@@ -1,0 +1,18 @@
+development:
+  adapter: postgresql
+  encoding: unicode
+  database: gameplan_development
+  pool: 5
+  host: localhost
+  username: beeker
+  password: beeker
+
+
+test:
+  adapter: postgresql
+  encoding: unicode
+  database: gameplan_test
+  pool: 5
+  host: localhost
+  username: beeker
+  password:
