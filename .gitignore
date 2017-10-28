@@ -16,6 +16,7 @@
 /tmp/*
 log
 tmp
+test
 .idea
 bin
 !/log/.keep
