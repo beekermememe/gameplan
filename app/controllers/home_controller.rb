@@ -1,5 +1,7 @@
 class HomeController < ApplicationController
-  # include Secured
+  include ::Secured
   def index
+    puts "here"
+
   end
 end
