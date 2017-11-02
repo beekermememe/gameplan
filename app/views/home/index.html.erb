@@ -1,13 +1,6 @@
 <% if !current_user %>
   <section class="jumbotron text-center">
     <h2 style="color:whitesmoke">The next step in your game!</h2>
-    <h4><a style="color:whitesmoke" class="btn btn-success btn-lg" href="/auth/auth0">Login</a></h4>
   </section>
-<% else %>
-    <section class="jumbotron text-center">
-        <h3>Welcome - <%= current_user.inspect %></h3>
-    </section>
-
-
 <% end %>
 
