@@ -1,0 +1,2 @@
+class MatchDetail < ApplicationRecord
+end

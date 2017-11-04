@@ -10,10 +10,72 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171028150004) do
+ActiveRecord::Schema.define(version: 20171104175114) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "courts", force: :cascade do |t|
+    t.string "name"
+    t.string "street"
+    t.string "city"
+    t.string "longitude"
+    t.string "latitude"
+    t.integer "timezone"
+    t.string "summary"
+    t.string "googlemap"
+    t.string "email"
+    t.string "website"
+    t.string "phone"
+    t.string "zipcode"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "match_details", force: :cascade do |t|
+    t.string "strengths", default: [], array: true
+    t.string "strength_ids", default: [], array: true
+    t.string "weaknesses", default: [], array: true
+    t.string "weakness_ids", default: [], array: true
+    t.integer "result_id"
+    t.text "details"
+    t.text "note_to_self"
+    t.datetime "played_date"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "matches", force: :cascade do |t|
+    t.integer "court_id"
+    t.integer "court_number"
+    t.integer "user_id"
+    t.integer "opponent_id"
+    t.integer "match_detail_id"
+    t.datetime "match_datetime"
+    t.integer "timezone"
+    t.integer "league_id"
+    t.text "result_summary"
+    t.text "location_summary"
+    t.text "opponent_summary"
+    t.boolean "doubles"
+    t.boolean "singles"
+    t.integer "partner_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "results", force: :cascade do |t|
+    t.string "sets", default: [], array: true
+    t.integer "match_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "strengths", force: :cascade do |t|
+    t.string "title"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "name"
@@ -37,6 +99,12 @@ ActiveRecord::Schema.define(version: 20171028150004) do
     t.inet "last_sign_in_ip"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+  end
+
+  create_table "weaknesses", force: :cascade do |t|
+    t.string "title"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
 end
