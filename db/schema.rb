@@ -17,17 +17,14 @@ ActiveRecord::Schema.define(version: 20171104175114) do
 
   create_table "courts", force: :cascade do |t|
     t.string "name"
-    t.string "street"
-    t.string "city"
+    t.text "address"
     t.string "longitude"
     t.string "latitude"
-    t.integer "timezone"
     t.string "summary"
-    t.string "googlemap"
-    t.string "email"
-    t.string "website"
+    t.string "google_map_link"
     t.string "phone"
-    t.string "zipcode"
+    t.integer "indoorcourts"
+    t.integer "outdoorcourts"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
