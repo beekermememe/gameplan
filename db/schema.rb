@@ -23,8 +23,8 @@ ActiveRecord::Schema.define(version: 20171104175114) do
     t.string "summary"
     t.string "google_map_link"
     t.string "phone"
-    t.integer "indoorcourts"
-    t.integer "outdoorcourts"
+    t.integer "indoor_courts"
+    t.integer "outdoor_courts"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

@@ -8,8 +8,8 @@ class CreateCourts < ActiveRecord::Migration[5.1]
       t.string :summary
       t.string :google_map_link
       t.string :phone
-      t.integer :indoorcourts
-      t.integer :outdoorcourts
+      t.integer :indoor_courts
+      t.integer :outdoor_courts
       t.timestamps
     end
   end

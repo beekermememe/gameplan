@@ -10,8 +10,8 @@
 #  summary         :string
 #  google_map_link :string
 #  phone           :string
-#  indoorcourts    :integer
-#  outdoorcourts   :integer
+#  indoor_courts   :integer
+#  outdoor_courts  :integer
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null
 #
