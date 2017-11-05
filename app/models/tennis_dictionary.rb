@@ -1,0 +1,2 @@
+class TennisDictionary < ApplicationRecord
+end
