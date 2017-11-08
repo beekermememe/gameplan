@@ -4,4 +4,8 @@ class HomeController < ApplicationController
     @user = current_user
     @matches = current_user.matches
   end
+
+  def login
+
+  end
 end

@@ -629,7 +629,6 @@ u1 = User.create(
     name: 'Jane Smith',
     email: 'jane.smith@test.com',
     club_id: 1,
-    usta_number: '123456',
     city: 'Broomfield',
     state: 'CO',
     password: '123456',
@@ -640,7 +639,6 @@ u2 = User.create(
     name: 'Janet Jones',
     email: 'janet.jones@test.com',
     club_id: 2,
-    usta_number: '123756',
     city: 'Broomfield',
     state: 'CO',
     password: '123456',
@@ -651,7 +649,6 @@ u3 = User.create(
     name: 'Paula Cold',
     email: 'paula.cold@test.com',
     club_id: 3,
-    usta_number: '123356',
     city: 'Fort Collins',
     state: 'CO',
     password: '123456',
@@ -662,7 +659,6 @@ u4 = User.create(
     name: 'Cindy Acton',
     email: 'cindy.acton@test.com',
     club_id: 1,
-    usta_number: '123456',
     city: 'Broomfield',
     state: 'CO',
     password: '123456',
@@ -673,7 +669,6 @@ u5 = User.create(
     name: 'Chloe Kelly',
     email: 'chloe.kelly@test.com',
     club_id: 3,
-    usta_number: '123456',
     city: 'Fort Collins',
     state: 'CO',
     password: '123456',
@@ -684,7 +679,6 @@ u6 = User.create(
     name: 'Sarah Lisden',
     email: 'sarah.lisden@test.com',
     club_id: 1,
-    usta_number: '123256',
     city: 'Broomfield',
     state: 'CO',
     password: '123456',
@@ -695,11 +689,20 @@ u7 = User.create(
     name: 'Joanna Mars',
     email: 'joanna.mars@test.com',
     club_id: 2,
-    usta_number: '123256',
     city: 'Broomfield',
     state: 'CO',
     password: '123456',
     usta_number: 'avdsefg'
+)
+
+u8 = User.create(
+    name: 'Brendan Keogh',
+    email: 'bkeogh123@gmail.com',
+    club_id: 2,
+    city: 'Broomfield',
+    state: 'CO',
+    password: '123456',
+    usta_number: 'avdsxfg'
 )
 
 match1 = Match.create({
@@ -720,7 +723,6 @@ results_match1 = Result.create(
 match1details = MatchDetail.create(
     match_id: match1.id,
     result_id: results_match1.id,
-    details: "Was really tired. Long Drive. Windy Court",
     played_date: match1.match_datetime,
     strength_ids: [strengths[1].id,strengths[4].id,strengths[9].id],
     weakness_ids: [weaknesses[2].id,strengths[5].id,strengths[7].id],
@@ -746,7 +748,6 @@ results_match2 = Result.create(
 match2details = MatchDetail.create(
     match_id: match2.id,
     result_id: results_match2.id,
-    details: "Was really tired. Long Drive. Windy Court",
     played_date: match2.match_datetime,
     strength_ids: [strengths[2].id,strengths[4].id,strengths[8].id],
     weakness_ids: [weaknesses[1].id,strengths[3].id,strengths[9].id],
@@ -772,7 +773,6 @@ results_match3 = Result.create(
 match3details = MatchDetail.create(
     match_id: match3.id,
     result_id: results_match3.id,
-    details: "Was really tired. Long Drive. Windy Court",
     played_date: match3.match_datetime,
     strength_ids: [strengths[2].id,strengths[3].id,strengths[5].id],
     weakness_ids: [weaknesses[1].id,strengths[4].id,strengths[8].id],
@@ -797,7 +797,6 @@ results_match4 = Result.create(
 match4details = MatchDetail.create(
     match_id: match4.id,
     result_id: results_match4.id,
-    details: "Was really tired. Long Drive. Windy Court",
     played_date: match4.match_datetime,
     strength_ids: [strengths[1].id,strengths[5].id,strengths[7].id],
     weakness_ids: [weaknesses[2].id,strengths[4].id,strengths[9].id],
@@ -822,9 +821,59 @@ results_match5 = Result.create(
 match5details = MatchDetail.create(
     match_id: match5.id,
     result_id: results_match5.id,
-    details: "Was really tired. Long Drive. Windy Court",
     played_date: match5.match_datetime,
     strength_ids: [strengths[2].id,strengths[4].id,strengths[8].id],
     weakness_ids: [weaknesses[1].id,strengths[5].id,strengths[3].id],
     details: "#{tennis_words[9].title},#{tennis_words[10].title},#{tennis_words[12].title},#{tennis_words[1].title}"
+)
+
+
+match6 = Match.create({
+    court_id: 1,
+    user_id: u8.id,
+    opponent_id: u3.id,
+    match_datetime: Time.now - 1.week,
+    doubles: true,
+    singles: false,
+    court_number: 7,
+    partner_id: u7.id
+})
+
+results_match6 = Result.create(
+    sets: ["6-3","5-7","6-7"],
+    match_id: match6.id
+)
+
+match6details = MatchDetail.create(
+    match_id: match6.id,
+    result_id: results_match6.id,
+    played_date: match6.match_datetime,
+    strength_ids: [strengths[2].id,strengths[4].id,strengths[8].id],
+    weakness_ids: [weaknesses[1].id,strengths[5].id,strengths[3].id],
+    details: "#{tennis_words[9].title},#{tennis_words[10].title},#{tennis_words[12].title},#{tennis_words[1].title}"
+)
+
+match7 = Match.create({
+    court_id: 3,
+    user_id: u8.id,
+    opponent_id: u5.id,
+    match_datetime: Time.now - 2.week,
+    doubles: true,
+    singles: false,
+    court_number: 7,
+    partner_id: u6.id
+})
+
+results_match7 = Result.create(
+    sets: ["6-4","1-6","2-6"],
+    match_id: match7.id
+)
+
+match7details = MatchDetail.create(
+    match_id: match7.id,
+    result_id: results_match7.id,
+    played_date: match7.match_datetime,
+    strength_ids: [strengths[1].id,strengths[3].id,strengths[7].id],
+    weakness_ids: [weaknesses[4].id,strengths[8].id,strengths[2].id],
+    details: "#{tennis_words[1].title},#{tennis_words[8].title},#{tennis_words[3].title},#{tennis_words[7].title}"
 )

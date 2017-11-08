@@ -9,7 +9,8 @@ class CreateUsers < ActiveRecord::Migration[5.1]
       t.string :city
       t.string :state
       t.string :zipcode
-
+      t.string :authtype
+      t.string :auth_id
       t.timestamps
     end
   end

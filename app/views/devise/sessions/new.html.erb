@@ -10,20 +10,21 @@
                 <%= t('.sign_in', :default => "Sign in") %>
               </h5>
             </div>
-            <div class="row">
-              <%= f.email_field :email, autofocus: true, class: "large-12 columns", placeholder: "Email"%>
+            <div class="row" style="margin-left:20px;margin-right:20px;">
+              <%= f.email_field :email, autofocus: true, class: "large-8 columns", placeholder: "Email"%>
             </div>
-            <div class="row">
-              <%= f.password_field :password, autocomplete: "off", class: "large-12 columns", placeholder: "Password"%>
+            <div class="row" style="margin-left:20px;margin-right:20px;">
+              <%= f.password_field :password, autocomplete: "off", class: "large-8 columns", placeholder: "Password"%>
             </div>
             <% if devise_mapping.rememberable? %>
-              <div class="row">
+              <div class="row" >
                 <%= f.check_box :remember_me %>
-                <%= f.label :remember_me %>
+                <%= f.label :remember_me, style: "font-size:0.8rem;" %>
               </div>
             <% end %>
             <div class="row">
-              <%= f.submit  t('.sign_in', :default => "Sign in"), class: "button expand large-12 large-centered columns" %>
+              <input type="submit" class="button large-5 columns" value="Login"  style="margin-left: 5px;height: 55px">
+              <a type="button" class="button large-6 columns" href='/auth/auth0' style="margin-left: 5px;font-size: 1.2rem;height: 55px"><i style="margin-left: 10px;font-size: 1.5rem;" class="fi-social-facebook"></i><i  style="margin-left: 10px;font-size: 1.5rem;" class="fi-social-linkedin"></i><i style="margin-left: 10px;font-size: 1.5rem;" class="fi-social-instagram"></i><i style="margin-left: 10px;font-size: 1.5rem;" class="fi-social-google-plus"></i><i style="margin-left: 10px;font-size: 1.5rem;" class="fi-social-twitter"></i></a>
             </div>
           <% end %>
         </div>  

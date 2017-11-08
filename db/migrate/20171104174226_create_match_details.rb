@@ -6,6 +6,7 @@ class CreateMatchDetails < ActiveRecord::Migration[5.1]
       t.string :weaknesses, array: true, default: []
       t.string :weakness_ids, array: true, default: []
       t.integer :result_id
+      t.integer :match_id
       t.text :details
       t.text :note_to_self
       t.datetime :played_date

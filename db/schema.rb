@@ -35,6 +35,7 @@ ActiveRecord::Schema.define(version: 20171105135744) do
     t.string "weaknesses", default: [], array: true
     t.string "weakness_ids", default: [], array: true
     t.integer "result_id"
+    t.integer "match_id"
     t.text "details"
     t.text "note_to_self"
     t.datetime "played_date"
@@ -90,6 +91,8 @@ ActiveRecord::Schema.define(version: 20171105135744) do
     t.string "city"
     t.string "state"
     t.string "zipcode"
+    t.string "authtype"
+    t.string "auth_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "encrypted_password", default: "", null: false
