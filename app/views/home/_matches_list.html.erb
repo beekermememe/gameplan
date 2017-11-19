@@ -29,13 +29,13 @@
   <% @matches.each do |match| %>
     <tr>
       <td>
-        <a href='/opponents/'<%= match.opponent.id %>><%= match.opponent.name %></a>
+        <a href='/opponents/<%= match.opponent.id %>' data-reveal-id="match_opponent" data-reveal-ajax="true"><%= match.opponent.name %></a>
       </td>
       <td>
         <%= match.match_datetime.to_date %>
       </td>
       <td>
-        <a href='/courts/'<%= match.court_id %>><%= match.court.name %></a>
+        <a href='/courts/<%= match.court_id %>' data-reveal-id="match_opponent" data-reveal-ajax="true"><%= match.court.name %></a>
       </td>
       <td>
         <%= match.details.result.win ? "WIN" : "LOSS" %>
@@ -56,3 +56,6 @@
   <% end %>
   </tbody>
 </table>
+
+<div id="match_opponent" class="reveal-modal large-12 large-centered medium-12 medium-centered" data-reveal aria-labelledby="modalTitle" aria-hidden="true" role="dialog">
+</div>

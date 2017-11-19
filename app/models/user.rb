@@ -30,4 +30,8 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
   has_many :matches
+
+  def club
+    Court.find(club_id)
+  end
 end

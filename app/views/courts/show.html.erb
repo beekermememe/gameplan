@@ -1,0 +1,18 @@
+<table class="table">
+  <tr>
+    <td>Name</td>
+    <td><%= @court.name %></td>
+  </tr>
+  <tr>
+    <td>Address</td>
+    <td><%= @court.address %></td>
+  </tr>
+  <tr>
+    <td>Phone</td>
+    <td><%= @court.phone %></td>
+  </tr>
+  <tr>
+    <td>Directions</td>
+    <td><a href="<%= @court.google_map_link %>">Click here to open google maps</a></td>
+  </tr>
+</table>
