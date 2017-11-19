@@ -13,6 +13,8 @@
 //= require jquery2
 //= require rails-ujs
 //= require foundation
+//= require dataTables/jquery.dataTables
+//= require dataTables/jquery.dataTables.foundation
 //= require_tree .
 
 $(function(){ $(document).foundation(); });
