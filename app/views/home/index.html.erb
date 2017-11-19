@@ -1,6 +1,9 @@
-<% if !current_user %>
+<% if @user %>
   <section class="jumbotron text-center">
-    <h2 style="color:whitesmoke">The next step in your game!</h2>
+    <h4 style="color:whitesmoke">The next step in your game!</h4>
+  </section>
+  <section>
+    <%= render 'matches_list' %>
   </section>
 <% end %>
 

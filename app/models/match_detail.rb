@@ -18,4 +18,8 @@
 class MatchDetail < ApplicationRecord
   belongs_to :match
 
+  def result
+    Result.find(self.result_id)
+  end
+
 end

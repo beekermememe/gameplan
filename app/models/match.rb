@@ -25,4 +25,17 @@ class Match < ApplicationRecord
   has_one :result
   has_one :match_detail
   has_one :court
+
+  def opponent
+    User.where(id: self.opponent_id).first
+  end
+
+  def court
+    Court.where(id: self.court_id).first
+  end
+
+  def details
+    MatchDetail.where(id: self.match_detail_id).first
+  end
+
 end

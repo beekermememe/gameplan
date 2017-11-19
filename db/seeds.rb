@@ -729,6 +729,9 @@ match1details = MatchDetail.create(
     details: "#{tennis_words[1].title},#{tennis_words[6].title},#{tennis_words[9].title},#{tennis_words[14].title},#{tennis_words[11].title}"
 )
 
+match1.match_detail_id = match1details.id
+match1.save
+
 match2 = Match.create({
     court_id: 2,
     user_id: u1.id,
@@ -753,6 +756,9 @@ match2details = MatchDetail.create(
     weakness_ids: [weaknesses[1].id,strengths[3].id,strengths[9].id],
     details: "#{tennis_words[2].title},#{tennis_words[5].title},#{tennis_words[8].title},#{tennis_words[10].title},#{tennis_words[12].title}"
 )
+
+match2.match_detail_id = match2details.id
+match2.save
 
 match3 = Match.create({
     court_id: 3,
@@ -779,6 +785,9 @@ match3details = MatchDetail.create(
     details: "#{tennis_words[1].title},#{tennis_words[3].title},#{tennis_words[5].title},#{tennis_words[7].title},#{tennis_words[9].title}"
 )
 
+match3.match_detail_id = match3details.id
+match3.save
+
 match4 = Match.create({
     court_id: 10,
     user_id: u2.id,
@@ -802,6 +811,10 @@ match4details = MatchDetail.create(
     weakness_ids: [weaknesses[2].id,strengths[4].id,strengths[9].id],
     details: "#{tennis_words[3].title},#{tennis_words[5].title},#{tennis_words[6].title},#{tennis_words[9].title},#{tennis_words[11].title}"
 )
+
+match4.match_detail_id = match4details.id
+match4.save
+
 match5 = Match.create({
     court_id: 1,
     user_id: u2.id,
@@ -827,6 +840,8 @@ match5details = MatchDetail.create(
     details: "#{tennis_words[9].title},#{tennis_words[10].title},#{tennis_words[12].title},#{tennis_words[1].title}"
 )
 
+match5.match_detail_id = match5details.id
+match5.save
 
 match6 = Match.create({
     court_id: 1,
@@ -853,6 +868,9 @@ match6details = MatchDetail.create(
     details: "#{tennis_words[9].title},#{tennis_words[10].title},#{tennis_words[12].title},#{tennis_words[1].title}"
 )
 
+match6.match_detail_id = match6details.id
+match6.save
+
 match7 = Match.create({
     court_id: 3,
     user_id: u8.id,
@@ -877,3 +895,6 @@ match7details = MatchDetail.create(
     weakness_ids: [weaknesses[4].id,strengths[8].id,strengths[2].id],
     details: "#{tennis_words[1].title},#{tennis_words[8].title},#{tennis_words[3].title},#{tennis_words[7].title}"
 )
+
+match7.match_detail_id = match7details.id
+match7.save
