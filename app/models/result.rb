@@ -24,4 +24,8 @@ class Result < ApplicationRecord
     end
     win_count > loss_count
   end
+
+  def show_sets
+    sets.join(' , ')
+  end
 end

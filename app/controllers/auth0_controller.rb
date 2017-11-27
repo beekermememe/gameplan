@@ -3,13 +3,12 @@ class Auth0Controller < ApplicationController
     # This stores all the user information that came from Auth0
     # and the IdP
     session[:userinfo] = request.env['omniauth.auth']
-    current_user = User.find_or_create_by_email [session[:userinfo]['email']]
+    current_user = User.find_or_create_by(email: [session[:userinfo]['email']])
     if(current_user)
-
+      redirect_to '/home/index'
     else
 
     end
-
     # Redirect to the URL you want after successful auth
   end
 

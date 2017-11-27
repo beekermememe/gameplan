@@ -22,4 +22,14 @@ class MatchDetail < ApplicationRecord
     Result.find(self.result_id)
   end
 
+  def show_strengths
+    _strengths = Strength.where(id: strength_ids)
+    _strengths.map { |s| s.title }.join(', ')
+  end
+
+  def show_weaknesses
+    _weaknesses = Weakness.where(id: weakness_ids)
+    _weaknesses.map { |s| s.title }.join(', ')
+  end
+
 end

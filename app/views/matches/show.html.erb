@@ -1,0 +1,26 @@
+<form>
+<div class="row">
+  <div class="small-8">
+    <fieldset>
+      <label class="match-label">Opponent
+        <input type="text" disabled="true" name="opponent" value="<%= @match.opponent.name %>"/>
+      </label>
+    </fieldset>
+    <fieldset>
+      <label class="match-label">Result <%= @match.match_detail.result.win ? '- WIN' : '- LOSS' %>
+        <input type="text" disabled="true" name="opponent" value="<%= @match.match_detail.result.show_sets %>"/>
+      </label>
+    </fieldset>
+    <fieldset>
+      <label class="match-label">Strengths
+        <input type="text" disabled="true" name="opponent" value="<%= @match.match_detail.show_strengths %>"/>
+      </label>
+    </fieldset>
+    <fieldset>
+      <label class="match-label">Weaknesses
+        <input type="text" disabled="true" name="opponent" value="<%= @match.match_detail.show_weaknesses %>"/>
+      </label>
+    </fieldset>
+  </div>
+</div>
+</form>
