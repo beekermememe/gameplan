@@ -33,7 +33,13 @@ Rails.application.routes.draw do
 
   resources :opponents, only: [:show]
 
-  resources :matches, only: [:show]
+  resources :matches, only: [:show, :update] do
+    get :result
+    get :opponents
+    get :strengths
+    get :weaknesses
+    get :note_to_self
+  end
 
   resources :courts, only: [:show]
 end

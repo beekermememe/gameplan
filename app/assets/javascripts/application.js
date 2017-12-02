@@ -15,6 +15,7 @@
 //= require foundation
 //= require dataTables/jquery.dataTables
 //= require dataTables/jquery.dataTables.foundation
+//= require autocomplete
 //= require_tree .
 
 $(function(){ $(document).foundation(); });
