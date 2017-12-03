@@ -1,8 +1,41 @@
 <form>
+  <a class="close-reveal-modal close-form-modal" aria-label="Close">&#215;</a>
   <div class="row">
-    <% set_score = @results.sets[0].split("-") %>
+    <% set_score = @results.sets[0] ? @results.sets[0].split("-") : [-1,-1]%>
     <div class="medium-12 columns set" id="set-1">
       <label class="medium-6" name="set1"><b>First Set</b></label>
+      <select class="medium-3 home-score">
+        <% 0.upto(6).each do |setnumber| %>
+          <option value="<%=setnumber%>" <%= setnumber == set_score[0].to_i ? "selected" : ""%>><%=setnumber%></option>
+        <% end %>
+      </select>
+      <select class="medium-3 away-score">
+        <% 0.upto(6).each do |setnumber| %>
+          <option value="<%=setnumber%>"  <%= setnumber == set_score[1].to_i ? "selected" : ""%>><%=setnumber%></option>
+        <% end %>
+      </select>
+    </div>
+  </div>
+  <div class="row">
+    <% set_score = @results.sets[1] ? @results.sets[1].split("-") : [-1,-1]%>
+    <div class="medium-12 columns set" id="set-2">
+      <label class="medium-6" name="set1"><b>Second Set</b></label>
+      <select class="medium-3 home-score">
+        <% 0.upto(6).each do |setnumber| %>
+          <option value="<%=setnumber%>" <%= setnumber == set_score[0].to_i ? "selected" : ""%>><%=setnumber%></option>
+        <% end %>
+      </select>
+      <select class="medium-3 away-score">
+        <% 0.upto(6).each do |setnumber| %>
+          <option value="<%=setnumber%>"  <%= setnumber == set_score[1].to_i ? "selected" : ""%>><%=setnumber%></option>
+        <% end %>
+      </select>
+    </div>
+  </div>
+  <div class="row">
+    <% set_score = @results.sets[2] ? @results.sets[2].split("-") : [-1,-1]%>
+    <div class="medium-12 columns set" id="set-3">
+      <label class="medium-6" name="set1"><b>Third Set</b></label>
       <select class="medium-3 home-score">
         <% 0.upto(6).each do |setnumber| %>
           <option value="<%=setnumber%>" <%= setnumber == set_score[0].to_i ? "selected" : ""%>><%=setnumber%></option>

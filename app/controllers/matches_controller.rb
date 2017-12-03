@@ -10,13 +10,22 @@ class MatchesController < ApplicationController
   end
 
   def update
-
+    @match = Match.find(params[:id])
+    if params[:result]
+      @match.update_result(params[:result].values)
+    end
+    render json: {status: "ok"}
   end
 
   private
 
   def show_params
     params.permit(:id, :match_id)
+  end
+
+  def update_params
+    params.permit(:id)
+    params.require(:result)
   end
 
 

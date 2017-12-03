@@ -38,4 +38,20 @@ class Match < ApplicationRecord
     MatchDetail.where(id: self.match_detail_id).first
   end
 
+  def update_result(new_result)
+    current_result = details.result
+    if !current_result
+      current_result = Result.new
+      current_result.match_id = details.match_id
+    end
+
+    sets = []
+    new_result.each do |set_score,count|
+      sets << "#{set_score[:home]}-#{set_score[:away]}"
+    end
+    current_result.sets = sets
+    current_result.save!
+
+  end
+
 end
