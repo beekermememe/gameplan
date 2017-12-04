@@ -9,6 +9,18 @@ class MatchesController < ApplicationController
     render layout: false
   end
 
+  def strengths
+    @match = Match.find(show_params[:match_id])
+    @all_strengths = Strength.all
+    @current_strengths = @match.match_detail.strength_ids
+  end
+
+  def weaknesses
+    @match = Match.find(show_params[:match_id])
+    @all_weaknesses = Weakness.all
+    @current_weaknesses = @match.match_detail.weakness_ids
+  end
+
   def update
     @match = Match.find(params[:id])
     if params[:result]

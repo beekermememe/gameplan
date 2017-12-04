@@ -34,15 +34,14 @@ gem 'jbuilder', '~> 2.5'
 # gem 'capistrano-rails', group: :development
 gem 'pg'
 gem 'jquery-rails'
-gem 'foundation-rails'
 gem 'devise'
 gem 'devise-foundation-views'
 
 gem 'omniauth', '~> 1.6.1'
 gem 'omniauth-auth0', '~> 2.0.0'
 gem 'annotate'
-gem 'jquery-datatables-rails', '~> 3.4.0'
 gem 'neo4j', '~> 9.0.0'
+gem 'selectize-rails', '~> 0.12.4.1'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

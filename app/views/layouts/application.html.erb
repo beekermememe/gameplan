@@ -2,19 +2,19 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=0.7" />
 
     <title><%= content_for?(:title) ? yield(:title) : "Gameplans" %></title>
 
-    <%= stylesheet_link_tag    "application" %>
-    <%= javascript_include_tag "vendor/modernizr" %>
+    <%= stylesheet_link_tag "application" %>
     <p class="notice"><%= notice %></p>
     <p class="alert"><%= alert %></p>
     <%= csrf_meta_tags %>
   </head>
 
   <body class="background">
-    <%= yield %>
     <%= javascript_include_tag "application" %>
+    <%= yield %>
+
   </body>
 </html>

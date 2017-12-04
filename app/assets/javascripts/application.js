@@ -13,9 +13,10 @@
 //= require jquery2
 //= require rails-ujs
 //= require foundation
-//= require dataTables/jquery.dataTables
-//= require dataTables/jquery.dataTables.foundation
+//= require datatables
 //= require autocomplete
-//= require_tree .
+//= require home
+//= require matches
+//= require what-input
 
 $(function(){ $(document).foundation(); });

@@ -9,12 +9,21 @@ $(function(){
 
     $('.results').click(function(element){
         var match_id = $(".match-details")[0].id;
-        var popup = $(".popup");
         $('#form-modal').bind('opened', function() {
             reattachResultHandlers();
         });
         $("#form-modal").foundation('reveal', 'open', {
             url: ('/matches/' + match_id + '/result.html')
+        });
+    })
+
+    $('.strengths').click(function(element){
+        var match_id = $(".match-details")[0].id;
+        $('#form-modal').bind('opened', function() {
+            reattachStrengthResultHandlers();
+        });
+        $("#form-modal").foundation('reveal', 'open', {
+            url: ('/matches/' + match_id + '/strengths.html')
         });
     })
 
@@ -41,7 +50,6 @@ $(function(){
                 success: function (data) {
                     console.log("Success changing score",data);
                     location.reload();
-                    // $("#form-modal").foundation('reveal', 'close');
                     },
                 error: function(err){
                     console.log("Failure changing score",err);
@@ -59,4 +67,7 @@ $(function(){
         $(document).foundation();
     }
 
+    var reattachStrengthResultHandlers = function(){
+
+    }
 })

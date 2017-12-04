@@ -1,61 +1,65 @@
-<table id="data-datatables" class="large-12 large-centered medium-12 medium-centered">
-  <thead>
-  <tr>
-    <th>
-      Opponent
-    </th>
-    <th>
-      Date
-    </th>
-    <th>
-      Location
-    </th>
-    <th>
-      Win/Loss
-    </th>
-    <th>
-      Set1
-    </th>
-    <th>
-      Set2
-    </th>
-    <th>
-      Set3
-    </th>
-    <th></th>
-  </tr>
-  </thead>
-  <tbody>
-  <% @matches.each do |match| %>
-    <tr>
-      <td>
-        <a href='/opponents/<%= match.opponent.id %>' data-reveal-id="match_opponent" data-reveal-ajax="true"><%= match.opponent.name %></a>
-      </td>
-      <td>
-        <%= match.match_datetime.to_date %>
-      </td>
-      <td>
-        <a href='/courts/<%= match.court_id %>' data-reveal-id="match_opponent" data-reveal-ajax="true"><%= match.court.name %></a>
-      </td>
-      <td>
-        <%= match.details.result.win ? "WIN" : "LOSS" %>
-      </td>
-      <td>
-        <%= match.details.result.sets[0] %>
-      </td>
-      <td>
-        <%= match.details.result.sets[1] %>
-      </td>
-      <td>
-        <%= match.details.result.sets.length > 2 ? match.details.result.sets[2] : ""  %>
-      </td>
-      <td>
-        <button class="view-match" id="match-id-<%=match.id%>">View Match</button>
-      </td>
-    </tr>
-  <% end %>
-  </tbody>
-</table>
+<div class="grid-x grid-margin-x">
+  <div class="large-12 large-centered medium-12 cell">
+    <table id="data-datatables">
+      <thead>
+      <tr>
+        <th>
+          Opponent
+        </th>
+        <th>
+          Date
+        </th>
+        <th>
+          Location
+        </th>
+        <th>
+          Win/Loss
+        </th>
+        <th>
+          Set1
+        </th>
+        <th>
+          Set2
+        </th>
+        <th>
+          Set3
+        </th>
+        <th></th>
+      </tr>
+      </thead>
+      <tbody>
+      <% @matches.each do |match| %>
+        <tr>
+          <td>
+            <a href='/opponents/<%= match.opponent.id %>' data-reveal-id="match_opponent" data-reveal-ajax="true"><%= match.opponent.name %></a>
+          </td>
+          <td>
+            <%= match.match_datetime.to_date %>
+          </td>
+          <td>
+            <a href='/courts/<%= match.court_id %>' data-reveal-id="match_opponent" data-reveal-ajax="true"><%= match.court.name %></a>
+          </td>
+          <td>
+            <%= match.details.result.win ? "WIN" : "LOSS" %>
+          </td>
+          <td>
+            <%= match.details.result.sets[0] %>
+          </td>
+          <td>
+            <%= match.details.result.sets[1] %>
+          </td>
+          <td>
+            <%= match.details.result.sets.length > 2 ? match.details.result.sets[2] : ""  %>
+          </td>
+          <td>
+            <button class="view-match" id="match-id-<%=match.id%>">View Match</button>
+          </td>
+        </tr>
+      <% end %>
+      </tbody>
+    </table>
 
-<div id="match_opponent" class="reveal-modal large-12 large-centered medium-12 medium-centered" data-reveal aria-labelledby="modalTitle" aria-hidden="true" role="dialog">
+    <div id="match_opponent" class="reveal-modal large-12 large-centered medium-12 medium-centered" data-reveal aria-labelledby="modalTitle" aria-hidden="true" role="dialog">
+    </div>
+  </div>
 </div>
