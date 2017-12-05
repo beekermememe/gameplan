@@ -1,30 +1,30 @@
 <%= foundation_devise_error_messages! %>
-<div class="row">
-  <div class="medium-6 medium-centered columns">
+<div class="grid-x grid-margin-x">
+  <div class="cell small-offset-1 medium-offset-3 medium-6 small-10">
     <div class="login-box">
-      <div class="row">
-        <div class="large-12 columns">
+      <div class="">
+        <div class="">
           <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-            <div class="row">
+            <div class="grid-x grid-padding-x">
               <h5 class="text-center">
                 <%= t('.sign_in', :default => "Sign in") %>
               </h5>
             </div>
-            <div class="row" style="margin-left:20px;margin-right:20px;">
-              <%= f.email_field :email, autofocus: true, class: "large-8 columns", placeholder: "Email"%>
+            <div class="grid-x grid-padding-x" style="margin-left:20px;margin-right:20px;">
+              <%= f.email_field :email, autofocus: true, class: "", placeholder: "Email"%>
             </div>
-            <div class="row" style="margin-left:20px;margin-right:20px;">
-              <%= f.password_field :password, autocomplete: "off", class: "large-8 columns", placeholder: "Password"%>
+            <div class="grid-x grid-padding-x" style="margin-left:20px;margin-right:20px;">
+              <%= f.password_field :password, autocomplete: "off", class: "", placeholder: "Password"%>
             </div>
             <% if devise_mapping.rememberable? %>
-              <div class="row" >
+              <div class="grid-x grid-padding-x" >
                 <%= f.check_box :remember_me %>
-                <%= f.label :remember_me, style: "font-size:0.8rem;" %>
+                <%= f.label :remember_me, style: "font-size:0.8rem;color:black;" %>
               </div>
             <% end %>
-            <div class="row">
-              <input type="submit" class="button large-5 columns" value="Login"  style="margin-left: 5px;height: 55px">
-              <a type="button" class="button large-6 columns" href='/auth/auth0' style="margin-left: 5px;font-size: 1.2rem;height: 55px"><i style="margin-left: 10px;font-size: 1.5rem;" class="fi-social-facebook"></i><i  style="margin-left: 10px;font-size: 1.5rem;" class="fi-social-linkedin"></i><i style="margin-left: 10px;font-size: 1.5rem;" class="fi-social-instagram"></i><i style="margin-left: 10px;font-size: 1.5rem;" class="fi-social-google-plus"></i><i style="margin-left: 10px;font-size: 1.5rem;" class="fi-social-twitter"></i></a>
+            <div class="grid-x grid-padding-x">
+              <input type="submit" class="button medium-4" value="Login"  style="margin-left: 5px;height: 55px">
+              <a type="button" class="button medium-4" href='/auth/auth0' style="margin-left: 5px;font-size: 1.2rem;height: 55px;color: black"><i style="margin-left: 10px;font-size: 1.5rem;" class="fi-social-facebook"></i><i  style="margin-left: 10px;font-size: 1.5rem;" class="fi-social-linkedin"></i><i style="margin-left: 10px;font-size: 1.5rem;" class="fi-social-instagram"></i><i style="margin-left: 10px;font-size: 1.5rem;" class="fi-social-google-plus"></i><i style="margin-left: 10px;font-size: 1.5rem;" class="fi-social-twitter"></i></a>
             </div>
           <% end %>
         </div>  

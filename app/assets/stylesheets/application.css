@@ -13,6 +13,7 @@
 
  * require foundation_and_overrides
 
+*= require normailize
 *= require foundation
 *= require_self
 *= require devise_foundation_views_scss
