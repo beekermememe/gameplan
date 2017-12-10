@@ -1,55 +1,69 @@
 <form>
-  <a class="close-reveal-modal close-form-modal" aria-label="Close">&#215;</a>
-  <div class="row">
+  <button class="close-button" data-close aria-label="Close modal" type="button">
+    <span aria-hidden="true">&times;</span>
+  </button>
+  <div class="grid-x grid-margin-x">
     <% set_score = @results.sets[0] ? @results.sets[0].split("-") : [-1,-1]%>
-    <div class="medium-12 columns set" id="set-1">
-      <label class="medium-6" name="set1"><b>First Set</b></label>
-      <select class="medium-3 home-score">
-        <% 0.upto(6).each do |setnumber| %>
-          <option value="<%=setnumber%>" <%= setnumber == set_score[0].to_i ? "selected" : ""%>><%=setnumber%></option>
-        <% end %>
-      </select>
-      <select class="medium-3 away-score">
+    <label class="cell medium-offset-1 medium-3" name="set1"><b>First Set</b></label>
+    <div class="cell medium-offset-1  medium-2 set" id="set-1">
+      <div class="cell medium-2">
+        <select class="cell medium-1 home-score">
+          <% 0.upto(6).each do |setnumber| %>
+            <option value="<%=setnumber%>" <%= setnumber == set_score[0].to_i ? "selected" : ""%>><%=setnumber%></option>
+          <% end %>
+        </select>
+      </div>
+    </div>
+    <div class="cell medium-2">
+      <select class="cell medium-1 away-score">
         <% 0.upto(6).each do |setnumber| %>
           <option value="<%=setnumber%>"  <%= setnumber == set_score[1].to_i ? "selected" : ""%>><%=setnumber%></option>
         <% end %>
       </select>
     </div>
   </div>
-  <div class="row">
+  <div class="grid-x grid-margin-x">
     <% set_score = @results.sets[1] ? @results.sets[1].split("-") : [-1,-1]%>
-    <div class="medium-12 columns set" id="set-2">
-      <label class="medium-6" name="set1"><b>Second Set</b></label>
-      <select class="medium-3 home-score">
-        <% 0.upto(6).each do |setnumber| %>
-          <option value="<%=setnumber%>" <%= setnumber == set_score[0].to_i ? "selected" : ""%>><%=setnumber%></option>
-        <% end %>
-      </select>
-      <select class="medium-3 away-score">
+    <label class="cell medium-offset-1 medium-3" name="set1"><b>Second Set</b></label>
+    <div class="cell medium-offset-1  medium-2 set" id="set-1">
+      <div class="cell medium-2">
+        <select class="cell medium-1 home-score">
+          <% 0.upto(6).each do |setnumber| %>
+            <option value="<%=setnumber%>" <%= setnumber == set_score[0].to_i ? "selected" : ""%>><%=setnumber%></option>
+          <% end %>
+        </select>
+      </div>
+    </div>
+    <div class="cell medium-2">
+      <select class="cell medium-1 away-score">
         <% 0.upto(6).each do |setnumber| %>
           <option value="<%=setnumber%>"  <%= setnumber == set_score[1].to_i ? "selected" : ""%>><%=setnumber%></option>
         <% end %>
       </select>
     </div>
   </div>
-  <div class="row">
+  <div class="grid-x grid-margin-x">
     <% set_score = @results.sets[2] ? @results.sets[2].split("-") : [-1,-1]%>
-    <div class="medium-12 columns set" id="set-3">
-      <label class="medium-6" name="set1"><b>Third Set</b></label>
-      <select class="medium-3 home-score">
-        <% 0.upto(6).each do |setnumber| %>
-          <option value="<%=setnumber%>" <%= setnumber == set_score[0].to_i ? "selected" : ""%>><%=setnumber%></option>
-        <% end %>
-      </select>
-      <select class="medium-3 away-score">
+    <label class="cell medium-offset-1 medium-3" name="set1"><b>Third Set</b></label>
+    <div class="cell medium-offset-1 medium-2 set" id="set-1">
+      <div class="cell medium-2">
+        <select class="cell medium-1 home-score">
+          <% 0.upto(6).each do |setnumber| %>
+            <option value="<%=setnumber%>" <%= setnumber == set_score[0].to_i ? "selected" : ""%>><%=setnumber%></option>
+          <% end %>
+        </select>
+      </div>
+    </div>
+    <div class="cell medium-2">
+      <select class="cell medium-1 away-score">
         <% 0.upto(6).each do |setnumber| %>
           <option value="<%=setnumber%>"  <%= setnumber == set_score[1].to_i ? "selected" : ""%>><%=setnumber%></option>
         <% end %>
       </select>
     </div>
   </div>
-  <div class="row">
-    <button class="success update-match" id="<%= @match.id%>" value="submit">Save</button>
-    <button class="cancel cancel-update" id="<%= @match.id%>" value="submit">Cancel</button>
+  <div class="grid-x grid-margin-x">
+    <button class="medium-offset-1 medium-2 cell button success update-match" id="<%= @match.id%>" value="submit">Save</button>
+    <button class="medium-2 cell button cancel cancel-update" id="<%= @match.id%>" value="submit">Cancel</button>
   </div>
 </form>

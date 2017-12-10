@@ -13,12 +13,14 @@ class MatchesController < ApplicationController
     @match = Match.find(show_params[:match_id])
     @all_strengths = Strength.all
     @current_strengths = @match.match_detail.strength_ids
+    render layout: false
   end
 
   def weaknesses
     @match = Match.find(show_params[:match_id])
     @all_weaknesses = Weakness.all
     @current_weaknesses = @match.match_detail.weakness_ids
+    render layout: false
   end
 
   def update

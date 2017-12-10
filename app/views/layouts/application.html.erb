@@ -13,6 +13,20 @@
   </head>
 
   <body class="background">
+    <div class="top-bar">
+      <div class="top-bar-left">
+        <ul class="menu" data-dropdown-menu>
+          <li class="menu-text">GamePlans</li>
+          <li class="is-active" id="matches-menu-item"><a href="/home/index">Matches</a></li>
+          <li id="my-profile-menu-item"><a href="/profile">My Profile</a></li>
+        </ul>
+      </div>
+      <div class="top-bar-right">
+        <ul class="menu">
+          <li id="logout-menu-item"><button type="button" class="button">Logout</button></li>
+        </ul>
+      </div>
+    </div>
     <%= javascript_include_tag "application" %>
     <%= yield %>
 

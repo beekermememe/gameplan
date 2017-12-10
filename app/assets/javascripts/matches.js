@@ -2,6 +2,16 @@ $(function(){
     $('#data-datatables').DataTable();
     $(document).foundation();
 
+    $(".match-data").click(function(e){
+        e.preventDefault();
+        var href = e.target.dataset.href;
+        var modal = $("#match_opponent");
+        $.ajax(href).done(function(resp){
+            modal.html(resp).foundation('open');
+        })
+
+    });
+
     $('.view-match').click(function(element){
         var match_id = element.target.id.split('-id-')[1];
         location.pathname = '/matches/' + match_id;
@@ -12,8 +22,9 @@ $(function(){
         $('#form-modal').bind('opened', function() {
             reattachResultHandlers();
         });
-        $("#form-modal").foundation('reveal', 'open', {
-            url: ('/matches/' + match_id + '/result.html')
+        var modal = $("#form-modal");
+        $.ajax('/matches/' + match_id + '/result.html').done(function(resp){
+            modal.html(resp).foundation('open');
         });
     })
 
@@ -22,9 +33,11 @@ $(function(){
         $('#form-modal').bind('opened', function() {
             reattachStrengthResultHandlers();
         });
-        $("#form-modal").foundation('reveal', 'open', {
-            url: ('/matches/' + match_id + '/strengths.html')
-        });
+        var modal = $("#form-modal");
+        $.ajax('/matches/' + match_id + '/strengths.html').done(function(resp){
+            debugger;
+            modal.html(resp).foundation('open');
+        })
     })
 
     var reattachResultHandlers = function(){

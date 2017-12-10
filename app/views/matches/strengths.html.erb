@@ -1,15 +1,15 @@
-<form>
-  <div class="row">
+<form class="grid-x grid-margin-x">
+  <div class="cell medium-offset-2 medium-5">
     <div>
-    <select multiple="multiple" size="10">
+    <select size="10" m>
     <% @all_strengths.each do |strength| %>
       <option value="<%= strength.id %>" <%= @current_strengths.include?(strength.id.to_s) ? "selected": "" %>><%= strength.title%></option>
     <% end %>
     </select>
     </div>
   </div>
-  <div class="row">
-    <button class="success update-strengths" id="<%= @match.id%>" value="submit">Save</button>
-    <button class="cancel cancel-update" id="<%= @match.id%>" value="submit">Cancel</button>
+  <div class="cell medium-offset-2 medium-5">
+    <button class="button cell medium-offset-1 medium-4 success update-strengths" id="<%= @match.id%>" value="submit">Save</button>
+    <button class="button cell medium-offset-1 medium-4 cancel cancel-update" id="<%= @match.id%>" value="submit">Cancel</button>
   </div>
 </form>

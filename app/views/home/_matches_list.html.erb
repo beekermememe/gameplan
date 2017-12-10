@@ -1,5 +1,5 @@
-<div class="grid-x grid-margin-x">
-  <div class="large-12 large-centered medium-12 cell">
+<div class="grid-x grid-margin-x matches-list">
+  <div class="large-offset-1 large-10 medium-offset-1 medium-10 cell">
     <table id="data-datatables">
       <thead>
       <tr>
@@ -31,13 +31,13 @@
       <% @matches.each do |match| %>
         <tr>
           <td>
-            <a href='/opponents/<%= match.opponent.id %>' data-reveal-id="match_opponent" data-reveal-ajax="true"><%= match.opponent.name %></a>
+            <a class='match-data' data-href='/opponents/<%= match.opponent.id %>'><%= match.opponent.name %></a>
           </td>
           <td>
             <%= match.match_datetime.to_date %>
           </td>
           <td>
-            <a href='/courts/<%= match.court_id %>' data-reveal-id="match_opponent" data-reveal-ajax="true"><%= match.court.name %></a>
+            <a class='match-data' data-href='/courts/<%= match.court_id %>'><%= match.court.name %></a>
           </td>
           <td>
             <%= match.details.result.win ? "WIN" : "LOSS" %>
@@ -52,14 +52,14 @@
             <%= match.details.result.sets.length > 2 ? match.details.result.sets[2] : ""  %>
           </td>
           <td>
-            <button class="view-match" id="match-id-<%=match.id%>">View Match</button>
+            <button class="view-match button" id="match-id-<%=match.id%>">View Match</button>
           </td>
         </tr>
       <% end %>
       </tbody>
     </table>
 
-    <div id="match_opponent" class="reveal-modal large-12 large-centered medium-12 medium-centered" data-reveal aria-labelledby="modalTitle" aria-hidden="true" role="dialog">
+    <div id="match_opponent" class="reveal large-12 large-centered medium-12 medium-centered" data-reveal aria-labelledby="modalTitle" aria-hidden="true" role="dialog">
     </div>
   </div>
 </div>

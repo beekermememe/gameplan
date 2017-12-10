@@ -1,6 +1,6 @@
 <form>
-<div class="row">
-  <div class="small-8 match-details" id="<%= @match.id %>">
+<div class="grid-x grid-margin-x">
+  <div class="cell small-offset-1 small-10 match-details" id="<%= @match.id %>">
     <fieldset>
       <label class="match-label">Opponent
         <input class="opponent" type="text" disabled="true" name="opponent" value="<%= @match.opponent.name %>"/>
@@ -29,4 +29,4 @@
   </div>
 </div>
 </form>
-<div id="form-modal" class="reveal-modal medium" data-reveal style="display: none"></div>
+<div id="form-modal" class="reveal medium" data-reveal style="display: none"></div>
