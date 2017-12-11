@@ -1,7 +1,7 @@
 <form class="grid-x grid-margin-x">
   <div class="cell medium-offset-2 medium-5">
     <div>
-    <select size="10" m>
+    <select class="edit-strengths" multiple size="10" heigth="100px">
     <% @all_strengths.each do |strength| %>
       <option value="<%= strength.id %>" <%= @current_strengths.include?(strength.id.to_s) ? "selected": "" %>><%= strength.title%></option>
     <% end %>

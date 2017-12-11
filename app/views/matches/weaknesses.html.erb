@@ -1,0 +1,15 @@
+<form class="grid-x grid-margin-x">
+  <div class="cell medium-offset-2 medium-5">
+    <div>
+      <select class="edit-weaknesses" multiple size="10" heigth="100px">
+        <% @all_weaknesses.each do |weakness| %>
+          <option value="<%= weakness.id %>" <%= @current_weaknesses.include?(weakness.id.to_s) ? "selected": "" %>><%= weakness.title%></option>
+        <% end %>
+      </select>
+    </div>
+  </div>
+  <div class="cell medium-offset-2 medium-5">
+    <button class="button cell medium-offset-1 medium-4 success update-weaknesses" id="<%= @match.id%>" value="submit">Save</button>
+    <button class="button cell medium-offset-1 medium-4 cancel cancel-update" id="<%= @match.id%>" value="submit">Cancel</button>
+  </div>
+</form>

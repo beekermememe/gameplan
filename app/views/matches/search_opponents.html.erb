@@ -1,0 +1,9 @@
+<select class="update-opponent" size="4" style="height:100px">
+s  <% if @search_results.count == 0 %>
+    <option value="<%= -1 %>" disabled="true">No Results</option>
+  <% else %>
+    <% @search_results.each do |opponent| %>
+      <option value="<%= opponent[0] %>" <%= @selected_id == opponent[0] ? "selected" : ""%>><%= opponent[1]%></option>
+    <% end %>
+  <% end %>
+</select>

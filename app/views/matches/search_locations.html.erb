@@ -1,0 +1,9 @@
+<select class="update-location" size="4" style="height:100px">
+  s  <% if @search_results.count == 0 %>
+    <option value="<%= -1 %>" disabled="true">No Results</option>
+  <% else %>
+    <% @search_results.each do |location| %>
+      <option value="<%= location[0] %>" <%= @selected_id == location[0] ? "selected" : ""%>><%= location[1] + ',' + location[2]%></option>
+    <% end %>
+  <% end %>
+</select>

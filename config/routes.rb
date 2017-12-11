@@ -39,6 +39,9 @@ Rails.application.routes.draw do
     get :strengths
     get :weaknesses
     get :note_to_self
+    get :search_opponents
+    get :search_locations
+    get :location
   end
 
   resources :courts, only: [:show]
