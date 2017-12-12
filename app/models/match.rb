@@ -55,7 +55,7 @@ class Match < ApplicationRecord
 
   def update_strengths(new_strengths)
     match_details = details
-    match_details.strength_ids = new_strengths.map { |_id| id.to_i }
+    match_details.strength_ids = new_strengths.map { |_id| _id.to_i }
     match_details.save!
   end
 
@@ -71,7 +71,7 @@ class Match < ApplicationRecord
 
   def update_weaknesses(new_weaknesses)
     match_details = details
-    match_details.weakness_ids = new_weaknesses.map { |_id| id.to_i }
+    match_details.weakness_ids = new_weaknesses.map { |_id| _id.to_i }
     match_details.save!
   end
 
