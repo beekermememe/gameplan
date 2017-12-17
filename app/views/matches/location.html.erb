@@ -1,15 +1,15 @@
-<form class="grid-x grid-margin-x">
-  <div class="cell medium-offset-2 medium-5">
-    <div>
-      <input type="hidden" id="location-id" value="<%= @location.id %>">
-      <input type="text" id="location" rows="10" value="<%= @location.name + ',' + @location.address %>">
+<form>
+  <div class="grid-x grid-margin-x">
+    <div class="cell medium-12">
+      <input type="hidden" id="location-id" value="<%= @location ? @location.id : nil%>">
+      <input type="text" id="location" rows="10" value="<%= @location ? @location.name + ',' + @location.address : ''%>">
     </div>
-    <div class="search-results" style="height:10px">
+    <div class="search-results cell medium-12" style="height:10px">
 
     </div>
-    <div class="cell medium-offset-2 medium-5">
-      <button class="button cell medium-offset-1 medium-4 success update-location" id="<%= @match.id%>" value="submit">Save</button>
-      <button class="button cell medium-offset-1 medium-4 cancel cancel-update" id="<%= @match.id%>" value="submit">Cancel</button>
+    <div class="cell medium-4">
+      <button class="button cell medium-4 success update-location" id="<%= @match ? @match.id : ''%>" value="submit">Save</button>
+      <button class="button cell medium-4 cancel cancel-update" id="<%= @match ? @match.id : ''%>" value="submit">Cancel</button>
     </div>
   </div>
 </form>

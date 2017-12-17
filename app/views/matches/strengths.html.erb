@@ -9,7 +9,7 @@
     </div>
   </div>
   <div class="cell medium-offset-2 medium-5">
-    <button class="button cell medium-offset-1 medium-4 success update-strengths" id="<%= @match.id%>" value="submit">Save</button>
-    <button class="button cell medium-offset-1 medium-4 cancel cancel-update" id="<%= @match.id%>" value="submit">Cancel</button>
+    <button class="button cell medium-offset-1 medium-4 success update-strengths" id="<%= @match ? @match.id : ''%>" value="submit">Save</button>
+    <button class="button cell medium-offset-1 medium-4 cancel cancel-update" id="<%= @match ? @match.id : ''%>" value="submit">Cancel</button>
   </div>
 </form>

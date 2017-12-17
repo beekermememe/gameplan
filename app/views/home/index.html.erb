@@ -8,5 +8,11 @@
   <section class="">
     <%= render 'matches_list' %>
   </section>
+  <script>
+      $(function() {
+          $(".is-active").removeClass('is-active')
+          $("#matches-menu-item").addClass('is-active')
+      })
+  </script>
 <% end %>
 

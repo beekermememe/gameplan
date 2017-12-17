@@ -33,7 +33,7 @@ Rails.application.routes.draw do
 
   resources :opponents, only: [:show]
 
-  resources :matches, only: [:show, :update] do
+  resources :matches, only: [:show, :update, :new, :create] do
     get :result
     get :opponents
     get :strengths
@@ -43,6 +43,8 @@ Rails.application.routes.draw do
     get :search_locations
     get :location
   end
+
+  resources :users, only: [:show, :update]
 
   resources :courts, only: [:show]
 end

@@ -17,6 +17,7 @@
 //= require autocomplete
 //= require home
 //= require matches
+//= require new_match
 //= require what-input
 
 $(function(){ $(document).foundation(); });

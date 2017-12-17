@@ -3,35 +3,49 @@
   <div class="cell small-offset-1 small-10 match-details" id="<%= @match.id %>">
     <fieldset>
       <label class="match-label opponent">Opponent
-        <input class="opponent" type="text" disabled="true" name="opponent" value="<%= @match.opponent.name %>"/>
+        <input class="opponent" type="text" name="opponent" value="<%= @match.opponent.name %>"/>
       </label>
     </fieldset>
     <fieldset>
       <label class="match-label results">Result <%= @match.match_detail.result.win ? '- WIN' : '- LOSS' %>
-        <input type="text" disabled="true" name="result" value="<%= @match.match_detail.result.show_sets %>"/>
+        <input type="text" name="result" value="<%= @match.match_detail.result.show_sets %>"/>
       </label>
     </fieldset>
     <fieldset>
       <label class="match-label strengths">Strengths
-        <input type="text" disabled="true" name="strengths" value="<%= @match.match_detail.show_strengths %>"/>
+        <input type="text" name="strengths" value="<%= @match.match_detail.show_strengths %>"/>
       </label>
     </fieldset>
     <fieldset>
       <label class="match-label weaknesses">Weaknesses
-        <input type="text" disabled="true" name="weaknesses" value="<%= @match.match_detail.show_weaknesses %>"/>
+        <input type="text" name="weaknesses" value="<%= @match.match_detail.show_weaknesses %>"/>
       </label>
     </fieldset>
     <fieldset>
       <label class="match-label note_to_self">Notes to Self
-        <input type="text" rows="4" disabled="true" name="note_to_self" value="<%= @match.match_detail.note_to_self %>"/>
+        <input type="text" rows="4" name="note_to_self" value="<%= @match.match_detail.note_to_self %>"/>
       </label>
     </fieldset>
     <fieldset>
       <label class="match-label location">Location
-        <input type="text" disabled="true" name="location" value="<%= @match.court.name + ',' + @match.court.address %>"/>
+        <input type="text" name="location" value="<%= @match.court.name + ',' + @match.court.address %>"/>
       </label>
     </fieldset>
+    <fieldset>
+      <label class="match-label datetime">Date
+        <input type="datetime-local" name="datetime" value="<%= @match.match_datetime %>"/>
+      </label>
+    </fieldset>
+  </div>
+  <div class="cell medium-offset-2 medium-5">
+    <button class="button cell medium-offset-1 medium-4 cancel cancel-update" id="<%= @match.id%>" value="submit">Back</button>
   </div>
 </div>
 </form>
 <div id="form-modal" class="reveal medium" data-reveal style="display: none"></div>
+<script>
+  $(function() {
+      $(".is-active").removeClass('is-active')
+      $("#matches-menu-item").addClass('is-active')
+  })
+</script>

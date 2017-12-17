@@ -2,35 +2,57 @@
   <div class="grid-x grid-margin-x">
     <div class="cell small-offset-1 small-10 match-details" id="<%= @match.id %>">
       <fieldset>
-        <label class="match-label">Opponent
-          <input class="opponent" type="text"name="opponent" value="<%= @match.opponent.name %>"/>
+        <label class="new-opponent match-label">Opponent
+          <input id="new-opponent" type="text"name="new-opponent"/>
         </label>
       </fieldset>
       <fieldset>
-        <label class="match-label results">Result <%= @match.match_detail.result.win ? '- WIN' : '- LOSS' %>
-          <input type="text" name="result" value="<%= @match.match_detail.result.show_sets %>"/>
+        <label class="match-label new-results">Result</label>
+          <input id="new-results" type="text" name="new-results"/>
         </label>
       </fieldset>
       <fieldset>
-        <label class="match-label strengths">Strengths
-          <input type="text" name="strengths" value="<%= @match.match_detail.show_strengths %>"/>
+        <label class="match-label new-location">Location
+          <input id="new-location" type="text" name="new-location" value=""/>
         </label>
       </fieldset>
       <fieldset>
-        <label class="match-label weaknesses">Weaknesses
-          <input type="text" name="weaknesses" value="<%= @match.match_detail.show_weaknesses %>"/>
+        <label class="match-label new-strengths">Strengths
+          <input id="new-strengths" type="text" name="new-strengths"/>
         </label>
       </fieldset>
       <fieldset>
-        <label class="match-label note_to_self">Notes to Self
-          <input type="textarea" rows="4" disabled="true" name="note_to_self" value="<%= @match.match_detail.note_to_self %>"/>
+        <label class="match-label new-weaknesses">Weaknesses
+          <input id="new-weaknesses" type="text" name="new-weaknesses"/>
+        </label>
+      </fieldset>
+      <fieldset>
+        <label class="match-label new-note-to-self">Notes to Self
+          <textarea id="new-note-to-self" type="textarea" rows="4" name="new-note-to-self"></textarea>
+        </label>
+      </fieldset>
+      <fieldset>
+        <label class="match-label new-date-and-time">Match Date and Time
+          <input id="new-date-and-time" type="date" rows="4" disabled="true" name="new-date-and-time" value=""/>
         </label>
       </fieldset>
     </div>
   </div>
-  <div class="cell medium-offset-2 medium-5">
-    <button class="button cell medium-offset-1 medium-4 success create-match" value="submit">Save</button>
-    <button class="button cell medium-offset-1 medium-4 cancel cancel-create" value="submit">Cancel</button>
+  <div class="grid-x grid-margin-x">
+  <div class="cell medium-offset-4 medium-4 small-offset-1 small-10">
+    <button class="button cell medium-4 success create-match" value="submit">Save</button>
+    <button class="button cell medium-2 cancel cancel-create" value="submit">Cancel</button>
   </div>
+  </div>
+  <input type="hidden" name="new_opponent_id" id="new_opponent_id"/>
+  <input type="hidden" name="new_location_id" id="new_location_id"/>
+  <input type="hidden" name="new_strengths_ids" id="new_strengths_ids"/>
+  <input type="hidden" name="new_weaknesses_ids" id="new_weaknesses_ids"/>
 </form>
 <div id="form-modal" class="reveal medium" data-reveal style="display: none"></div>
+<script>
+    $(function() {
+        $(".is-active").removeClass('is-active')
+        $("#new-match-menu-item").addClass('is-active')
+    })
+</script>

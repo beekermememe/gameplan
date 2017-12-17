@@ -1,0 +1,51 @@
+<form>
+  <div class="grid-x grid-margin-x">
+    <div class="cell small-offset-1 small-10 user" id="<%= @user.id %>">
+      <fieldset>
+        <label class="match-label email">Name
+          <input class="email" type="text" name="email" value="<%= @user.email %>"/>
+        </label>
+      </fieldset>
+      <fieldset>
+        <label class="match-label name">Email
+          <input class="name" type="text" name="name" value="<%= @user.name %>"/>
+        </label>
+      </fieldset>
+      <fieldset>
+        <label class="match-label usta_number">USTA Number
+          <input class="name" type="text" name="usta_number" value="<%= @user.usta_number %>"/>
+        </label>
+      </fieldset>
+      <fieldset>
+        <label class="match-label club">Club
+          <input class="club" type="text" name="club" value="<%= @user.club.name %>"/>
+        </label>
+      </fieldset>
+      <fieldset>
+        <label class="match-label city">City
+          <input class="city" type="text" name="city" value="<%= @user.city %>"/>
+        </label>
+      </fieldset>
+      <fieldset>
+        <label class="match-label state">State
+          <input class="state" type="text" name="state" value="<%= @user.state %>"/>
+        </label>
+      </fieldset>
+      <fieldset>
+        <label class="match-label state">Zipcode
+          <input class="zipcode" type="text" name="zipcode" value="<%= @user.zipcode %>"/>
+        </label>
+      </fieldset>
+    </div>
+    <div class="cell medium-offset-2 medium-5">
+      <button class="button cell medium-offset-1 medium-4 success update-match" id="<%= @user.id%>" value="submit">Save</button>
+      <button class="button cell medium-offset-1 medium-4 cancel cancel-update" id="<%= @user.id%>" value="submit">Back</button>
+    </div>
+  </div>
+  <script>
+      $(function() {
+          $(".is-active").removeClass('is-active')
+          $("#my-profile-menu-item").addClass('is-active')
+      })
+  </script>
+</form>

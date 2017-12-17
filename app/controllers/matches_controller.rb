@@ -10,43 +10,64 @@ class MatchesController < ApplicationController
   end
 
   def show
-    @match = Match.find(show_params[:id])
+    @match = Match.find(show_params[:id]) if show_params[:id].to_s != '-1'
   end
 
   def search_opponent
-    @match = Match.find(show_params[:id])
-
+    @match = Match.find(show_params[:id]) if show_params[:id].to_s != '-1'
   end
 
   def result
-    @match = Match.find(show_params[:match_id])
-    @results = @match.match_detail.result
+    if show_params[:match_id].to_s != '-1'
+      @match = Match.find(show_params[:match_id])
+      @results = @match.match_detail.result
+    else
+      @match = Match.new
+      @match.match_detail = MatchDetail.new
+      result = Result.new
+      result.sets = []
+      @results = result
+    end
     render layout: false
   end
 
   def strengths
-    @match = Match.find(show_params[:match_id])
+    @current_strengths = []
+    if(show_params[:match_id].to_s != '-1')
+      @match = Match.find(show_params[:match_id])
+      @current_strengths = @match.match_detail.strength_ids
+    end
     @all_strengths = Strength.all
-    @current_strengths = @match.match_detail.strength_ids
     render layout: false
   end
 
   def opponents
-    @match = Match.find(show_params[:match_id])
-    @opponent = @match.opponent
+    if show_params[:match_id].to_s == '-1'
+      @match = nil
+      @opponent = nil
+    else
+      @match = Match.find(show_params[:match_id])
+      @opponent = @match.opponent
+    end
+
     render layout: false
   end
 
   def weaknesses
-    @match = Match.find(show_params[:match_id])
+    @current_weaknesses = []
+    if(show_params[:match_id].to_s != '-1')
+      @match = Match.find(show_params[:match_id])
+      @current_weaknesses = @match.match_detail.weakness_ids
+    end
     @all_weaknesses = Weakness.all
-    @current_weaknesses = @match.match_detail.weakness_ids
     render layout: false
   end
 
   def location
-    @match = Match.find(show_params[:match_id])
-    @location = @match.court
+    if show_params[:match_id].to_s != '-1'
+      @match = Match.find(show_params[:match_id])
+      @location = @match.court
+    end
     render layout: false
   end
 
@@ -57,17 +78,23 @@ class MatchesController < ApplicationController
   end
 
   def search_opponents
-    @match = Match.find(search_params[:match_id])
     query = search_params[:query].to_s
-    @selected_id = @match.opponent_id ? @match.opponent_id.to_s : '-1'
-    @search_results = User.where('name like ?',"%#{query}%").where.not(id: @match.user_id).pluck(:id,:name)
+    @match = nil
+    @match = Match.find(search_params[:match_id]) if show_params[:match_id].to_s != '-1'
+    @selected_id ='-1'
+    if(@match && @match.opponent_id)
+      @selected_id  = @match.opponent_id.to_s
+    end
+    @search_results = User.where('name like ?',"%#{query}%")
+    @search_results = @search_results.where.not(id: @match.user_id) if @match
+    @search_results = @search_results.pluck(:id,:name)
     render layout: false
   end
 
   def search_locations
-    @match = Match.find(search_params[:match_id])
+    @match = Match.find(search_params[:match_id]) if search_params[:match_id].to_s != '-1'
     query = search_params[:query].to_s
-    @selected_id = @match.court_id ? @match.court_id.to_s : '-1'
+    @selected_id = (@match && @match.court_id) ? @match.court_id.to_s : '-1'
     @search_results = Court.where('name like ?',"%#{query}%").pluck(:id,:name, :address)
     render layout: false
   end

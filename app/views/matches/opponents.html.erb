@@ -1,15 +1,15 @@
-<form class="grid-x grid-margin-x">
-  <div class="cell medium-offset-2 medium-5">
-    <div>
-      <input type="hidden" id="opponent-id" value="<%= @opponent.id %>">
-      <input type="text" id="opponent" rows="10" value="<%= @opponent.name %>">
+<form>
+  <div class="grid-x grid-margin-x">
+    <div class="cell medium-12">
+      <input type="hidden" id="opponent-id" value="<%= @opponent ? @opponent.id : -1%>">
+      <input type="text" id="opponent" rows="10" value="<%=  @opponent ? @opponent.name : ''%>" placeholder="Enter Name of Opponent">
     </div>
-    <div class="search-results" style="height:10px">
+    <div class="search-results cell medium-12" style="height:10px">
 
     </div>
-    <div class="cell medium-offset-2 medium-5">
-      <button class="button cell medium-offset-1 medium-4 success update-opponent" id="<%= @match.id%>" value="submit">Save</button>
-      <button class="button cell medium-offset-1 medium-4 cancel cancel-update" id="<%= @match.id%>" value="submit">Cancel</button>
+    <div class="cell medium-4">
+      <button class="button cell medium-offset-1 medium-4 success update-opponent" id="<%= @match ? @match.id : '-1'%>" value="submit">Save</button>
+      <button class="button cell medium-offset-1 medium-4 cancel cancel-update" id="<%= @match ? @match.id : '-1'%>" value="submit">Cancel</button>
     </div>
   </div>
 </form>
