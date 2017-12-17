@@ -6,7 +6,8 @@ class MatchesController < ApplicationController
   end
 
   def create
-
+    create_new_match(current_user,create_params)
+    render :json => {result: 'ok'}
   end
 
   def show
@@ -137,4 +138,7 @@ class MatchesController < ApplicationController
     params.permit(:id, :match_id, :query)
   end
 
+  def create_params
+    params.permit(:result,:weakness_ids,:strength_ids,:note_to_self,:opponent_id)
+  end
 end

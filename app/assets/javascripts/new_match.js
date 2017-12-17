@@ -2,6 +2,25 @@ $(function(){
     $('#data-datatables').DataTable();
     $(document).foundation();
 
+    $('#create-match').click(function(event){
+        event.preventDefault();
+        var location_id,strength_ids,opponent_id, weakness_ids, result, notes_to_self;
+        location_id = $('#new_location_id');
+        strength_ids = $('#new_location_id');
+        weakness_ids = $('#new_location_id');
+        result = $('#new_location_id');
+        notes_to_self = $('#new_location_id');
+        $.post('/matches',
+            {
+                location_id: location_id,
+                strength_ids: strength_ids,
+                weakness_ids: weakness_ids,
+                result: result,
+                notes_to_self: notes_to_self
+            }).done(function(result){
+
+        });
+    })
     $('.new-results').click(function(element){
         $('#form-modal').bind('open.zf.reveal', function() {
             reattachNewResultHandlers();

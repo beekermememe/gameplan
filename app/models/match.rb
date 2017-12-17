@@ -26,6 +26,26 @@ class Match < ApplicationRecord
   has_one :match_detail
   has_one :court
 
+  def create_new_match(user,params)
+    match = Match.create(
+      user_id: user.id,
+      court_id: params[:location_id],
+      opponent_id: params[:opponent_id])
+    result = Result.create(
+      sets: params[:results].to_s == '' ? [] : params[:results].split(','),
+      match_id: match.id
+    )
+    details = MatchDetail.create(
+      strength_ids: params[:strength_ids].to_s == '' ? [] : params[:strength_ids].split(',').map {|i| i.to_i},
+      weakness_ids: params[:weakness_ids].to_s == '' ? [] : params[:weakness_ids].split(',').map {|i| i.to_i},
+      note_to_self: params[:note_to_self],
+      result_id: result.id
+    )
+
+    match.match_detail_id = details.id
+    match.save!
+  end
+
   def opponent
     User.where(id: self.opponent_id).first
   end
