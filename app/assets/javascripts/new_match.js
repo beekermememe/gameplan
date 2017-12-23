@@ -2,25 +2,38 @@ $(function(){
     $('#data-datatables').DataTable();
     $(document).foundation();
 
-    $('#create-match').click(function(event){
+    $('.create-match').click(function(event){
         event.preventDefault();
         var location_id,strength_ids,opponent_id, weakness_ids, result, notes_to_self;
-        location_id = $('#new_location_id');
-        strength_ids = $('#new_location_id');
-        weakness_ids = $('#new_location_id');
-        result = $('#new_location_id');
-        notes_to_self = $('#new_location_id');
-        $.post('/matches',
-            {
-                location_id: location_id,
-                strength_ids: strength_ids,
-                weakness_ids: weakness_ids,
-                result: result,
-                notes_to_self: notes_to_self
-            }).done(function(result){
-
-        });
+        location_id = $('#new_location_id').val();
+        strength_ids = $('#new_strengths_ids').val();
+        weakness_ids = $('#new_weaknesses_ids').val();
+        result = $('#new_results_array').val();;
+        notes_to_self = $('#new_note_to_self').text();
+        opponent_id = $('#new_opponent_id').val();
+        debugger;
+        $.ajax({
+                url: '/matches',
+                dataType: 'json',
+                type: 'POST',
+                data:{
+                    opponent_id: opponent_id,
+                    location_id: location_id,
+                    strength_ids: strength_ids,
+                    weakness_ids: weakness_ids,
+                    result: result,
+                    notes_to_self: notes_to_self
+                },
+                success: function (data) {
+                    console.log("Success saving match",data);
+                    location.reload();
+                },
+                error: function(err){
+                    console.log("Failure saving match",err);
+                }
+            })
     })
+
     $('.new-results').click(function(element){
         $('#form-modal').bind('open.zf.reveal', function() {
             reattachNewResultHandlers();
@@ -143,7 +156,7 @@ $(function(){
             var opponent_id = $("#opponent-id").val();
             var opponent_name = $("#opponent").val();
             $("#new-opponent").val(opponent_name);
-            $("#opponent_id").val(opponent_id);
+            $("#new_opponent_id").val(opponent_id);
             $("#form-modal").foundation('close');
         })
         $('.cancel-update').click(function(event) {
@@ -191,7 +204,8 @@ $(function(){
             }
             $("#form-modal").foundation('close');
             console.log('result = ' + result_string.join(','));
-            $("#new-results").val(result_string.join(','))
+            $('#new-result').val(result_string.join(','));
+            $("#new_results_array").val(result_string.join(','));
         });
 
         $('.cancel-update').click(function(event){

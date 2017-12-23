@@ -19,17 +19,26 @@ class MatchDetail < ApplicationRecord
   belongs_to :match
 
   def result
-    Result.find(self.result_id)
+    self.result_id ? Result.find(self.result_id) : Result.new
   end
 
   def show_strengths
-    _strengths = Strength.where(id: strength_ids)
-    _strengths.map { |s| s.title }.join(', ')
+    if strength_ids
+      _strengths = Strength.where(id: strength_ids.map { |_id| _id.to_i})
+      _strengths.map { |s| s.title }.join(', ')
+    else
+      ''
+    end
+
   end
 
   def show_weaknesses
-    _weaknesses = Weakness.where(id: weakness_ids)
-    _weaknesses.map { |s| s.title }.join(', ')
+    if weakness_ids
+      _weaknesses = Weakness.where(id: weakness_ids.map { |_id| _id.to_i})
+      _weaknesses.map { |s| s.title }.join(', ')
+    else
+      ''
+    end
   end
 
 end

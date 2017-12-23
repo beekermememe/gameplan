@@ -7,33 +7,33 @@
       </label>
     </fieldset>
     <fieldset>
-      <label class="match-label results">Result <%= @match.match_detail.result.win ? '- WIN' : '- LOSS' %>
-        <input type="text" name="result" value="<%= @match.match_detail.result.show_sets %>"/>
+      <label class="match-label results">Result <%= (@match.match_detail && @match.match_detail.result) ? (@match.match_detail.result.win ? '- WIN' : '- LOSS') : "" %>
+        <input type="text" name="result" value="<%= (@match.match_detail && @match.match_detail.result) ? @match.match_detail.result.show_sets : ""%>"/>
       </label>
     </fieldset>
     <fieldset>
       <label class="match-label strengths">Strengths
-        <input type="text" name="strengths" value="<%= @match.match_detail.show_strengths %>"/>
+        <input type="text" name="strengths" value="<%= @match.match_detail ? @match.match_detail.show_strengths : ""%>"/>
       </label>
     </fieldset>
     <fieldset>
       <label class="match-label weaknesses">Weaknesses
-        <input type="text" name="weaknesses" value="<%= @match.match_detail.show_weaknesses %>"/>
+        <input type="text" name="weaknesses" value="<%= @match.match_detail ? @match.match_detail.show_weaknesses : ""%>"/>
       </label>
     </fieldset>
     <fieldset>
       <label class="match-label note_to_self">Notes to Self
-        <input type="text" rows="4" name="note_to_self" value="<%= @match.match_detail.note_to_self %>"/>
+        <input type="text" rows="4" name="note_to_self" value="<%= @match.match_detail ? @match.match_detail.note_to_self : ""%>"/>
       </label>
     </fieldset>
     <fieldset>
       <label class="match-label location">Location
-        <input type="text" name="location" value="<%= @match.court.name + ',' + @match.court.address %>"/>
+        <input type="text" name="location" value="<%= @match.court ? @match.court.name + ',' + @match.court.address : ""%>"/>
       </label>
     </fieldset>
     <fieldset>
       <label class="match-label datetime">Date
-        <input type="datetime-local" name="datetime" value="<%= @match.match_datetime %>"/>
+        <input type="datetime-local" name="datetime" value="<%= @match.match_datetime ? @match.match_datetime : 'Not Set' %>"/>
       </label>
     </fieldset>
   </div>

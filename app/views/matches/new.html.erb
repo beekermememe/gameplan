@@ -33,7 +33,8 @@
       </fieldset>
       <fieldset>
         <label class="match-label new-date-and-time">Match Date and Time
-          <input id="new-date-and-time" type="date" rows="4" disabled="true" name="new-date-and-time" value=""/>
+          <input id="new-date" type="date" rows="4" disabled="true" name="new-date" value=""/>
+          <input id="new-time" type="time" rows="4" disabled="true" name="new-time" value=""/>
         </label>
       </fieldset>
     </div>
@@ -48,6 +49,7 @@
   <input type="hidden" name="new_location_id" id="new_location_id"/>
   <input type="hidden" name="new_strengths_ids" id="new_strengths_ids"/>
   <input type="hidden" name="new_weaknesses_ids" id="new_weaknesses_ids"/>
+  <input type="hidden" name="new_results_array" id="new_results_array"/>
 </form>
 <div id="form-modal" class="reveal medium" data-reveal style="display: none"></div>
 <script>

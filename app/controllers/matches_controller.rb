@@ -1,4 +1,5 @@
 class MatchesController < ApplicationController
+  before_action :check_if_match_details, only: [:update]
 
   def new
     @match = Match.new
@@ -6,7 +7,7 @@ class MatchesController < ApplicationController
   end
 
   def create
-    create_new_match(current_user,create_params)
+    Match.create_new_match(current_user,create_params)
     render :json => {result: 'ok'}
   end
 
@@ -36,7 +37,7 @@ class MatchesController < ApplicationController
     @current_strengths = []
     if(show_params[:match_id].to_s != '-1')
       @match = Match.find(show_params[:match_id])
-      @current_strengths = @match.match_detail.strength_ids
+      @current_strengths = @match.match_detail ? @match.match_detail.strength_ids : []
     end
     @all_strengths = Strength.all
     render layout: false
@@ -58,7 +59,7 @@ class MatchesController < ApplicationController
     @current_weaknesses = []
     if(show_params[:match_id].to_s != '-1')
       @match = Match.find(show_params[:match_id])
-      @current_weaknesses = @match.match_detail.weakness_ids
+      @current_weaknesses = @match.match_detail ? @match.match_detail.weakness_ids : []
     end
     @all_weaknesses = Weakness.all
     render layout: false
@@ -74,7 +75,8 @@ class MatchesController < ApplicationController
 
   def note_to_self
     @match = Match.find(show_params[:match_id])
-    @note_to_self = @match.match_detail.note_to_self
+
+    @note_to_self = @match.match_detail ? @match.match_detail.note_to_self : ""
     render layout: false
   end
 
@@ -140,5 +142,13 @@ class MatchesController < ApplicationController
 
   def create_params
     params.permit(:result,:weakness_ids,:strength_ids,:note_to_self,:opponent_id)
+  end
+
+  private
+  def check_if_match_details
+    @match = Match.find(show_params[:id])
+    unless @match.match_detail
+      @match.match_detail = MatchDetail.create({match_id: @match.id})
+    end
   end
 end

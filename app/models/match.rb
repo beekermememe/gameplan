@@ -26,57 +26,77 @@ class Match < ApplicationRecord
   has_one :match_detail
   has_one :court
 
-  def create_new_match(user,params)
+  def self.create_new_match(user,params)
     match = Match.create(
       user_id: user.id,
-      court_id: params[:location_id],
-      opponent_id: params[:opponent_id])
+      court_id: params[:location_id].to_i,
+      opponent_id: params[:opponent_id].to_i)
+
     result = Result.create(
       sets: params[:results].to_s == '' ? [] : params[:results].split(','),
       match_id: match.id
     )
+
     details = MatchDetail.create(
       strength_ids: params[:strength_ids].to_s == '' ? [] : params[:strength_ids].split(',').map {|i| i.to_i},
       weakness_ids: params[:weakness_ids].to_s == '' ? [] : params[:weakness_ids].split(',').map {|i| i.to_i},
       note_to_self: params[:note_to_self],
-      result_id: result.id
+      result_id: result.id,
+      match_id: match.id
     )
-
     match.match_detail_id = details.id
     match.save!
   end
 
   def opponent
-    User.where(id: self.opponent_id).first
+    if self.opponent_id
+      User.where(id: self.opponent_id).first
+    else
+      nil
+    end
   end
 
   def court
-    Court.where(id: self.court_id).first
+    if self.court_id
+      Court.where(id: self.court_id).first
+    else
+      nil
+    end
+
   end
 
   def details
-    MatchDetail.where(id: self.match_detail_id).first
+    if self.match_detail_id
+      MatchDetail.where(id: self.match_detail_id).first
+    else
+      deets = MatchDetail.create(match_id: id)
+      self.match_detail_id = deets.id
+      self.save!
+      deets
+    end
   end
 
   def update_result(new_result)
-    current_result = details.result
-    if current_result.nil?
-      current_result = Result.new
-      current_result.match_id = details.match_id
-    end
-
+    check_object
+    current_result = result
     sets = []
     new_result.each do |set_score,count|
       sets << "#{set_score[:home]}-#{set_score[:away]}"
     end
+    current_result.match_id = id
     current_result.sets = sets
     current_result.save!
+    _match_details = match_detail
+    match_detail.result_id = current_result.id
+    _match_details.save!
   end
 
   def update_strengths(new_strengths)
-    match_details = details
-    match_details.strength_ids = new_strengths.map { |_id| _id.to_i }
-    match_details.save!
+    check_object
+    _match_details = match_detail
+    _match_details.match_id = id
+    _match_details.strength_ids = new_strengths.map { |_id| _id.to_i }
+    _match_details.save!
   end
 
   def update_opponent(opponent_id)
@@ -90,14 +110,35 @@ class Match < ApplicationRecord
   end
 
   def update_weaknesses(new_weaknesses)
-    match_details = details
-    match_details.weakness_ids = new_weaknesses.map { |_id| _id.to_i }
-    match_details.save!
+    check_object
+    _match_details = match_detail
+    _match_details.match_id = id
+    _match_details.weakness_ids = new_weaknesses.map { |_id| _id.to_i }
+    _match_details.save!
   end
 
   def update_note_to_self(new_note_to_self)
-    match_details = details
-    match_details.note_to_self = new_note_to_self
-    match_details.save!
+    check_object
+    _match_details = match_detail
+    _match_details.match_id = id
+    _match_details.note_to_self = new_note_to_self
+    _match_details.save!
+  end
+
+  private
+  def check_object
+    unless match_detail_id
+      deets = MatchDetail.create(match_id: id)
+      self.match_detail_id = deets.id
+      save!
+    end
+
+    if match_detail.result_id
+      res = Result.create(match_id: id)
+      deets = match_detail
+      deets.result_id = res.id
+      deets.save!
+      save!
+    end
   end
 end

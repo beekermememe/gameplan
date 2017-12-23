@@ -34,22 +34,26 @@
             <a class='match-data' data-href='/opponents/<%= match.opponent.id %>'><%= match.opponent.name %></a>
           </td>
           <td>
-            <%= match.match_datetime.to_date %>
+            <%= match.match_datetime ? match.match_datetime.to_date : 'Not Entered' %>
           </td>
           <td>
-            <a class='match-data' data-href='/courts/<%= match.court_id %>'><%= match.court.name %></a>
+            <% if match.court %>
+              <a class='match-data' data-href='/courts/<%= match.court_id %>'><%= match.court.name %></a>
+            <% else %>
+              Not Entered
+            <% end %>
           </td>
           <td>
-            <%= match.details.result.win ? "WIN" : "LOSS" %>
+            <%= (match.details && match.details.result) ? (match.details.result.win ? "WIN" : "LOSS") : "No results" %>
           </td>
           <td>
-            <%= match.details.result.sets[0] %>
+            <%= (match.details && match.details.result) ? match.details.result.sets[0] : "No result" %>
           </td>
           <td>
-            <%= match.details.result.sets[1] %>
+            <%= (match.details && match.details.result) ? match.details.result.sets[1] : "No result" %>
           </td>
           <td>
-            <%= match.details.result.sets.length > 2 ? match.details.result.sets[2] : ""  %>
+            <%= (match.details && match.details.result &&match.details.result.sets.length > 2) ? match.details.result.sets[2] : ""  %>
           </td>
           <td>
             <button class="view-match button" id="match-id-<%=match.id%>">View Match</button>
