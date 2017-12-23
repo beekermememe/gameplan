@@ -132,6 +132,7 @@ $(function(){
 
     var reattachNewLocationSearchHandlers = function(){
         $(".update-location option").click(function(e){
+            $("#new_location_id").val(e.target.value);
             $("#location-id").val(e.target.value);
             $("#location").val(e.target.text);
             $(".search-results").html("");
@@ -204,7 +205,7 @@ $(function(){
             }
             $("#form-modal").foundation('close');
             console.log('result = ' + result_string.join(','));
-            $('#new-result').val(result_string.join(','));
+            $('#new-results').val(result_string.join(','));
             $("#new_results_array").val(result_string.join(','));
         });
 

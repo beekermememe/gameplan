@@ -33,7 +33,7 @@ class Match < ApplicationRecord
       opponent_id: params[:opponent_id].to_i)
 
     result = Result.create(
-      sets: params[:results].to_s == '' ? [] : params[:results].split(','),
+      sets: params[:result].to_s == '' ? [] : params[:result].split(','),
       match_id: match.id
     )
 

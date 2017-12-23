@@ -133,7 +133,7 @@ class MatchesController < ApplicationController
 
   def update_params
     params.permit(:id)
-    params.require([:result,:strengths,:note_to_self,:opponent])
+    params.require([:result,:strengths,:note_to_self,:opponent, :location, :notes_to_self])
   end
 
   def search_params
@@ -141,7 +141,7 @@ class MatchesController < ApplicationController
   end
 
   def create_params
-    params.permit(:result,:weakness_ids,:strength_ids,:note_to_self,:opponent_id)
+    params.permit(:result,:weakness_ids,:strength_ids,:note_to_self,:opponent_id, :location_id, :notes_to_self)
   end
 
   private
