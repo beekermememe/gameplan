@@ -1,0 +1,35 @@
+<form>
+  <div class="grid-x grid-margin-x">
+    <div class="cell small-offset-1 small-10 user" id="<%= @user.id %>">
+      <fieldset>
+        <label class="match-label name">Name
+          <input required="true" class="email" type="text" id="name" name="name" value="" placeholder="Required - Enter you Name Here"/>
+        </label>
+      </fieldset>
+      <div id="name-info" style="color: red;font-size: small"></div>
+      <fieldset>
+        <label class="match-label email">Email
+          <input required="true" class="email" type="text" id="email" name="email" value="<%= @user.email %>"/>
+        </label>
+      </fieldset>
+      <div id="email-info" style="color: red;font-size: small"></div>
+      <fieldset>
+        <label class="match-label pasasword">Setup Password
+          <input required="true" class="password" type="password" name="password" id="password" value="" placeholder="Required - Enter a new password"/>
+          <input required="true" class="password" type="password" name="verify-password" id="verify-password" value="" placeholder="Required - Verify password"/>
+        </label>
+      </fieldset>
+      <div id="password-info" style="color: red; font-size: small"></div>
+    </div>
+    <div class="cell medium-offset-2 medium-5">
+      <button class="button cell medium-offset-1 medium-4 success create-user" id="create-<%= @user.id%>" value="submit">Save</button>
+      <button class="button cell medium-offset-1 medium-4 cancel cancel-user" id="cancel-<%= @user.id%>" value="submit">Cancel</button>
+    </div>
+  </div>
+  <script>
+      $(function() {
+          $(".is-active").removeClass('is-active')
+          $("#my-profile-menu-item").addClass('is-active')
+      })
+  </script>
+</form>

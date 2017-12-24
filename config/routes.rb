@@ -44,7 +44,7 @@ Rails.application.routes.draw do
     get :location
   end
 
-  resources :users, only: [:show, :update]
+  resources :users, only: [:show, :update, :new]
 
   resources :courts, only: [:show]
 end

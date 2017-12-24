@@ -19,5 +19,6 @@
 //= require matches
 //= require new_match
 //= require what-input
+//= require new_user
 
 $(function(){ $(document).foundation(); });
