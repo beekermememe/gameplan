@@ -11,7 +11,6 @@ $(function(){
         result = $('#new_results_array').val();;
         notes_to_self = $('#new_note_to_self').text();
         opponent_id = $('#new_opponent_id').val();
-        debugger;
         $.ajax({
                 url: '/matches',
                 dataType: 'json',

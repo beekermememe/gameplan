@@ -1,29 +1,31 @@
 <form>
   <div class="grid-x grid-margin-x">
-    <div class="cell small-offset-1 small-10 user" id="<%= @user.id %>">
+    <div class="cell small-offset-1 small-10 user">
       <fieldset>
-        <label class="match-label email">Name
-          <input class="email" type="text" name="email" value="<%= @user.email %>"/>
+        <input type="hidden" id="user-id" value="<%= @user.id %>"/>
+        <label class="match-label name">Name
+          <input id="name" type="text" name="name" value="<%= @user.name %>"/>
         </label>
       </fieldset>
       <fieldset>
-        <label class="match-label name">Email
-          <input class="name" type="text" name="name" value="<%= @user.name %>"/>
+        <label class="match-label email">Email
+          <input id="email" type="text" name="email" value="<%= @user.email %>"/>
         </label>
       </fieldset>
       <fieldset>
         <label class="match-label usta_number">USTA Number
-          <input class="name" type="text" name="usta_number" value="<%= @user.usta_number %>"/>
+          <input id="usta_number" type="text" name="usta_number" value="<%= @user.usta_number %>"/>
         </label>
       </fieldset>
       <fieldset>
         <label class="match-label club">Club
-          <input class="club" type="text" name="club" value="<%= @user.club.name %>"/>
+          <input id="club-id" type="hidden" name="club-id" value="<%= @user.club_id ? @user.club_id : ''%>"/>
+          <input id="club" type="text" name="club" value="<%= @user.club_id ? @user.club.name : ''%>"/>
         </label>
       </fieldset>
       <fieldset>
         <label class="match-label city">City
-          <input class="city" type="text" name="city" value="<%= @user.city %>"/>
+          <input id="city" type="text" name="city" value="<%= @user.city %>"/>
         </label>
       </fieldset>
       <fieldset>
@@ -38,8 +40,7 @@
       </fieldset>
     </div>
     <div class="cell medium-offset-2 medium-5">
-      <button class="button cell medium-offset-1 medium-4 success update-user" id="<%= @user.id%>" value="submit">Save</button>
-      <button class="button cell medium-offset-1 medium-4 cancel cancel-update" id="<%= @user.id%>" value="submit">Back</button>
+      <button class="button cell medium-offset-1 medium-4 success update-existing-user" id="update-existing-user" value="submit">Save</button>
     </div>
   </div>
   <script>
@@ -49,3 +50,4 @@
       })
   </script>
 </form>
+<div id="form-modal" class="reveal medium" data-reveal style="display: none"></div>

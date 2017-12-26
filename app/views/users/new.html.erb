@@ -1,5 +1,6 @@
 <form>
   <div class="grid-x grid-margin-x">
+    <input type="hidden" value="<%= @user.id %>" id="user-id">
     <div class="cell small-offset-1 small-10 user" id="<%= @user.id %>">
       <fieldset>
         <label class="match-label name">Name
@@ -14,16 +15,18 @@
       </fieldset>
       <div id="email-info" style="color: red;font-size: small"></div>
       <fieldset>
-        <label class="match-label pasasword">Setup Password
+        <label class="match-label password">Setup Password
           <input required="true" class="password" type="password" name="password" id="password" value="" placeholder="Required - Enter a new password"/>
+        </label>
+        <label class="match-label verify-password">Verify Password
           <input required="true" class="password" type="password" name="verify-password" id="verify-password" value="" placeholder="Required - Verify password"/>
         </label>
       </fieldset>
       <div id="password-info" style="color: red; font-size: small"></div>
     </div>
     <div class="cell medium-offset-2 medium-5">
-      <button class="button cell medium-offset-1 medium-4 success create-user" id="create-<%= @user.id%>" value="submit">Save</button>
-      <button class="button cell medium-offset-1 medium-4 cancel cancel-user" id="cancel-<%= @user.id%>" value="submit">Cancel</button>
+      <button class="button cell medium-offset-1 medium-4 success create-user" id="create-user" value="submit">Save</button>
+      <button class="button cell medium-offset-1 medium-4 cancel cancel-user" id="cancel-user" value="submit">Cancel</button>
     </div>
   </div>
   <script>
