@@ -16,3 +16,12 @@ test:
   host: localhost
   username: beeker
   password:
+
+production:
+  adapter: postgresql
+  encoding: unicode
+  database: gameplan_production
+  pool: 5
+  host: localhost
+  username: beeker
+  password: beeker
