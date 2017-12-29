@@ -30,8 +30,9 @@ class Match < ApplicationRecord
     match = Match.create(
       user_id: user.id,
       court_id: params[:location_id].to_i,
-      opponent_id: params[:opponent_id].to_i)
-
+      opponent_id: params[:opponent_id].to_i,
+      match_datetime: params[:match_datetime]
+    )
     result = Result.create(
       sets: params[:result].to_s == '' ? [] : params[:result].split(','),
       match_id: match.id
@@ -110,7 +111,7 @@ class Match < ApplicationRecord
   end
 
   def update_datetime(new_date_time)
-    self.court_id = location_id.to_i
+    self.match_datetime = DateTime.parse(new_date_time)
     self.save!
   end
 

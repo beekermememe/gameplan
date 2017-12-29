@@ -4,13 +4,14 @@ $(function(){
 
     $('.create-match').click(function(event){
         event.preventDefault();
-        var location_id,strength_ids,opponent_id, weakness_ids, result, notes_to_self;
+        var location_id,strength_ids,opponent_id, weakness_ids, result, notes_to_self, match_datetime;
         location_id = $('#new_location_id').val();
         strength_ids = $('#new_strengths_ids').val();
         weakness_ids = $('#new_weaknesses_ids').val();
         result = $('#new_results_array').val();;
         notes_to_self = $('#new_note_to_self').text();
         opponent_id = $('#new_opponent_id').val();
+        match_datetime = $('#new_match_datetime').val();
         $.ajax({
                 url: '/matches',
                 dataType: 'json',
@@ -21,7 +22,8 @@ $(function(){
                     strength_ids: strength_ids,
                     weakness_ids: weakness_ids,
                     result: result,
-                    notes_to_self: notes_to_self
+                    notes_to_self: notes_to_self,
+                    match_datetime: match_datetime
                 },
                 success: function (data) {
                     console.log("Success saving match",data);
@@ -257,4 +259,13 @@ $(function(){
             $("#form-modal").foundation('close');
         })
     }
+
+  var attachNewDateHandler = function(){
+    flatpickr("#new_match_datetime", {
+      enableTime: true,
+      altInput: true,
+      plugins: [new confirmDatePlugin({})]
+    });
+  }
+  attachNewDateHandler();
 })
