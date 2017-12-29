@@ -15,6 +15,8 @@
 //= require foundation
 //= require datatables
 //= require autocomplete
+//= require flatpickr
+//= require confirmdate
 //= require home
 //= require matches
 //= require new_match

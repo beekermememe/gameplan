@@ -32,9 +32,8 @@
       </label>
     </fieldset>
     <fieldset>
-      <label class="match-label datetime">Date
-        <input type="datetime-local" name="datetime" value="<%= @match.match_datetime ? @match.match_datetime : 'Not Set' %>"/>
-      </label>
+      <label class="match-label datetime">Date</label>
+      <input id="match_datetime" type="text" name="datetime" value="<%= @match.match_datetime ? @match.match_datetime.strftime('%Y-%m-%d %h:%M') : '' %>" placeholder="Please enter a date"/>
     </fieldset>
   </div>
   <div class="cell medium-offset-2 medium-5">

@@ -4,8 +4,8 @@ development:
   database: gameplan_development
   pool: 5
   host: localhost
-  username: beeker
-  password: beeker
+#  username: beeker
+#  password: beeker
 
 
 test:
@@ -14,8 +14,8 @@ test:
   database: gameplan_test
   pool: 5
   host: localhost
-  username: beeker
-  password:
+#  username: beeker
+#  password:
 
 production:
   adapter: postgresql

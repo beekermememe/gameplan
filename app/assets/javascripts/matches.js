@@ -296,4 +296,40 @@ $(function(){
 
         })
     }
+
+    var attachDateHandler = function(){
+      flatpickr("#match_datetime", {
+        enableTime: true,
+        altInput: true,
+        plugins: [new confirmDatePlugin({})],
+        onOpen: [
+          function(selectedDates, dateStr, instance){
+            var currentSelectedTime = $("#match_datetime").val();
+            if(currentSelectedTime) {
+              instance.setDate(currentSelectedTime);
+            }
+          }],
+        onClose: function(selectedDates, dateStr, instance){
+          var match_id = $(".match-details")[0].id;
+          $.ajax({
+                url: '/matches/' + match_id,
+                type: 'PUT',
+                dataType: 'json',
+                data: {match_datetime: dateStr},
+                success: function (data) {
+                  console.log("Success changing strengths",data);
+                  location.reload();
+                },
+                error: function(err){
+                  console.log("Failure changing strengths",err);
+                  $("#form-modal").foundation('close');
+                }
+              }
+          );
+        }
+      });
+
+
+    }
+    attachDateHandler();
 })

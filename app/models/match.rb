@@ -109,6 +109,11 @@ class Match < ApplicationRecord
     self.save!
   end
 
+  def update_datetime(new_date_time)
+    self.court_id = location_id.to_i
+    self.save!
+  end
+
   def update_weaknesses(new_weaknesses)
     check_object
     _match_details = match_detail
