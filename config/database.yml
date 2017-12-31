@@ -4,7 +4,7 @@ development:
   database: gameplan_development
   pool: 5
   host: localhost
-#  username: beeker
+  username: beeker
 #  password: beeker
 
 
@@ -14,7 +14,7 @@ test:
   database: gameplan_test
   pool: 5
   host: localhost
-#  username: beeker
+  username: beeker
 #  password:
 
 production:
@@ -24,4 +24,4 @@ production:
   pool: 5
   host: localhost
   username: beeker
-  password: beeker
+  #password: beeker

@@ -21,7 +21,8 @@ test
 bin
 !/log/.keep
 !/tmp/.keep
-
+.DS_Store
+*.swp
 /node_modules
 /yarn-error.log
 

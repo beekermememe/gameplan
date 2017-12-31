@@ -16,6 +16,7 @@
 //= require datatables
 //= require autocomplete
 //= require flatpickr
+//= require chart
 //= require confirmdate
 //= require home
 //= require matches
