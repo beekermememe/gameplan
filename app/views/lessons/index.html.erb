@@ -1,0 +1,37 @@
+<div class="grid-x grid-margin-x matches-list">
+  <div class="large-offset-1 large-10 medium-offset-1 medium-10 small-12 cell">
+    <table id="data-datatables">
+      <thead>
+      <tr>
+        <th>
+          Coach
+        </th>
+        <th>
+          Date
+        </th>
+        <th>
+          More info
+        </th>
+      </tr>
+      </thead>
+      <tbody>
+      <% @lessons.each do |lesson| %>
+        <tr>
+          <td>
+            <%= lesson.coach %>
+          </td>
+          <td>
+            <%= lesson.lesson_date ? lesson.lesson_date.to_date : 'Not Entered' %>
+          </td>
+          <td>
+            <button class="view-lesson button" id="lesson-id-<%=lesson.id%>">View Lesson</button>
+          </td>
+        </tr>
+      <% end %>
+      </tbody>
+    </table>
+
+    <div id="lesson_detail" class="reveal large-12 large-centered medium-12 medium-centered" data-reveal aria-labelledby="modalTitle" aria-hidden="true" role="dialog">
+    </div>
+  </div>
+</div>

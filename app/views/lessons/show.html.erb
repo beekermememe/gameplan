@@ -1,0 +1,36 @@
+<form>
+  <div class="grid-x grid-margin-x">
+    <div class="cell small-offset-1 small-10 lesson-details" id="<%= @lesson.id %>">
+      <fieldset>
+        <label class="lesson-label coach">Coach
+          <input class="lesson_coach" type="text" name="coach" value="<%= @lesson.coach %>" id="<%= @lesson.coach_id %>"
+          />
+        </label>
+      </fieldset>
+      <fieldset>
+        <label class="lesson-label lesson_date">Date</label>
+        <input id="lesson_date" type="text" name="lesson_date" value="<%= @lesson.lesson_date ? @lesson.lesson_date.strftime('%Y-%m-%d %H:%M') : '' %>" placeholder="Please enter a date"/>
+      </fieldset>
+      <fieldset>
+        <label class="lesson-label notes">Notes
+          <input id="lesson_notes" type="text" name="notes" value="<%= @lesson.notes ? @lesson.notes : ""%>"/>
+        </label>
+      </fieldset>
+      <fieldset>
+        <label class="lesson-label coaches_note">Coaches Note
+          <input id="lesson_coaches_note" type="text" name="coaches_note" value="<%= @lesson.coaches_note ? @lesson.coaches_note : ""%>"/>
+        </label>
+      </fieldset>
+    </div>
+    <div class="cell medium-offset-2 medium-5">
+      <button class="button cell medium-offset-1 medium-4 cancel cancel-update" id="<%= @lesson.id%>" value="submit">Back</button>
+    </div>
+  </div>
+</form>
+<div id="form-modal" class="reveal medium" data-reveal style="display: none"></div>
+<script>
+    $(function() {
+        $(".is-active").removeClass('is-active')
+        $("#matches-menu-item").addClass('is-active')
+    })
+</script>
