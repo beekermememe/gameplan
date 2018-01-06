@@ -11,6 +11,8 @@
 #  city                   :string
 #  state                  :string
 #  zipcode                :string
+#  authtype               :string
+#  auth_id                :string
 #  created_at             :datetime         not null
 #  updated_at             :datetime         not null
 #  encrypted_password     :string           default(""), not null

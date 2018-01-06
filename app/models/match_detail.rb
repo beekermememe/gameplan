@@ -8,6 +8,7 @@
 #  weaknesses   :string           default([]), is an Array
 #  weakness_ids :string           default([]), is an Array
 #  result_id    :integer
+#  match_id     :integer
 #  details      :text
 #  note_to_self :text
 #  played_date  :datetime

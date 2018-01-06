@@ -139,7 +139,7 @@ class Match < ApplicationRecord
       save!
     end
 
-    if match_detail.result_id
+    if !match_detail.result_id
       res = Result.create(match_id: id)
       deets = match_detail
       deets.result_id = res.id

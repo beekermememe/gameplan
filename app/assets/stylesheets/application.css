@@ -23,5 +23,6 @@
 *= require dataTables.foundation
 *= require flatpickr.min
 *= require confirmdate
+*= require lessons
 */
 

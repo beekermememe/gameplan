@@ -23,7 +23,7 @@
     </fieldset>
     <fieldset>
       <label class="match-label note_to_self">Notes to Self
-        <input type="text" rows="4" name="note_to_self" value="<%= @match.match_detail ? @match.match_detail.note_to_self : ""%>"/>
+        <textarea type="" rows="4" name="note_to_self" rows="4"><%= @match.match_detail ? @match.match_detail.note_to_self : ""%> </textarea>
       </label>
     </fieldset>
     <fieldset>

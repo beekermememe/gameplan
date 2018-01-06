@@ -44,6 +44,14 @@ Rails.application.routes.draw do
     get :location
   end
 
+  resources :coaches do
+
+  end
+
+  resources :lessons, only: [:index, :show, :update, :new, :create] do
+    get :coaches_search
+  end
+
   resources :users, only: [:show, :update, :new, :delete_signup, :destroy] do
 
   end
