@@ -1,24 +1,24 @@
-<form>
+<form autocomplete="off">
   <div class="grid-x grid-margin-x">
     <div class="cell small-offset-1 small-10 lesson-details" id="<%= @lesson.id %>">
       <fieldset>
-        <label class="lesson-label opponent">Coach
+        <label class="lesson-label new-coach">Coach
           <input class="new-lesson_coach" type="text" name="coach" value="<%= @lesson.coach %>" id="<%= @lesson.coach_id %>"
           />
         </label>
       </fieldset>
       <fieldset>
         <label class="lesson-label lesson_date">Date</label>
-        <input id="new-lesson_date" type="text" name="lesson_date" value="<%= @lesson.lesson_date ? @lesson.lesson_date.strftime('%Y-%m-%d %H:%M') : '' %>" placeholder="Please enter a date"/>
+        <input autocomplete="off" id="new-lesson_date" type="text" name="lesson_date" value="<%= @lesson.lesson_date ? @lesson.lesson_date.strftime('%Y-%m-%d %H:%M') : '' %>" placeholder="Please enter a date"/>
       </fieldset>
       <fieldset>
         <label class="lesson-label notes">Player Notes
-          <textarea id="new-lesson_notes" name="notes" value="<%= @lesson.notes ? @lesson.notes : ""%>" rows="4"></textarea>
+          <textarea autocomplete="off" id="new-lesson_notes" name="notes" value="<%= @lesson.notes ? @lesson.notes : ""%>" rows="4"></textarea>
         </label>
       </fieldset>
       <fieldset>
         <label class="lesson-label coaches_note">Coaches Notes
-          <textarea id="new-lesson_coaches_note" name="coaches_note" disabled="true" value="<%= @lesson.coaches_note ? @lesson.coaches_note : ""%>" rows="4"></textarea>
+          <textarea autocomplete="off" id="new-lesson_coaches_note" name="coaches_note" disabled="true" value="<%= @lesson.coaches_note ? @lesson.coaches_note : ""%>" rows="4"></textarea>
         </label>
       </fieldset>
     </div>
@@ -32,6 +32,6 @@
 <script>
     $(function() {
         $(".is-active").removeClass('is-active')
-        $("#matches-menu-item").addClass('is-active')
+        $("#new-lesson-menu-item").addClass('is-active')
     })
 </script>

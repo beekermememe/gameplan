@@ -1,8 +1,8 @@
-<form>
+<form autocomplete="off">
   <div class="grid-x grid-margin-x">
     <div class="cell medium-12">
-      <input type="hidden" id="opponent-id" value="<%= @opponent ? @opponent.id : -1%>">
-      <input type="text" id="opponent" rows="10" value="<%=  @opponent ? @opponent.name : ''%>" placeholder="Enter Name of Opponent">
+      <input autocomplete="off" type="hidden" id="opponent-id" value="<%= @opponent ? @opponent.id : -1%>">
+      <input autocomplete="off" type="text" id="opponent" rows="10" value="<%=  @opponent ? @opponent.name : ''%>" placeholder="Enter Name of Opponent">
     </div>
     <div class="search-results cell medium-12" style="height:10px">
 

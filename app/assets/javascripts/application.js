@@ -24,5 +24,7 @@
 //= require what-input
 //= require new_user
 //= require edit_user
+//= require new_lesson
+//= require lessons
 
 $(function(){ $(document).foundation(); });

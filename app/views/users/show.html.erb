@@ -1,41 +1,41 @@
-<form>
+<form autocomplete="off">
   <div class="grid-x grid-margin-x">
     <div class="cell small-offset-1 small-10 user">
       <fieldset>
         <input type="hidden" id="user-id" value="<%= @user.id %>"/>
         <label class="match-label name">Name
-          <input id="name" type="text" name="name" value="<%= @user.name %>"/>
+          <input autocomplete="off" id="name" type="text" name="name" value="<%= @user.name %>"/>
         </label>
       </fieldset>
       <fieldset>
         <label class="match-label email">Email
-          <input id="email" type="text" name="email" value="<%= @user.email %>"/>
+          <input autocomplete="off" id="email" type="text" name="email" value="<%= @user.email %>"/>
         </label>
       </fieldset>
       <fieldset>
         <label class="match-label usta_number">USTA Number
-          <input id="usta_number" type="text" name="usta_number" value="<%= @user.usta_number %>"/>
+          <input autocomplete="off" id="usta_number" type="text" name="usta_number" value="<%= @user.usta_number %>"/>
         </label>
       </fieldset>
       <fieldset>
         <label class="match-label club">Club
           <input id="club-id" type="hidden" name="club-id" value="<%= @user.club_id ? @user.club_id : ''%>"/>
-          <input id="club" type="text" name="club" value="<%= @user.club_id ? @user.club.name : ''%>"/>
+          <input autocomplete="off" id="club" type="text" name="club" value="<%= @user.club_id ? @user.club.name : ''%>"/>
         </label>
       </fieldset>
       <fieldset>
         <label class="match-label city">City
-          <input id="city" type="text" name="city" value="<%= @user.city %>"/>
+          <input autocomplete="off" id="city" type="text" name="city" value="<%= @user.city %>"/>
         </label>
       </fieldset>
       <fieldset>
         <label class="match-label state">State
-          <input id="state" type="text" name="state" value="<%= @user.state %>"/>
+          <input autocomplete="off" id="state" type="text" name="state" value="<%= @user.state %>"/>
         </label>
       </fieldset>
       <fieldset>
         <label class="match-label state">Zipcode
-          <input id="zipcode" type="text" name="zipcode" value="<%= @user.zipcode %>"/>
+          <input autocomplete="off" id="zipcode" type="text" name="zipcode" value="<%= @user.zipcode %>"/>
         </label>
       </fieldset>
     </div>

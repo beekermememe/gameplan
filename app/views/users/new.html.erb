@@ -1,25 +1,25 @@
-<form>
+<form autocomplete="off">
   <div class="grid-x grid-margin-x">
     <input type="hidden" value="<%= @user.id %>" id="user-id">
     <div class="cell small-offset-1 small-10 user" id="<%= @user.id %>">
       <fieldset>
         <label class="match-label name">Name
-          <input required="true" class="email" type="text" id="name" name="name" value="" placeholder="Required - Enter you Name Here"/>
+          <input autocomplete="off" required="true" class="email" type="text" id="name" name="name" value="" placeholder="Required - Enter you Name Here"/>
         </label>
       </fieldset>
       <div id="name-info" style="color: red;font-size: small"></div>
       <fieldset>
         <label class="match-label email">Email
-          <input required="true" class="email" type="text" id="email" name="email" value="<%= @user.email %>"/>
+          <input autocomplete="off" required="true" class="email" type="text" id="email" name="email" value="<%= @user.email %>"/>
         </label>
       </fieldset>
       <div id="email-info" style="color: red;font-size: small"></div>
       <fieldset>
         <label class="match-label password">Setup Password
-          <input required="true" class="password" type="password" name="password" id="password" value="" placeholder="Required - Enter a new password"/>
+          <input autocomplete="off" required="true" class="password" type="password" name="password" id="password" value="" placeholder="Required - Enter a new password"/>
         </label>
         <label class="match-label verify-password">Verify Password
-          <input required="true" class="password" type="password" name="verify-password" id="verify-password" value="" placeholder="Required - Verify password"/>
+          <input autocomplete="off" required="true" class="password" type="password" name="verify-password" id="verify-password" value="" placeholder="Required - Verify password"/>
         </label>
       </fieldset>
       <div id="password-info" style="color: red; font-size: small"></div>

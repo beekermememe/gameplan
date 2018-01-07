@@ -1,9 +1,9 @@
-<form>
+<form autocomplete="off">
   <div class="grid-x grid-margin-x">
     <div class="cell small-offset-1 small-10 lesson-details" id="<%= @lesson.id %>">
       <fieldset>
         <label class="lesson-label coach">Coach
-          <input class="lesson_coach" type="text" name="coach" value="<%= @lesson.coach %>" id="<%= @lesson.coach_id %>"
+          <input class="lesson_coach" type="text" name="coach" value="<%= @lesson.coach.name %>" id="<%= @lesson.coach_id %>"
           />
         </label>
       </fieldset>
@@ -13,17 +13,17 @@
       </fieldset>
       <fieldset>
         <label class="lesson-label notes">Notes
-          <input id="lesson_notes" type="text" name="notes" value="<%= @lesson.notes ? @lesson.notes : ""%>"/>
+          <textarea id="lesson_notes" name="notes" rows="4"><%= @lesson.notes ? @lesson.notes : ""%></textarea>
         </label>
       </fieldset>
       <fieldset>
         <label class="lesson-label coaches_note">Coaches Note
-          <input id="lesson_coaches_note" type="text" name="coaches_note" value="<%= @lesson.coaches_note ? @lesson.coaches_note : ""%>"/>
+          <textarea disabled="true" id="lesson_coaches_note" name="coaches_note" rows="4"><%= @lesson.coaches_note ? @lesson.coaches_note : ""%></textarea>
         </label>
       </fieldset>
     </div>
     <div class="cell medium-offset-2 medium-5">
-      <button class="button cell medium-offset-1 medium-4 cancel cancel-update" id="<%= @lesson.id%>" value="submit">Back</button>
+      <button class="button cell medium-offset-1 medium-4 cancel cancel-lesson-update" id="<%= @lesson.id%>" value="submit">Back</button>
     </div>
   </div>
 </form>
@@ -31,6 +31,6 @@
 <script>
     $(function() {
         $(".is-active").removeClass('is-active')
-        $("#matches-menu-item").addClass('is-active')
+        $("#lessons-menu-item").addClass('is-active')
     })
 </script>

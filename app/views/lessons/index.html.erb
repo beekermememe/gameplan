@@ -18,7 +18,7 @@
       <% @lessons.each do |lesson| %>
         <tr>
           <td>
-            <%= lesson.coach %>
+            <%= lesson.coach.name %>
           </td>
           <td>
             <%= lesson.lesson_date ? lesson.lesson_date.to_date : 'Not Entered' %>
@@ -35,3 +35,10 @@
     </div>
   </div>
 </div>
+
+<script>
+    $(function() {
+        $(".is-active").removeClass('is-active')
+        $("#lessons-menu-item").addClass('is-active')
+    })
+</script>

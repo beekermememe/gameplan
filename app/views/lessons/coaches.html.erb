@@ -1,0 +1,15 @@
+<form autocomplete="off">
+  <div class="grid-x grid-margin-x">
+    <div class="cell medium-12">
+      <input autocomplete="off" type="hidden" id="coach-id" value="<%= @coach ? @coach.id : -1%>">
+      <input autocomplete="off" type="text" id="coach" rows="10" value="<%=  @coach ? @coach.name : ''%>" placeholder="Enter Name of Coach">
+    </div>
+    <div class="search-results cell medium-12" style="height:10px">
+
+    </div>
+    <div class="cell medium-4">
+      <button class="button cell medium-offset-1 medium-4 success update-coach" id="<%= @lesson ? @lesson.id : '-1'%>" value="submit">Save</button>
+      <button class="button cell medium-offset-1 medium-4 cancel cancel-update" id="<%= @lesson ? @lesson.id : '-1'%>" value="submit">Cancel</button>
+    </div>
+  </div>
+</form>

@@ -5,7 +5,7 @@ $(function(){
     $('.save-new-lesson').click(function(event){
         event.preventDefault();
         var coach_id,player_notes,lesson_datetime;
-        coach_id = $('#new-lesson_coach')[0].id;
+        coach_id = $('.new-lesson_coach')[0].id;
         player_notes = $('#new-lesson_notes').val();
         lesson_datetime = $('#new-lesson_date').val();
         $.ajax({
@@ -29,11 +29,11 @@ $(function(){
 
     $('.new-coach').click(function(element){
         $('#form-modal').bind('open.zf.reveal', function() {
-            console.log('reattachNewOpponentHandlers');
+            console.log('reattachNewCoachHandlers');
             reattachNewCoachHandlers();
         });
         var modal = $("#form-modal");
-        $.ajax('/matches/-1/opponents.html').done(function(resp){
+        $.ajax('/lessons/-1/coaches.html').done(function(resp){
             modal.html(resp).foundation('open');
         })
     })

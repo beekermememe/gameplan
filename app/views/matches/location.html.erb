@@ -1,8 +1,8 @@
-<form>
+<form autocomplete="off">
   <div class="grid-x grid-margin-x">
     <div class="cell medium-12">
-      <input type="hidden" id="location-id" value="<%= @location ? @location.id : nil%>">
-      <input type="text" id="location" rows="10" value="<%= @location ? @location.name + ',' + @location.address : ''%>">
+      <input autocomplete="off" type="hidden" id="location-id" value="<%= @location ? @location.id : nil%>">
+      <input autocomplete="off" type="text" id="location" rows="10" value="<%= @location ? @location.name + ',' + @location.address : ''%>">
     </div>
     <div class="search-results cell medium-12" style="height:10px">
 

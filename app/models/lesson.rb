@@ -18,8 +18,12 @@ class Lesson < ApplicationRecord
     Lesson.create({
       user_id: current_user.id,
       coach_id: create_params[:coach_id],
-      lesson_date: create_params[:lesson_date_time],
-      notes: create_params[:player_notes]
+      lesson_date: create_params[:lesson_datetime],
+      notes: create_params[:notes]
                   })
+  end
+
+  def coach
+    coach_id ? User.find(coach_id) : nil
   end
 end
