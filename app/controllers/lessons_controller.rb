@@ -10,6 +10,12 @@ class LessonsController < ApplicationController
     render json: {status: 'ok'}
   end
 
+  def player_notes
+    @lesson = Lesson.find(search_params[:lesson_id]) if search_params[:lesson_id].to_s != '-1'
+    @notes = @lesson.notes
+    render layout: false
+  end
+
   def new
     @lesson = Lesson.new
   end
@@ -46,7 +52,7 @@ class LessonsController < ApplicationController
   private
 
   def update_params
-    params.permit(:coach_id,:coaches_notes,:lesson_datetime,:notes)
+    params.permit(:coach_id,:coaches_notes,:lesson_date,:notes)
   end
 
   def create_params

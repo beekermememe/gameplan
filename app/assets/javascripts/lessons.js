@@ -62,4 +62,73 @@ $(function(){
             $(".search-results").height('10px');
         })
     }
+
+    $('.lesson_notes').click(function(element){
+        var lesson_id = $(".lesson-details")[0].id;
+        $('#form-modal').bind('open.zf.reveal', function() {
+            console.log('reattachNotesHandlers');
+            reattachNotesHandlers();
+        });
+        var modal = $("#form-modal");
+        $.ajax('/lessons/' + lesson_id + '/player_notes.html').done(function(resp){
+            modal.html(resp).foundation('open');
+        })
+    })
+    var reattachNotesHandlers = function(){
+        $('.update-player-notes').click(function(event) {
+            event.preventDefault();
+            var lesson_id = $(".lesson-details")[0].id;
+            var player_notes = $("#player-notes")[0].value;
+            $.ajax({
+                    url: '/lessons/' + lesson_id,
+                    type: 'PUT',
+                    dataType: 'json',
+                    data: {notes: player_notes},
+                    success: function (data) {
+                        console.log("Success changing player-notes",data);
+                        location.reload();
+                    },
+                    error: function(err){
+                        console.log("Failure changing player-notes",err);
+                        $("#form-modal").foundation('close');
+                    }
+                }
+            );
+
+        })
+    }
+
+    var attachLassonDateHandler = function(){
+        flatpickr("#lesson_date", {
+            enableTime: true,
+            altInput: true,
+            plugins: [new confirmDatePlugin({})],
+            onOpen: [
+                function(selectedDates, dateStr, instance){
+                    var currentSelectedTime = $("#lesson_date").val();
+                    if(currentSelectedTime) {
+                        instance.setDate(currentSelectedTime);
+                    }
+                }],
+            onClose: function(selectedDates, dateStr, instance){
+                var lesson_id = $(".lesson-details")[0].id;
+                $.ajax({
+                        url: '/lessons/' + lesson_id,
+                        type: 'PUT',
+                        dataType: 'json',
+                        data: {lesson_date: dateStr},
+                        success: function (data) {
+                            console.log("Success changing lesson_date",data);
+                            location.reload();
+                        },
+                        error: function(err){
+                            console.log("Failure changing lesson_date",err);
+                            $("#form-modal").foundation('close');
+                        }
+                    }
+                );
+            }
+        });
+    }
+    attachLassonDateHandler();
 })

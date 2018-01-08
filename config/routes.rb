@@ -51,6 +51,7 @@ Rails.application.routes.draw do
   resources :lessons, only: [:index, :show, :update, :new, :create] do
     get :coaches_search
     get :coaches
+    get :player_notes
   end
 
   resources :users, only: [:show, :update, :new, :delete_signup, :destroy] do

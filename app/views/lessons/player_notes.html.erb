@@ -1,0 +1,12 @@
+<form class="grid-x grid-margin-x" autocomplete="off">
+  <div class="cell medium-12">
+    <div>
+      <label name="player-notes">Player Notes</label>
+      <textarea autocomplete="off" id="player-notes" rows="4"><%= @notes %></textarea>
+    </div>
+    <div>
+      <button class="button cell success update-player-notes" id="<%= @lesson.id%>" value="submit">Save</button>
+      <button class="button cell cancel cancel-update " id="<%= @lesson.id%>" value="submit">Cancel</button>
+    </div>
+  </div>
+</form>

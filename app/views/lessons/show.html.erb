@@ -12,8 +12,8 @@
         <input id="lesson_date" type="text" name="lesson_date" value="<%= @lesson.lesson_date ? @lesson.lesson_date.strftime('%Y-%m-%d %H:%M') : '' %>" placeholder="Please enter a date"/>
       </fieldset>
       <fieldset>
-        <label class="lesson-label notes">Notes
-          <textarea id="lesson_notes" name="notes" rows="4"><%= @lesson.notes ? @lesson.notes : ""%></textarea>
+        <label class="lesson-label lesson_notes">Notes
+          <textarea id="lesson_notes" name="lesson_notes" rows="4"><%= @lesson.notes ? @lesson.notes : ""%></textarea>
         </label>
       </fieldset>
       <fieldset>
