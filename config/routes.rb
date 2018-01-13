@@ -48,6 +48,10 @@ Rails.application.routes.draw do
 
   end
 
+  resources :analytics, only: [:index] do
+
+  end
+
   resources :lessons, only: [:index, :show, :update, :new, :create] do
     get :coaches_search
     get :coaches
