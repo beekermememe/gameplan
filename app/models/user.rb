@@ -34,6 +34,6 @@ class User < ApplicationRecord
   has_many :matches
 
   def club
-    Court.find(club_id)
+    Court.find(club_id) if club_id.to_i != 0
   end
 end

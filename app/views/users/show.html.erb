@@ -19,8 +19,8 @@
       </fieldset>
       <fieldset>
         <label class="match-label club">Club
-          <input id="club-id" type="hidden" name="club-id" value="<%= @user.club_id.to_s != '' ? @user.club_id : ''%>"/>
-          <input autocomplete="off" id="club" type="text" name="club" value="<%= @user.club_id.to_s != '' ? @user.c lub.name : ''%>"/>
+          <input id="club-id" type="hidden" name="club-id" value="<%= @user.club_id.to_i != 0 ? @user.club_id : nil%>"/>
+          <input autocomplete="off" id="club" type="text" name="club" value="<%= @user.club_id.to_i != 0 ? @user.club.name : ''%>"/>
         </label>
       </fieldset>
       <fieldset>
