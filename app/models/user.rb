@@ -32,6 +32,7 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
   has_many :matches
+  has_many :lessons
 
   def club
     Court.find(club_id) if club_id.to_i != 0

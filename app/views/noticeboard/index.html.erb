@@ -1,0 +1,46 @@
+<div class="grid-x grid-margin-x">
+  <div class="large-offset-1 large-10 medium-offset-1 medium-10 small-12 cell">
+    <div style="background-color: white">
+      <% if @upcoming_lesson %>
+          <div class="callout">
+            <h5>Upcoming Lesson Alert</h5>
+            <p style="padding-left: 2em">
+        You have a LESSON with <%= @upcoming_lesson.coach.name %> scheduled for <%= @upcoming_lesson.lesson_date %>
+            </p>
+          </div>
+      <% end %>
+      <% if @upcoming_match %>
+          <div class="callout">
+            <h5>Upcoming Match Alert</h5>
+          <p style="padding-left: 2em">
+        You have a MATCH with <%= @upcoming_match.opponent.name %> scheduled for <%= @upcoming_match.match_datetime %>
+          </p>
+          </div>
+      <% end %>
+      <section style="padding-left:1em;padding-bottom:1.5em">
+        <h4 style="border: 20px">Activities</h4>
+        <table class="table">
+          <% @items_to_display.each do |item| %>
+            <tr>
+              <% if item.try(:match_datetime) %>
+                <td>
+                  <a href="/matches/<%= item.id%>">View</a>
+                </td>
+                <td>
+                You had a Match against <%= item.opponent.name %> on <%= item.match_datetime %> - <%= item.result.win ? "WIN" : "LOSS" %> (<%= item.result.show_sets %>)
+                </td>
+              <% elsif  item.try(:lesson_date) %>
+                <td>
+                <a href="/lessons/<%= item.id%>">View</a>
+                </td>
+                <td>
+                You had a Lesson with <%= item.coach.name %> on <%= item.lesson_date %>
+                </td>
+              <% end %>
+            </tr>
+          <% end %>
+        </table>
+      </section>
+    </div>
+  </div>
+</div>

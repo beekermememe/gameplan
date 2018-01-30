@@ -11,9 +11,10 @@
 #  user_id      :integer
 #  created_at   :datetime         not null
 #  updated_at   :datetime         not null
-#
 
 class Lesson < ApplicationRecord
+  has_one :user
+
   def self.create_new_lesson(current_user,create_params)
     Lesson.create({
       user_id: current_user.id,
