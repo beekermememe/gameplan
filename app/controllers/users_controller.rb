@@ -15,7 +15,7 @@ class UsersController < ApplicationController
     @user.save!
     sign_in(@user)
     flash[:notice] = "Welcome #{@user.name}, Time to Add Matches. Select the 'Add New Match' to Start"
-    redirect '/home/index'
+    redirect '/matches'
   end
 
   def update

@@ -8,7 +8,7 @@ class Auth0Controller < ApplicationController
       @current_user = User.find_by_email([session[:userinfo]['info']['email'].downcase])
       if(@current_user)
         sign_in(@current_user)
-        redirect_to '/home/index'
+        redirect_to '/noticeboard'
       else
         @current_user = User.create(email: [session[:userinfo]['info']['email'].downcase])
         if @current_user
