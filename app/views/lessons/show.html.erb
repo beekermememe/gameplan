@@ -9,7 +9,7 @@
       </fieldset>
       <fieldset>
         <label class="lesson-label lesson_date">Date</label>
-        <input id="lesson_date" type="text" name="lesson_date" value="<%= @lesson.lesson_date ? @lesson.lesson_date.strftime('%Y-%m-%d %H:%M') : '' %>" placeholder="Please enter a date"/>
+        <input id="lesson_date" type="text" name="lesson_date" value="<%= @lesson.lesson_date ? @lesson.lesson_date.strftime("%b/%-d/%Y at %l:%M %p") : '' %>" placeholder="Please enter a date"/>
       </fieldset>
       <fieldset>
         <label class="lesson-label lesson_notes">Notes

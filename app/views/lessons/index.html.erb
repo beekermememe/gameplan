@@ -21,7 +21,7 @@
             <%= lesson.coach.name %>
           </td>
           <td>
-            <%= lesson.lesson_date ? lesson.lesson_date.to_date : 'Not Entered' %>
+            <%= lesson.lesson_date ? lesson.lesson_date.strftime("%b/%-d/%Y at %l:%M %p") : 'Not Entered' %>
           </td>
           <td>
             <button class="view-lesson button" id="lesson-id-<%=lesson.id%>">View Lesson</button>

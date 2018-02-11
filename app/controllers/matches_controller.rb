@@ -6,6 +6,11 @@ class MatchesController < ApplicationController
     @match.match_detail = MatchDetail.new
   end
 
+  def index
+    @user = current_user
+    @matches = current_user.matches
+  end
+
   def create
     Match.create_new_match(current_user,create_params)
     render :json => {result: 'ok'}
