@@ -41,6 +41,8 @@ gem 'annotate'
 gem 'neo4j', '~> 9.0.0'
 gem 'selectize-rails', '~> 0.12.4.1'
 gem 'dalli'
+gem 'curb'
+gem 'nokogiri'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

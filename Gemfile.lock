@@ -66,6 +66,7 @@ GEM
     coffee-script-source (1.12.2)
     concurrent-ruby (1.0.5)
     crass (1.0.3)
+    curb (0.9.4)
     dalli (2.7.6)
     devise (4.3.0)
       bcrypt (~> 3.0)
@@ -247,6 +248,7 @@ DEPENDENCIES
   byebug
   capybara (~> 2.13)
   coffee-rails (~> 4.2)
+  curb
   dalli
   devise
   devise-foundation-views
@@ -255,6 +257,7 @@ DEPENDENCIES
   letter_opener
   listen (>= 3.0.5, < 3.2)
   neo4j (~> 9.0.0)
+  nokogiri
   omniauth (~> 1.6.1)
   omniauth-auth0 (~> 2.0.0)
   pg
