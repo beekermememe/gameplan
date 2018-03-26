@@ -95,13 +95,13 @@ class MatchesController < ApplicationController
     end
     @search_results = User.where('name like ?',"%#{query}%")
     @search_results = @search_results.where.not(id: @match.user_id) if @match
-    @search_results = @search_results.pluck(:id,:name)
+    @search_results = @search_results.pluck(:id,:name, :city, :state)
     remote_results = UstaWebService.search_user(
         first_name: query.split(' ')[0],
-        last_name: query.split(' ')[0],
+        last_name: query.split(' ')[1],
         state: 'CO'
     )
-
+    @search_results += remote_results
     render layout: false
   end
 

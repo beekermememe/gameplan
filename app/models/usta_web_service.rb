@@ -10,8 +10,9 @@ class UstaWebService
       params.update(state: state) if(state)
       params.update(gender: gender) if(first_name)
       params.update(exact_match: exact_match)
+      existing_usta = []
       results = []
-      if first_name || last_name
+      if first_name && first_name.length > 3 && last_name && last_name.length > 3
         response = sample_search_response # search(params)
         xml_doc  = Nokogiri::XML(response)
 
@@ -21,7 +22,7 @@ class UstaWebService
           ustanumber = player.xpath('playerid').children.first.text
           ranking = player.xpath('ntrp').children.first.text
           state = player.xpath('state').children.first.text
-          city = player.xpath('state').children.first.text
+          city = player.xpath('city').children.first.text
           teams = []
           player.xpath('teams/team').each do |team|
             teams << {
@@ -29,35 +30,36 @@ class UstaWebService
                 teamid: team.xpath('teamid').children.first.text,
                 teamcode: team.xpath('teamcode').children.first.text,
                 championshipyear: team.xpath('championshipyear').children.first.text,
-
             }
           end
           results << {
               name: "#{firstname} #{lastname}",
-              ustanumber: ustanumber,
+              usta_number: ustanumber,
               ranking: ranking,
               state: state,
               city: city,
-              teams: teams
+              team: teams
           }
 
         end
         user_results = []
         results.each do |result|
-          existing = User.find_by_usta_number(result[:ustanumber])
+          next if existing_usta.include?(result[:usta_number])
+          existing_usta << result[:usta_number]
+          existing = result[:usta_number] ? User.find_by_usta_number(result[:usta_number]) : nil
           if existing
-            existing = existing.update(result)
-            user_results << existing
+            existing.update!(result)
+            user_results << [ existing.id, existing.name, existing.city, existing.state ]
           else
-            new_user = User.create(
-                result
-            )
-            user_results << new_user
+            result[:email] = "#{Time.now.to_i}_random@unknown.com"
+            result[:password] = "#{Time.now.to_i}#{rand(100000)}"
+            new_user = User.create!(result)
+            user_results << [ new_user.id, new_user.name, new_user.city, new_user.state ]
           end
         end
-        return user_results
+        user_results
       else
-        ''
+        []
       end
     end
 
@@ -108,7 +110,7 @@ class UstaWebService
     end
 
     def sample_search_response
-      '<players><player><firstname>Sarah</firstname><middlename /><lastname>Post</lastname><  >11115023  </playerid><ntrp>3.5       </ntrp><state>TX</state><city>San Angelo</city><teams><team><teamid>1324158</teamid><teamcode>8096337381</teamcode><teamname>Halfman/Huffman</teamname><championshipyear>2018</championshipyear></team><team><teamid>1324166</teamid><teamcode>8096337389</teamcode><teamname>Jett/Lane</teamname><championshipyear>2018</championshipyear></team></teams></player><player><firstname>Sarah</firstname><middlename /><lastname>Post</lastname><playerid>2010758580</playerid><ntrp>3.0       </ntrp><state>CO</state><city>Broomfield</city><teams><team><teamid>1287806</teamid><teamcode>2572299405</teamcode><teamname>BRMST GREEN</teamname><championshipyear>2018</championshipyear></team></teams></player><player><firstname>Sarah</firstname><middlename /><lastname>Post</lastname><playerid>11115023  </playerid><ntrp>3.5       </ntrp><state>TX</state><city>San Angelo</city><teams><team><teamid>1221241</teamid><teamcode>8096227921</teamcode><teamname>Pfluger/Swartz</teamname><championshipyear>2017</championshipyear></team><team><teamid>1238573</teamid><teamcode>8096246962</teamcode><teamname>Bright</teamname><championshipyear>2017</championshipyear></team><team><teamid>1238657</teamid><teamcode>8096247049</teamcode><teamname>Bright</teamname><championshipyear>2017</championshipyear></team></teams></player><player><firstname>Sarah</firstname><middlename /><lastname>Post</lastname><playerid>2010758580</playerid><ntrp>3.0       </ntrp><state>CO</state><city>Broomfield</city><teams><team><teamid>1198715</teamid><teamcode>2572204418</teamcode><teamname>BRMST RED</teamname><championshipyear>2017</championshipyear></team><team><teamid>1200604</teamid><teamcode>2572206331</teamcode><teamname>BRMST GREEN</teamname><championshipyear>2017</championshipyear></team><team><teamid>1199609</teamid><teamcode>2572205330</teamcode><teamname>BRMST GREEN</teamname><championshipyear>2017</championshipyear></team></teams></player></players>'
+      '<players><player><firstname>Sarah</firstname><middlename/><lastname>Post</lastname><playerid>11115023</playerid><ntrp>3.5</ntrp><state>TX</state><city>San Angelo</city><teams><team><teamid>1324158</teamid><teamcode>8096337381</teamcode><teamname>Halfman/Huffman</teamname><championshipyear>2018</championshipyear></team><team><teamid>1324166</teamid><teamcode>8096337389</teamcode><teamname>Jett/Lane</teamname><championshipyear>2018</championshipyear></team></teams></player><player><firstname>Sarah</firstname><middlename /><lastname>Post</lastname><playerid>2010758580</playerid><ntrp>3.0       </ntrp><state>CO</state><city>Broomfield</city><teams><team><teamid>1287806</teamid><teamcode>2572299405</teamcode><teamname>BRMST GREEN</teamname><championshipyear>2018</championshipyear></team></teams></player><player><firstname>Sarah</firstname><middlename/><lastname>Post</lastname><playerid>11115023</playerid><ntrp>3.5</ntrp><state>TX</state><city>San Angelo</city><teams><team><teamid>1221241</teamid><teamcode>8096227921</teamcode><teamname>Pfluger/Swartz</teamname><championshipyear>2017</championshipyear></team><team><teamid>1238573</teamid><teamcode>8096246962</teamcode><teamname>Bright</teamname><championshipyear>2017</championshipyear></team><team><teamid>1238657</teamid><teamcode>8096247049</teamcode><teamname>Bright</teamname><championshipyear>2017</championshipyear></team></teams></player><player><firstname>Sarah</firstname><middlename /><lastname>Post</lastname><playerid>2010758580</playerid><ntrp>3.0       </ntrp><state>CO</state><city>Broomfield</city><teams><team><teamid>1198715</teamid><teamcode>2572204418</teamcode><teamname>BRMST RED</teamname><championshipyear>2017</championshipyear></team><team><teamid>1200604</teamid><teamcode>2572206331</teamcode><teamname>BRMST GREEN</teamname><championshipyear>2017</championshipyear></team><team><teamid>1199609</teamid><teamcode>2572205330</teamcode><teamname>BRMST GREEN</teamname><championshipyear>2017</championshipyear></team></teams></player></players>'
     end
   end
 end
