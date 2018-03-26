@@ -3,6 +3,60 @@ class UstaWebService
 
 
   class << self
+    def update_user(usta_number,expected_name,current_user)
+      response = sampler_get_user_response # search(params)
+      xml_doc  = Nokogiri::XML(response)
+
+      xml_doc.xpath('userinfo').each do |userinfo|
+        name = userinfo.xpath('name').children.first.text
+        if name.downcase != expected_name.downcase
+
+        else
+          referenced_user = current_user
+          user_to_copy = nil
+          User.where({usta_number: usta_number}).each do |user|
+            if(user.email != current_user.email)
+              if !user_to_copy
+                user_to_copy = user
+              else
+                user.delete!
+              end
+            end
+          end
+
+          if user_to_copy
+            referenced_user.city = user_to_copy.city
+            referenced_user.ranking = user_to_copy.ranking
+            referenced_user.team = user_to_copy.team
+            referenced_user.city = user_to_copy.city
+            referenced_user.state = user_to_copy.state
+            referenced_user.save!
+            Matches.where(opponent_id: user_to_copy.id).all do |match|
+              match.opponent_id = referenced_user.id
+              match.save!
+            end
+            user_to_copy.delete!
+          else
+            referenced_user.ranking = player.xpath('ntrp').children.first.text
+            referenced_user.state = player.xpath('state').children.first.text
+            referenced_user.city = player.xpath('city').children.first.text
+            teams = []
+            player.xpath('teams/team').each do |team|
+              teams << {
+                  teamname: team.xpath('teamname').children.first.text,
+                  teamid: team.xpath('teamid').children.first.text,
+                  teamcode: team.xpath('teamcode').children.first.text,
+                  championshipyear: team.xpath('championshipyear').children.first.text,
+              }
+            end
+            referenced_user.team = teams
+            referenced_user.save!
+          end
+        end
+
+      end
+    end
+
     def search_user(first_name: nil, last_name: nil, state: nil, gender: nil, exact_match: 'false')
       params = {}
       params.update(first_name: first_name) if(first_name)
