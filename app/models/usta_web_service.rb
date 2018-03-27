@@ -31,22 +31,23 @@ class UstaWebService
             referenced_user.city = user_to_copy.city
             referenced_user.state = user_to_copy.state
             referenced_user.save!
-            Matches.where(opponent_id: user_to_copy.id).all do |match|
+            Match.where(opponent_id: user_to_copy.id).all do |match|
               match.opponent_id = referenced_user.id
               match.save!
             end
             user_to_copy.delete!
           else
-            referenced_user.ranking = player.xpath('ntrp').children.first.text
-            referenced_user.state = player.xpath('state').children.first.text
-            referenced_user.city = player.xpath('city').children.first.text
+            referenced_user.ranking = userinfo.xpath('ntrprating').children.first.text
+            referenced_user.ranking = userinfo.xpath('ntrprating').children.first.text
+            referenced_user.state = userinfo.xpath('state').children.first ? userinfo.xpath('state').children.first.text : referenced_user.state
+            referenced_user.city = userinfo.xpath('city').children.first ? userinfo.xpath('city').children.first.text : referenced_user.city
             teams = []
-            player.xpath('teams/team').each do |team|
+            userinfo.xpath('teams/team').each do |team|
               teams << {
-                  teamname: team.xpath('teamname').children.first.text,
-                  teamid: team.xpath('teamid').children.first.text,
-                  teamcode: team.xpath('teamcode').children.first.text,
-                  championshipyear: team.xpath('championshipyear').children.first.text,
+                  teamname: team.xpath('championshipyear').children.first ? team.xpath('teamname').children.first.text : nil,
+                  teamid: team.xpath('championshipyear').children.first ? team.xpath('teamid').children.first.text : nil,
+                  teamcode: team.xpath('teamcode').children.first ? team.xpath('teamcode').children.first.text : nil,
+                  championshipyear: team.xpath('championshipyear').children.first ? team.xpath('championshipyear').children.first.text : nil,
               }
             end
             referenced_user.team = teams

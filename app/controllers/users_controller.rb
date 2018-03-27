@@ -31,6 +31,7 @@ class UsersController < ApplicationController
       @user.state = update_params[:state] if update_params[:state]
       @user.zipcode = update_params[:zipcode] if update_params[:zipcode]
       @user.save!
+      UstaWebService.update_user(@user.usta_number,@user.name,@user)
       sign_in(@user)
     end
     render json: {status: 'update'}
