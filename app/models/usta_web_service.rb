@@ -4,7 +4,7 @@ class UstaWebService
 
   class << self
     def update_user(usta_number,expected_name,current_user)
-      response = sampler_get_user_response # search(params)
+      response = get_user(usta_number: usta_number) #sampler_get_user_response # search(params)
       xml_doc  = Nokogiri::XML(response)
 
       xml_doc.xpath('userinfo').each do |userinfo|
@@ -128,6 +128,10 @@ class UstaWebService
 </websrcv_get_user>
 </soap:Body>
 </soap:Envelope>'
+      http = Curl.http('POST',BASEURL,soap) do |http|
+        http.headers['Content-Type'] = 'text/xml; charset=utf-8'
+      end
+      soap
     end
 
     def get_team(team_id)

@@ -6,7 +6,7 @@
             <h5>Upcoming Lesson Alert</h5>
             <span><img style="height: 20px" src='/images/icons8-planner.png'/></span>
             <p style="padding-left: 2em">
-        You have a LESSON with <%= @upcoming_lesson.coach.name %> scheduled for <%= @upcoming_lesson.lesson_date %>
+        You have a LESSON with <%= @upcoming_lesson.coach ? @upcoming_lesson.coach.name : "unknown" %> scheduled for <%= @upcoming_lesson.lesson_date %>
             </p>
           </div>
       <% end %>

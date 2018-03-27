@@ -25,6 +25,6 @@ class Lesson < ApplicationRecord
   end
 
   def coach
-    coach_id ? User.find(coach_id) : nil
+    coach_id && coach_id != -1 ? User.find(coach_id) : nil
   end
 end
