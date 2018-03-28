@@ -31,17 +31,18 @@ class UstaWebService
           end
         end
       end
+      puts "Updated"
     end
 
     def update_user_from_usta(referenced_user,usta_number,userinfo)
-      referenced_user.ranking = userinfo.xpath('ntrprating').children.first.text
+      referenced_user.ranking = userinfo.xpath('//ntrprating').children.first.text
       teams = []
-      userinfo.xpath('teams/team').each do |team|
+      userinfo.xpath('//teams/team').each do |team|
         teams << {
-            teamname: team.xpath('championshipyear').children.first ? team.xpath('teamname').children.first.text : nil,
-            teamid: team.xpath('championshipyear').children.first ? team.xpath('teamid').children.first.text : nil,
-            teamcode: team.xpath('teamcode').children.first ? team.xpath('teamcode').children.first.text : nil,
-            championshipyear: team.xpath('championshipyear').children.first ? team.xpath('championshipyear').children.first.text : nil,
+            teamname: team.xpath('//teamname').children.first ? team.xpath('//teamname').children.first.text : nil,
+            teamid: team.xpath('//championshipyear').children.first ? team.xpath('//teamid').children.first.text : nil,
+            teamcode: team.xpath('//teamcode').children.first ? team.xpath('//teamcode').children.first.text : nil,
+            championshipyear: team.xpath('//championshipyear').children.first ? team.xpath('//championshipyear').children.first.text : nil,
         }
       end
       referenced_user.team = teams
@@ -52,6 +53,7 @@ class UstaWebService
       if !search_results.empty?
         referenced_user.state = search_results[:state]
         referenced_user.city = search_results[:city]
+        referenced_user.save!
       end
     end
 
@@ -73,28 +75,28 @@ class UstaWebService
       result =  search({first_name: first_name, last_name: last_name, gender: gender, exact_match: exact_match})
       xml_doc  = Nokogiri::XML(result)
       player_info = nil
-      xml_doc.xpath('players/player').each do |player|
-        ustanumber = player.xpath('playerid').children.first.text
+      xml_doc.xpath('//players/player').each do |player|
+        ustanumber = player.xpath('//playerid').children.first.text
         next if usta_number != ustanumber
-        player_info = parse_player(player)
+        player_info = parse_player(player: player)
       end
       player_info
     end
 
     def parse_player(player: )
-      lastname = player.xpath('lastname').children.first.text
-      firstname = player.xpath('firstname').children.first.text
-      ustanumber = player.xpath('playerid').children.first.text
-      ranking = player.xpath('ntrp').children.first.text
-      state = player.xpath('state').children.first.text
-      city = player.xpath('city').children.first.text
+      lastname = player.xpath('//lastname').children.first.text
+      firstname = player.xpath('//firstname').children.first.text
+      ustanumber = player.xpath('//playerid').children.first.text
+      ranking = player.xpath('//ntrp').children.first.text
+      state = player.xpath('//state').children.first.text
+      city = player.xpath('//city').children.first.text
       teams = []
-      player.xpath('teams/team').each do |team|
+      player.xpath('//teams/team').each do |team|
         teams << {
-            teamname: team.xpath('teamname').children.first.text,
-            teamid: team.xpath('teamid').children.first.text,
-            teamcode: team.xpath('teamcode').children.first.text,
-            championshipyear: team.xpath('championshipyear').children.first.text,
+            teamname: team.xpath('//teamname').children.first.text,
+            teamid: team.xpath('//teamid').children.first.text,
+            teamcode: team.xpath('//teamcode').children.first.text,
+            championshipyear: team.xpath('//championshipyear').children.first.text,
         }
       end
       {
@@ -158,18 +160,7 @@ class UstaWebService
       http = Curl.http('POST',BASEURL,soap) do |http|
         http.headers['Content-Type'] = 'text/xml; charset=utf-8'
       end
-      soap
-    end
-
-    def get_team(team_id)
-      soap = '<?xml version="1.0" encoding="utf-8"?>
-<soap:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
-<soap:Body>
-<websrvc_get_team_info xmlns="http://tempuri.org/">
-<iTeamID>' + team_id + '</iTeamID>
-</websrvc_get_team_info>
-</soap:Body>
-</soap:Envelope>'
+      CGI.unescapeHTML http.body_str.split('<websrcv_get_userResult>')[1].split('</websrcv_get_userResult>')[0]
     end
 
     def search(params)
@@ -189,7 +180,7 @@ class UstaWebService
       http = Curl.http('POST',BASEURL,soap) do |http|
         http.headers['Content-Type'] = 'text/xml; charset=utf-8'
       end
-      soap
+      CGI.unescapeHTML http.body_str.split('<websrvc_player_searchResult>')[1].split('</websrvc_player_searchResult>')[0]
     end
 
     def sample_team_response
