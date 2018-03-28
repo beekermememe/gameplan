@@ -25,37 +25,86 @@ class UstaWebService
           end
 
           if user_to_copy
-            referenced_user.city = user_to_copy.city
-            referenced_user.ranking = user_to_copy.ranking
-            referenced_user.team = user_to_copy.team
-            referenced_user.city = user_to_copy.city
-            referenced_user.state = user_to_copy.state
-            referenced_user.save!
-            Match.where(opponent_id: user_to_copy.id).all do |match|
-              match.opponent_id = referenced_user.id
-              match.save!
-            end
-            user_to_copy.delete!
+            copy_from_existing_user(referenced_user, user_to_copy)
           else
-            referenced_user.ranking = userinfo.xpath('ntrprating').children.first.text
-            referenced_user.ranking = userinfo.xpath('ntrprating').children.first.text
-            referenced_user.state = userinfo.xpath('state').children.first ? userinfo.xpath('state').children.first.text : referenced_user.state
-            referenced_user.city = userinfo.xpath('city').children.first ? userinfo.xpath('city').children.first.text : referenced_user.city
-            teams = []
-            userinfo.xpath('teams/team').each do |team|
-              teams << {
-                  teamname: team.xpath('championshipyear').children.first ? team.xpath('teamname').children.first.text : nil,
-                  teamid: team.xpath('championshipyear').children.first ? team.xpath('teamid').children.first.text : nil,
-                  teamcode: team.xpath('teamcode').children.first ? team.xpath('teamcode').children.first.text : nil,
-                  championshipyear: team.xpath('championshipyear').children.first ? team.xpath('championshipyear').children.first.text : nil,
-              }
-            end
-            referenced_user.team = teams
-            referenced_user.save!
+            update_user_from_usta(referenced_user,usta_number,userinfo)
           end
         end
-
       end
+    end
+
+    def update_user_from_usta(referenced_user,usta_number,userinfo)
+      referenced_user.ranking = userinfo.xpath('ntrprating').children.first.text
+      teams = []
+      userinfo.xpath('teams/team').each do |team|
+        teams << {
+            teamname: team.xpath('championshipyear').children.first ? team.xpath('teamname').children.first.text : nil,
+            teamid: team.xpath('championshipyear').children.first ? team.xpath('teamid').children.first.text : nil,
+            teamcode: team.xpath('teamcode').children.first ? team.xpath('teamcode').children.first.text : nil,
+            championshipyear: team.xpath('championshipyear').children.first ? team.xpath('championshipyear').children.first.text : nil,
+        }
+      end
+      referenced_user.team = teams
+      referenced_user.save!
+      search_results = search_single_user(first_name: referenced_user.name.split(" ")[0],
+                                          last_name: referenced_user.name.split(" ")[1],state: referenced_user.state,
+                                          gender: nil, exact_match: 'true', usta_number: referenced_user.usta_number)
+      if !search_results.empty?
+        referenced_user.state = search_results[:state]
+        referenced_user.city = search_results[:city]
+      end
+    end
+
+    def copy_from_existing_user(referenced_user, user_to_copy)
+      referenced_user.city = user_to_copy.city
+      referenced_user.ranking = user_to_copy.ranking
+      referenced_user.team = user_to_copy.team
+      referenced_user.city = user_to_copy.city
+      referenced_user.state = user_to_copy.state
+      referenced_user.save!
+      Match.where(opponent_id: user_to_copy.id).all do |match|
+        match.opponent_id = referenced_user.id
+        match.save!
+      end
+      user_to_copy.delete!
+    end
+
+    def search_single_user(first_name: nil, last_name: nil, state: nil, gender: nil, exact_match: 'true', usta_number: usta_number)
+      result =  search({first_name: first_name, last_name: last_name, gender: gender, exact_match: exact_match})
+      xml_doc  = Nokogiri::XML(result)
+      player_info = nil
+      xml_doc.xpath('players/player').each do |player|
+        ustanumber = player.xpath('playerid').children.first.text
+        next if usta_number != ustanumber
+        player_info = parse_player(player)
+      end
+      player_info
+    end
+
+    def parse_player(player: )
+      lastname = player.xpath('lastname').children.first.text
+      firstname = player.xpath('firstname').children.first.text
+      ustanumber = player.xpath('playerid').children.first.text
+      ranking = player.xpath('ntrp').children.first.text
+      state = player.xpath('state').children.first.text
+      city = player.xpath('city').children.first.text
+      teams = []
+      player.xpath('teams/team').each do |team|
+        teams << {
+            teamname: team.xpath('teamname').children.first.text,
+            teamid: team.xpath('teamid').children.first.text,
+            teamcode: team.xpath('teamcode').children.first.text,
+            championshipyear: team.xpath('championshipyear').children.first.text,
+        }
+      end
+      {
+          name: "#{firstname} #{lastname}",
+          usta_number: ustanumber,
+          ranking: ranking,
+          state: state,
+          city: city,
+          team: teams
+      }
     end
 
     def search_user(first_name: nil, last_name: nil, state: nil, gender: nil, exact_match: 'false')
@@ -72,31 +121,9 @@ class UstaWebService
         xml_doc  = Nokogiri::XML(response)
 
         xml_doc.xpath('players/player').each do |player|
-          lastname = player.xpath('lastname').children.first.text
-          firstname = player.xpath('firstname').children.first.text
-          ustanumber = player.xpath('playerid').children.first.text
-          ranking = player.xpath('ntrp').children.first.text
-          state = player.xpath('state').children.first.text
-          city = player.xpath('city').children.first.text
-          teams = []
-          player.xpath('teams/team').each do |team|
-            teams << {
-                teamname: team.xpath('teamname').children.first.text,
-                teamid: team.xpath('teamid').children.first.text,
-                teamcode: team.xpath('teamcode').children.first.text,
-                championshipyear: team.xpath('championshipyear').children.first.text,
-            }
-          end
-          results << {
-              name: "#{firstname} #{lastname}",
-              usta_number: ustanumber,
-              ranking: ranking,
-              state: state,
-              city: city,
-              team: teams
-          }
-
+          results << parse_player(player: player)
         end
+
         user_results = []
         results.each do |result|
           next if existing_usta.include?(result[:usta_number])
@@ -159,6 +186,10 @@ class UstaWebService
 </websrvc_player_search>
 </soap:Body>
 </soap:Envelope>'
+      http = Curl.http('POST',BASEURL,soap) do |http|
+        http.headers['Content-Type'] = 'text/xml; charset=utf-8'
+      end
+      soap
     end
 
     def sample_team_response
