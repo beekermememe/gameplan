@@ -4,19 +4,17 @@
       <% if @upcoming_lesson %>
           <div class="callout">
             <h5>Upcoming Lesson Alert</h5>
-            <span><img style="height: 20px" src='/images/icons8-planner.png'/></span>
             <p style="padding-left: 2em">
-        You have a LESSON with <%= @upcoming_lesson.coach ? @upcoming_lesson.coach.name : "unknown" %> scheduled for <%= @upcoming_lesson.lesson_date %>
+              <img style="height: 20px" src='/images/icons8-planner.png'/>  You have a LESSON with <%= @upcoming_lesson.coach ? @upcoming_lesson.coach.name : "unknown" %> scheduled for <%= @upcoming_lesson.lesson_date %>
             </p>
           </div>
       <% end %>
       <% if @upcoming_match %>
           <div class="callout">
-            <span><img style="height: 20px" src='/images/icons8-planner.png'/></span>
             <h5>Upcoming Match Alert</h5>
-          <p style="padding-left: 2em">
-        You have a MATCH with <%= @upcoming_match.opponent.name %> scheduled for <%= @upcoming_match.match_datetime %>
-          </p>
+            <p style="padding-left: 2em">
+              <img style="height: 20px" src='/images/icons8-planner.png'/>  You have a MATCH with <%= @upcoming_match.opponent.name %> scheduled for <%= @upcoming_match.match_datetime %>
+            </p>
           </div>
       <% end %>
       <section style="padding-left:1em;padding-bottom:1.5em">
