@@ -39,7 +39,7 @@ $(function(){
     })
 
     var reattachNewCoachHandlers = function() {
-        $("#coach").keyup(function(event){
+        $(".search-coach").click(function(event){
             event.preventDefault();
             var query = $('#coach').val();
             $.ajax(

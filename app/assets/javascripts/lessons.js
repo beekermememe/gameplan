@@ -21,7 +21,7 @@ $(function(){
         })
     })
     var reattachCoachHandlers = function() {
-        $("#coach").keyup(function(event){
+        $("#search_coach").click(function(event){
             event.preventDefault();
             var lesson_id = $(".lesson-details")[0].id;
             var query = $('#coach').val();
@@ -98,7 +98,7 @@ $(function(){
         })
     }
 
-    var attachLassonDateHandler = function(){
+    var attachLessonDateHandler = function(){
         flatpickr("#lesson_date", {
             enableTime: true,
             altInput: true,
@@ -130,5 +130,5 @@ $(function(){
             }
         });
     }
-    attachLassonDateHandler();
+    attachLessonDateHandler();
 })

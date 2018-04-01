@@ -18,7 +18,7 @@
       <% @lessons.each do |lesson| %>
         <tr>
           <td>
-            <%= lesson.coach.name %>
+            <%= lesson.coach ? lesson.coach.name : ""%>
           </td>
           <td>
             <%= lesson.lesson_date ? lesson.lesson_date.strftime("%b/%-d/%Y at %l:%M %p") : 'Not Entered' %>

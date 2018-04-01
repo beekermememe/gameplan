@@ -3,7 +3,7 @@
     <div class="cell small-offset-1 small-10 lesson-details" id="<%= @lesson.id %>">
       <fieldset>
         <label class="lesson-label coach">Coach
-          <input class="lesson_coach" type="text" name="coach" value="<%= @lesson.coach.name %>" id="<%= @lesson.coach_id %>"
+          <input class="lesson_coach" type="text" name="coach" value="<%= @lesson.coach ? lesson.coach.name : "" %>" id="<%= @lesson.coach_id %>"
           />
         </label>
       </fieldset>

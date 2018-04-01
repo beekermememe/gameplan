@@ -40,7 +40,7 @@
                 </td>
                 <td>
                   <span><img style="height: 20px" src='/images/icons8-curriculum.png'/></span>
-                You had a Lesson with <%= item.coach.name %> on <%= item.lesson_date.strftime("%b/%-d/%Y at %l:%M %p") %>
+                You had a Lesson<%= item.coach ? " with " + item.coach.name : ""%> on <%= item.lesson_date.strftime("%b/%-d/%Y at %l:%M %p") %>
                 </td>
               <% end %>
             </tr>

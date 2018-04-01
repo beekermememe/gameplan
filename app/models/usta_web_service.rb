@@ -119,7 +119,7 @@ class UstaWebService
       params.update(exact_match: exact_match)
       existing_usta = []
       results = []
-      if first_name && first_name.length > 1 && last_name && last_name.length > 1
+      if first_name || last_name
         response = search(params)
         xml_doc  = Nokogiri::XML(response)
 
