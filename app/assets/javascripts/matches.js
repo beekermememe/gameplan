@@ -131,7 +131,7 @@ $(function(){
     }
 
     var reattachOpponentHandlers = function() {
-        $("#opponent").keyup(function(event){
+        $(".search-opponent").click(function(event){
             event.preventDefault();
             var match_id = $(".match-details")[0].id;
             var query = $('#opponent').val();

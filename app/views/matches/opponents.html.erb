@@ -1,15 +1,26 @@
 <form autocomplete="off">
-  <div class="grid-x grid-margin-x">
-    <div class="cell medium-12">
-      <input autocomplete="off" type="hidden" id="opponent-id" value="<%= @opponent ? @opponent.id : -1%>">
-      <input autocomplete="off" type="text" id="opponent" rows="10" value="<%=  @opponent ? @opponent.name : ''%>" placeholder="Enter Name of Opponent">
+  <input autocomplete="off" type="hidden" id="opponent-id" value="<%= @opponent ? @opponent.id : -1%>">
+  <div class="grid-margin-x">
+    <div class="grid-x">
+      <div class="cell medium-7 medium-offset-1">
+        <input autocomplete="off" type="text" id="opponent" value="<%=  @opponent ? @opponent.name : ''%>" placeholder="Enter Name of Opponent">
+      </div>
+      <div class="cell medium-offset-1 medium-2">
+        <button class="button cell medium-2 hollow search-opponent" id="search">Search</button>
+      </div>
     </div>
-    <div class="search-results cell medium-12" style="height:10px">
+    <div class="grid-x">
+      <div class="search-results cell medium-12" style="height:10px">
 
+      </div>
     </div>
-    <div class="cell medium-4">
-      <button class="button cell medium-offset-1 medium-4 success update-opponent" id="<%= @match ? @match.id : '-1'%>" value="submit">Save</button>
-      <button class="button cell medium-offset-1 medium-4 cancel cancel-update" id="<%= @match ? @match.id : '-1'%>" value="submit">Cancel</button>
+    <div class="grid-x">
+      <div class="cell medium-3 medium-offset-1">
+        <button class="button cell medium-3 success update-opponent" id="<%= @match ? @match.id : '-1'%>" value="submit">Save</button>
+      </div>
+      <div class="cell medium-3 medium-offset-1">
+        <button class="button cell medium-3 secondary cancel-update" id="<%= @match ? @match.id : '-1'%>" value="submit">Cancel</button>
+      </div>
     </div>
   </div>
 </form>

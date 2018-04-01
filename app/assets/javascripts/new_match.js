@@ -142,7 +142,7 @@ $(function(){
     }
 
     var reattachNewOpponentHandlers = function() {
-        $("#opponent").keyup(function(event){
+        $("#search").click(function(event){
             event.preventDefault();
             var query = $('#opponent').val();
             $.ajax(
