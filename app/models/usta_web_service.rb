@@ -83,6 +83,7 @@ class UstaWebService
       player_info
     end
 
+
     def parse_player(player: )
       lastname = player.xpath('//lastname').children.first.text
       firstname = player.xpath('//firstname').children.first.text
@@ -109,7 +110,7 @@ class UstaWebService
       }
     end
 
-    def search_user(first_name: nil, last_name: nil, state: nil, gender: nil, exact_match: 'false')
+    def search_user(first_name: nil, last_name: nil, state: "CO", gender: nil, exact_match: 'false')
       params = {}
       params.update(first_name: first_name) if(first_name)
       params.update(last_name: last_name) if(last_name)
@@ -118,8 +119,8 @@ class UstaWebService
       params.update(exact_match: exact_match)
       existing_usta = []
       results = []
-      if first_name && first_name.length > 3 && last_name && last_name.length > 3
-        response = sample_search_response # search(params)
+      if first_name && first_name.length > 1 && last_name && last_name.length > 1
+        response = search(params)
         xml_doc  = Nokogiri::XML(response)
 
         xml_doc.xpath('players/player').each do |player|
@@ -135,8 +136,8 @@ class UstaWebService
             existing.update!(result)
             user_results << [ existing.id, existing.name, existing.city, existing.state ]
           else
-            result[:email] = "#{Time.now.to_i}_random@unknown.com"
-            result[:password] = "#{Time.now.to_i}#{rand(100000)}"
+            result[:email] = "#{Time.now.to_i}#{rand(10000000)}_random@unknown.com"
+            result[:password] = "#{Time.now.to_i}#{rand(10000000)}"
             new_user = User.create!(result)
             user_results << [ new_user.id, new_user.name, new_user.city, new_user.state ]
           end
