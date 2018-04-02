@@ -85,21 +85,31 @@ class UstaWebService
 
 
     def parse_player(player: )
-      lastname = player.xpath('//lastname').children.first.text
-      firstname = player.xpath('//firstname').children.first.text
-      ustanumber = player.xpath('//playerid').children.first.text
-      ranking = player.xpath('//ntrp').children.first.text
-      state = player.xpath('//state').children.first.text
-      city = player.xpath('//city').children.first.text
-      teams = []
-      player.xpath('//teams/team').each do |team|
-        teams << {
-            teamname: team.xpath('//teamname').children.first.text,
-            teamid: team.xpath('//teamid').children.first.text,
-            teamcode: team.xpath('//teamcode').children.first.text,
-            championshipyear: team.xpath('//championshipyear').children.first.text,
-        }
+      firstname = nil
+      lastname = nil
+      ustanumber = nil
+      state = nil
+      city = nil
+      teams = nil
+      ranking = nil
+      player.children.each do |node|
+        if node.node_name == 'firstname'
+          firstname = node.content
+        elsif node.node_name == 'lastname'
+          lastname = node.content
+        elsif node.node_name == 'playerid'
+          ustanumber = node.content
+        elsif node.node_name == 'ntrp'
+          ranking = node.content
+        elsif node.node_name == 'state'
+          state = node.content
+        elsif node.node_name == 'city'
+          city = node.content
+        elsif node.node_name == 'teams'
+          teams = []
+        end
       end
+
       {
           name: "#{firstname} #{lastname}",
           usta_number: ustanumber,
@@ -168,16 +178,14 @@ class UstaWebService
       soap = '<?xml version="1.0" encoding="utf-8"?>
 <soap:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
 <soap:Body>
-<websrvc_player_search xmlns="http://tempuri.org/">
-<sFirstName>' + params[:first_name].to_s + '</sFirstName>
-<sLastName>' + params[:last_name].to_s + '</sLastName>
-<sGender>' + params[:gender].to_s + '</sGender>
-<sState>' + params[:state].to_s + '</sState>
-<bExactMatch>' + params[:exact_match].downcase + '</bExactMatch>
- <sYear>' + params[:year].to_s + '</sYear>
-</websrvc_player_search>
-</soap:Body>
-</soap:Envelope>'
+<websrvc_player_search xmlns="http://tempuri.org/">'
+      soap += '<sFirstName>' + params[:first_name].to_s + '</sFirstName>' if params[:first_name].to_s != ''
+      soap += '<sLastName>' + params[:last_name].to_s + '</sLastName>' if params[:last_name].to_s != ''
+      soap += '<sGender>' + params[:gender].to_s + '</sGender>' if params[:gender].to_s != ''
+      soap += '<sState>' + params[:state].to_s + '</sState>' if params[:state].to_s != ''
+      soap += '<bExactMatch>' + params[:exact_match].downcase + '</bExactMatch>' if params[:exact_match].to_s != ''
+      soap += '<sYear>' + params[:year].to_s + '</sYear>' if params[:year].to_s != ''
+      soap += '</websrvc_player_search></soap:Body></soap:Envelope>'
       http = Curl.http('POST',BASEURL,soap) do |http|
         http.headers['Content-Type'] = 'text/xml; charset=utf-8'
       end
