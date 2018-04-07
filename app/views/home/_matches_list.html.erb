@@ -44,7 +44,7 @@
             <% end %>
           </td>
           <td>
-            <%= (match.details && match.details.result) ? (match.details.result.win ? "WIN" : "LOSS") : "No results" %>
+            <%= (match.details && match.details.result) ? match.details.result.summary : "No results" %>
           </td>
           <td>
             <%= (match.details && match.details.result) ? match.details.result.sets[0] : "No result" %>

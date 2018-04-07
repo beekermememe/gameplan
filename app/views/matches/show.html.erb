@@ -7,7 +7,7 @@
       </label>
     </fieldset>
     <fieldset>
-      <label class="match-label results">Result <%= (@match.match_detail && @match.match_detail.result) ? (@match.match_detail.result.win ? '- WIN' : '- LOSS') : "" %>
+      <label class="match-label results">Result <%= (@match.match_detail && @match.match_detail.result) ? @match.match_detail.result.summary : "" %>
         <input type="text" name="result" value="<%= (@match.match_detail && @match.match_detail.result) ? @match.match_detail.result.show_sets : ""%>"/>
       </label>
     </fieldset>
