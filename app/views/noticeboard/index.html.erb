@@ -5,7 +5,7 @@
           <div class="callout">
             <h5>Upcoming Lesson Alert</h5>
             <p style="padding-left: 2em">
-              <img style="height: 20px" src='/images/icons8-planner.png'/>  You have a LESSON with <%= @upcoming_lesson.coach ? @upcoming_lesson.coach.name : "unknown" %> scheduled for <%= @upcoming_lesson.lesson_date %>
+              <img style="height: 20px" src='/images/icons8-planner.png'/>  You have a LESSON with <%= @upcoming_lesson.coach ? @upcoming_lesson.coach.name : "unknown" %> scheduled for <%= @upcoming_lesson.lesson_date.strftime("%b/%-d/%Y at %l:%M %p") %>
             </p>
           </div>
       <% end %>
@@ -13,7 +13,7 @@
           <div class="callout">
             <h5>Upcoming Match Alert</h5>
             <p style="padding-left: 2em">
-              <img style="height: 20px" src='/images/icons8-planner.png'/>  You have a MATCH with <%= @upcoming_match.opponent.name %> scheduled for <%= @upcoming_match.match_datetime %>
+              <img style="height: 20px" src='/images/icons8-planner.png'/>  You have a MATCH with <%= @upcoming_match.opponent.name %> scheduled for <%= @upcoming_match.match_datetime.strftime("%b/%-d/%Y at %l:%M %p") %>
             </p>
           </div>
       <% end %>
