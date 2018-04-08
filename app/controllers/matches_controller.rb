@@ -9,6 +9,9 @@ class MatchesController < ApplicationController
   def index
     @user = current_user
     @matches = current_user.matches
+    if index_params[:created]
+      flash[:notice] = "Welcome #{@user.name}, Time to Add Matches. Select the 'Add New Match' to Start"
+    end
   end
 
   def create
@@ -148,6 +151,10 @@ class MatchesController < ApplicationController
   def update_params
     params.permit(:id)
     params.require([:result,:strengths,:note_to_self,:opponent, :location, :notes_to_self, :match_datetime])
+  end
+
+  def index_params
+    params.permit(:created)
   end
 
   def search_params

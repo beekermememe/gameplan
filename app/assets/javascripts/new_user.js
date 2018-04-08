@@ -74,11 +74,10 @@ $(function(){
                     email: $('#email').val(),
                     password: $('#password').val(),
                     name: $('#name').val(),
+                    creating: true
                 },
                 success: function(data){
-                    alert('Account created');
-                    window.location( '/users/' + $('#user-id').val());
-
+                    window.location = '/matches?created=true';
                 },
                 error: function(error){
                     alert('Failed to create your account, please try later');
