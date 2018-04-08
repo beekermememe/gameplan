@@ -42,6 +42,13 @@
 </div>
 </form>
 <div id="form-modal" class="reveal medium" data-reveal style="display: none"></div>
+<div id="searchingModal" class="reveal-modal" data-reveal aria-hidden="true" role="dialog">
+  <div class="grid-x grid-margin-x">
+    <div class="cell medium-offset-2 medium-5">
+      <h2 class="align-center text-center" id="modalTitle" style="color: white">Searching <img style="height: 30px;" src="/images/spinner.gif"></h2>
+    </div>
+  </div>
+</div>
 <script>
   $(function() {
       $(".is-active").removeClass('is-active')

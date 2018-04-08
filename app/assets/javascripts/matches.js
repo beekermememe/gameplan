@@ -135,12 +135,15 @@ $(function(){
             event.preventDefault();
             var match_id = $(".match-details")[0].id;
             var query = $('#opponent').val();
+            $("#searchingModal").foundation('open')
             $.ajax(
                 '/matches/' + match_id + '/search_opponents.html?query=' + query
             ).done(function(resp){
                 $(".search-results").html(resp);
                 $(".search-results").height('110px');
                 reattachSearchHandlers();
+                $("#searchingModal").foundation('close');
+                $("#form-modal").foundation('open');
             })
         })
         $('.update-opponent').click(function(event) {

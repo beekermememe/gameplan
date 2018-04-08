@@ -42,12 +42,15 @@ $(function(){
         $(".search-coach").click(function(event){
             event.preventDefault();
             var query = $('#coach').val();
+            $("#searchingModal").foundation('open');
             $.ajax(
                 '/lessons/-1/coaches_search.html?query=' + query
             ).done(function(resp){
                 $(".search-results").html(resp);
                 $(".search-results").height('110px');
                 reattachNewSearchHandlers();
+                $("#searchingModal").foundation('close');
+                $("#form-modal").foundation('open');
             })
         })
         $('.update-coach').click(function(event) {

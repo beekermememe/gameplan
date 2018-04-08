@@ -145,12 +145,15 @@ $(function(){
         $("#search").click(function(event){
             event.preventDefault();
             var query = $('#opponent').val();
+            $("#searchingModal").foundation('open');
             $.ajax(
                 '/matches/-1/search_opponents.html?query=' + query
             ).done(function(resp){
                 $(".search-results").html(resp);
                 $(".search-results").height('110px');
                 reattachNewSearchHandlers();
+                $("#searchingModal").foundation('close');
+                $("#form-modal").foundation('open');
             })
         })
         $('.update-opponent').click(function(event) {
