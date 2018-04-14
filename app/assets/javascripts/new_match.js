@@ -54,6 +54,7 @@ $(function(){
         var modal = $("#form-modal");
         $.ajax('/matches/-1/strengths.html').done(function(resp){
             modal.html(resp).foundation('open');
+            $("#location").focus();
         })
     })
 
@@ -66,6 +67,7 @@ $(function(){
         var modal = $("#form-modal");
         $.ajax('/matches/-1/weaknesses.html').done(function(resp){
             modal.html(resp).foundation('open');
+            $("#location").focus();
         })
     })
 
@@ -78,6 +80,7 @@ $(function(){
         var modal = $("#form-modal");
         $.ajax('/matches/-1/note_to_self.html').done(function(resp){
             modal.html(resp).foundation('open');
+            $("#note-to-self").focus();
         })
     })
 
@@ -86,6 +89,9 @@ $(function(){
         $('#form-modal').bind('open.zf.reveal', function() {
             console.log('reattachNewOpponentHandlers');
             reattachNewOpponentHandlers();
+            $("#opponent").focus();
+            $('.update-opponent')[0].disabled = true;
+            $("#search")[0].disabled = true;
         });
         var modal = $("#form-modal");
         $.ajax('/matches/-1/opponents.html').done(function(resp){
@@ -98,6 +104,7 @@ $(function(){
         $('#form-modal').bind('open.zf.reveal', function() {
             console.log('reattachLocationHandlers');
             reattachNewLocationHandlers();
+            $("#location").focus();
         });
         var modal = $("#form-modal");
         $.ajax('/matches/-1/location.html').done(function(resp){
@@ -156,6 +163,13 @@ $(function(){
                 $("#form-modal").foundation('open');
             })
         })
+        $('#opponent').keyup(function(ev){
+            if($("#opponent").val() && $("#opponent").val().split(' ').length > 1 && $("#opponent").val().split(' ')[1].length > 2){
+                $("#search")[0].disabled = false;
+            } else {
+                $("#search")[0].disabled = true;
+            }
+        });
         $('.update-opponent').click(function(event) {
             event.preventDefault();
             var opponent_id = $("#opponent-id").val();
@@ -176,6 +190,7 @@ $(function(){
             $("#opponent").val(e.target.text);
             $(".search-results").html("");
             $(".search-results").height('10px');
+            $('.update-opponent')[0].disabled = false;
         })
     }
 

@@ -31,6 +31,9 @@ $(function(){
         $('#form-modal').bind('open.zf.reveal', function() {
             console.log('reattachNewCoachHandlers');
             reattachNewCoachHandlers();
+            $("#coach").focus();
+            $('.update-coach')[0].disabled = true;
+            $("#search")[0].disabled = true;
         });
         var modal = $("#form-modal");
         $.ajax('/lessons/-1/coaches.html').done(function(resp){
@@ -51,8 +54,16 @@ $(function(){
                 reattachNewSearchHandlers();
                 $("#searchingModal").foundation('close');
                 $("#form-modal").foundation('open');
+                $('.update-coach')[0].disabled = false;
             })
         })
+        $('#coach').keyup(function(ev) {
+            if ($("#coach").val() && $("#coach").val().split(' ').length > 1 && $("#coach").val().split(' ')[1].length > 1) {
+                $("#search")[0].disabled = false;
+            } else {
+                $("#search")[0].disabled = true;
+            }
+        });
         $('.update-coach').click(function(event) {
             event.preventDefault();
             var coach_id = $("#coach-id").val();
