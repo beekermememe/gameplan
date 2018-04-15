@@ -18,6 +18,7 @@ $(function(){
 
     $('.results').click(function(element){
         var match_id = $(".match-details")[0].id;
+        $('#form-modal').off();
         $('#form-modal').bind('open.zf.reveal', function() {
             reattachResultHandlers();
         });
@@ -29,6 +30,7 @@ $(function(){
 
     $('.strengths').click(function(element){
         var match_id = $(".match-details")[0].id;
+        $('#form-modal').off();
         $('#form-modal').bind('open.zf.reveal', function() {
             console.log('reattachStrengthResultHandlers');
             reattachStrengthResultHandlers();
@@ -41,6 +43,7 @@ $(function(){
 
     $('.weaknesses').click(function(element){
         var match_id = $(".match-details")[0].id;
+        $('#form-modal').off();
         $('#form-modal').bind('open.zf.reveal', function() {
             console.log('reattachWeaknessResultHandlers');
             reattachWeaknessResultHandlers();
@@ -53,9 +56,11 @@ $(function(){
 
     $('.note_to_self').click(function(element){
         var match_id = $(".match-details")[0].id;
+        $('#form-modal').off();
         $('#form-modal').bind('open.zf.reveal', function() {
             console.log('reattachNotesToSelfHandlers');
             reattachNoteToSelfHandlers();
+            $("#note-to-self").focus();
         });
         var modal = $("#form-modal");
         $.ajax('/matches/' + match_id + '/note_to_self.html').done(function(resp){
@@ -63,8 +68,51 @@ $(function(){
         })
     })
 
+    $('.team').click(function(element){
+        var match_id = $(".match-details")[0].id;
+        $('#form-modal').off();
+        $('#form-modal').bind('open.zf.reveal', function() {
+            console.log('reattachNotesToSelfHandlers');
+            reattachTeamHandlers();
+            $("#team").focus();
+        });
+        var modal = $("#form-modal");
+        $.ajax('/matches/' + match_id + '/team.html').done(function(resp){
+            modal.html(resp).foundation('open');
+        })
+    })
+
+    $('.league').click(function(element){
+        var match_id = $(".match-details")[0].id;
+        $('#form-modal').off();
+        $('#form-modal').bind('open.zf.reveal', function() {
+            console.log('reattachLeagueHandlers');
+            reattachLeagueHandlers();
+            $("#league").focus();
+        });
+        var modal = $("#form-modal");
+        $.ajax('/matches/' + match_id + '/league.html').done(function(resp){
+            modal.html(resp).foundation('open');
+        })
+    })
+
+    $('.season').click(function(element){
+        var match_id = $(".match-details")[0].id;
+        $('#form-modal').off();
+        $('#form-modal').bind('open.zf.reveal', function() {
+            console.log('reattachSeasonHandlers');
+            reattachSeasonHandlers();
+            $("#season").focus();
+        });
+        var modal = $("#form-modal");
+        $.ajax('/matches/' + match_id + '/season.html').done(function(resp){
+            modal.html(resp).foundation('open');
+        })
+    })
+
     $('.opponent').click(function(element){
         var match_id = $(".match-details")[0].id;
+        $('#form-modal').off();
         $('#form-modal').bind('open.zf.reveal', function() {
             console.log('reattachOpponentHandlers');
             reattachOpponentHandlers();
@@ -78,6 +126,7 @@ $(function(){
 
     $('.location').click(function(element){
         var match_id = $(".match-details")[0].id;
+        $('#form-modal').off();
         $('#form-modal').bind('open.zf.reveal', function() {
             console.log('reattachLocationHandlers');
             reattachLocationHandlers();
@@ -194,6 +243,78 @@ $(function(){
                     },
                     error: function(err){
                         console.log("Failure changing note_to_self",err);
+                        $("#form-modal").foundation('close');
+                    }
+                }
+            );
+
+        })
+    }
+
+    var reattachSeasonHandlers = function(){
+        $('.update-season').click(function(event) {
+            event.preventDefault();
+            var match_id = $(".match-details")[0].id;
+            var season = $("#season-update")[0].value;
+            $.ajax({
+                    url: '/matches/' + match_id,
+                    type: 'PUT',
+                    dataType: 'json',
+                    data: {season: season},
+                    success: function (data) {
+                        console.log("Success changing season",data);
+                        location.reload();
+                    },
+                    error: function(err){
+                        console.log("Failure changing season",err);
+                        $("#form-modal").foundation('close');
+                    }
+                }
+            );
+
+        })
+    }
+
+    var reattachLeagueHandlers = function(){
+        $('.update-league').click(function(event) {
+            event.preventDefault();
+            var match_id = $(".match-details")[0].id;
+            var league = $("#league-update")[0].value;
+            $.ajax({
+                    url: '/matches/' + match_id,
+                    type: 'PUT',
+                    dataType: 'json',
+                    data: {league: league},
+                    success: function (data) {
+                        console.log("Success changing league",data);
+                        location.reload();
+                    },
+                    error: function(err){
+                        console.log("Failure changing league",err);
+                        $("#form-modal").foundation('close');
+                    }
+                }
+            );
+
+        })
+    }
+
+    var reattachTeamHandlers = function(){
+        $('.update-team').click(function(event) {
+            event.preventDefault();
+            var match_id = $(".match-details")[0].id;
+            var team = $("#team-update")[0].value;
+            $.ajax({
+                    url: '/matches/' + match_id,
+                    type: 'PUT',
+                    dataType: 'json',
+                    data: {team: team},
+                    success: function (data) {
+                        console.log("Success changing team",data);
+                        location.reload();
+                    },
+                    error: function(err){
+                        console.log("Failure changing team",err);
                         $("#form-modal").foundation('close');
                     }
                 }

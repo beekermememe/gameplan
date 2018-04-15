@@ -83,8 +83,25 @@ class MatchesController < ApplicationController
 
   def note_to_self
     @match = Match.find(show_params[:match_id])
-
     @note_to_self = @match.match_detail ? @match.match_detail.note_to_self : ""
+    render layout: false
+  end
+
+  def league
+    @match = Match.find(show_params[:match_id])
+    @league = @match.league
+    render layout: false
+  end
+
+  def season
+    @match = Match.find(show_params[:match_id])
+    @season = @match.season
+    render layout: false
+  end
+
+  def team
+    @match = Match.find(show_params[:match_id])
+    @team = @match.team
     render layout: false
   end
 
@@ -142,8 +159,8 @@ class MatchesController < ApplicationController
     if params[:season]
       @match.update_season(params[:season])
     end
-    if params[:year]
-      @match.update_year(params[:year])
+    if params[:league]
+      @match.update_league(params[:league])
     end
     if params[:match_datetime]
       @match.update_datetime(params[:match_datetime])
@@ -171,7 +188,7 @@ class MatchesController < ApplicationController
   end
 
   def create_params
-    params.permit(:result,:weakness_ids,:strength_ids,:note_to_self,:opponent_id, :location_id, :notes_to_self, :match_datetime, :team, :season, :year)
+    params.permit(:result,:weakness_ids,:strength_ids,:note_to_self,:opponent_id, :location_id, :notes_to_self, :match_datetime, :team, :season, :league)
   end
 
   private

@@ -4,7 +4,7 @@ $(function(){
 
     $('.create-match').click(function(event){
         event.preventDefault();
-        var location_id,strength_ids,opponent_id, weakness_ids, result, notes_to_self, match_datetime, team ,season, year;
+        var location_id,strength_ids,opponent_id, weakness_ids, result, notes_to_self, match_datetime, team ,season, league;
         location_id = $('#new_location_id').val();
         strength_ids = $('#new_strengths_ids').val();
         weakness_ids = $('#new_weaknesses_ids').val();
@@ -14,7 +14,7 @@ $(function(){
         match_datetime = $('#new_match_datetime').val();
         team = $('#new-team').val();
         season = $('#new-season').val();
-        year = $('#new-year').val();
+        league = $('#new-league').val();
         $.ajax({
                 url: '/matches',
                 dataType: 'json',
@@ -29,7 +29,7 @@ $(function(){
                     match_datetime: match_datetime,
                     team: team,
                     season: season,
-                    year: year
+                    league: league
                 },
                 success: function (data) {
                     console.log("Success saving match",data);
@@ -42,6 +42,7 @@ $(function(){
     })
 
     $('.new-results').click(function(element){
+        $('#form-modal').off();
         $('#form-modal').bind('open.zf.reveal', function() {
             reattachNewResultHandlers();
         });
@@ -52,7 +53,7 @@ $(function(){
     })
 
     $('.new-strengths').click(function(element){
-        var match_id = $(".match-details")[0].id;
+        $('#form-modal').off();
         $('#form-modal').bind('open.zf.reveal', function() {
             console.log('reattachStrengthResultHandlers');
             reattachNewStrengthResultHandlers();
@@ -65,7 +66,7 @@ $(function(){
     })
 
     $('.new-weaknesses').click(function(element){
-        var match_id = $(".match-details")[0].id;
+        $('#form-modal').off();
         $('#form-modal').bind('open.zf.reveal', function() {
             console.log('reattachWeaknessResultHandlers');
             reattachNewWeaknessResultHandlers();
@@ -78,7 +79,7 @@ $(function(){
     })
 
     $('.new-note_to_self').click(function(element){
-        var match_id = $(".match-details")[0].id;
+        $('#form-modal').off();
         $('#form-modal').bind('open.zf.reveal', function() {
             console.log('reattachNotesToSelfHandlers');
             reattachNewNoteToSelfHandlers();
@@ -91,7 +92,7 @@ $(function(){
     })
 
     $('.new-opponent').click(function(element){
-        var match_id = $(".match-details")[0].id;
+        $('#form-modal').off();
         $('#form-modal').bind('open.zf.reveal', function() {
             console.log('reattachNewOpponentHandlers');
             reattachNewOpponentHandlers();
@@ -106,7 +107,7 @@ $(function(){
     })
 
     $('.new-location').click(function(element){
-        var match_id = $(".match-details")[0].id;
+        $('#form-modal').off();
         $('#form-modal').bind('open.zf.reveal', function() {
             console.log('reattachLocationHandlers');
             reattachNewLocationHandlers();

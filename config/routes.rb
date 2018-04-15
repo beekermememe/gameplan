@@ -41,6 +41,9 @@ Rails.application.routes.draw do
     get :search_opponents
     get :search_locations
     get :location
+    get :league
+    get :team
+    get :season
   end
 
   resources :coaches do

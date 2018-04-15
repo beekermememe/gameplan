@@ -1,0 +1,13 @@
+<form class="grid-x grid-margin-x" autocomplete="off">
+  <div class="cell medium-12">
+    <div>
+      <label name="team">Team
+        <input type="text" autocomplete="off" id="team-update" value="<%= @team %>">
+      </label>
+    </div>
+    <div>
+      <button class="button cell success update-team" id="<%= @match.id%>" value="submit">Save</button>
+      <button class="button cell cancel cancel-update" id="<%= @match.id%>" value="submit">Cancel</button>
+    </div>
+  </div>
+</form>

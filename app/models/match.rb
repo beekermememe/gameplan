@@ -32,7 +32,7 @@ class Match < ApplicationRecord
       court_id: params[:location_id].to_i,
       opponent_id: params[:opponent_id].to_i,
       match_datetime: params[:match_datetime],
-      year: params[:year],
+      league: params[:league],
       season: params[:season],
       team: params[:team]
     )
@@ -144,8 +144,8 @@ class Match < ApplicationRecord
     self.save!
   end
 
-  def update_year(year)
-    self.year = year
+  def update_league(league)
+    self.league = league
     self.save!
   end
 
