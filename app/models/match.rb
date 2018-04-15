@@ -31,7 +31,10 @@ class Match < ApplicationRecord
       user_id: user.id,
       court_id: params[:location_id].to_i,
       opponent_id: params[:opponent_id].to_i,
-      match_datetime: params[:match_datetime]
+      match_datetime: params[:match_datetime],
+      year: params[:year],
+      season: params[:season],
+      team: params[:team]
     )
     result = Result.create(
       sets: params[:result].to_s == '' ? [] : params[:result].split(','),
@@ -129,6 +132,21 @@ class Match < ApplicationRecord
     _match_details.match_id = id
     _match_details.note_to_self = new_note_to_self
     _match_details.save!
+  end
+
+  def update_team(update_team)
+    self.team = update_team
+    self.save!
+  end
+
+  def update_season(season)
+    self.season = season
+    self.save!
+  end
+
+  def update_year(year)
+    self.year = year
+    self.save!
   end
 
   private

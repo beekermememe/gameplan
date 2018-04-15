@@ -4,7 +4,7 @@ $(function(){
 
     $('.create-match').click(function(event){
         event.preventDefault();
-        var location_id,strength_ids,opponent_id, weakness_ids, result, notes_to_self, match_datetime;
+        var location_id,strength_ids,opponent_id, weakness_ids, result, notes_to_self, match_datetime, team ,season, year;
         location_id = $('#new_location_id').val();
         strength_ids = $('#new_strengths_ids').val();
         weakness_ids = $('#new_weaknesses_ids').val();
@@ -12,6 +12,9 @@ $(function(){
         notes_to_self = $('#new_note_to_self').text();
         opponent_id = $('#new_opponent_id').val();
         match_datetime = $('#new_match_datetime').val();
+        team = $('#new-team').val();
+        season = $('#new-season').val();
+        year = $('#new-year').val();
         $.ajax({
                 url: '/matches',
                 dataType: 'json',
@@ -23,7 +26,10 @@ $(function(){
                     weakness_ids: weakness_ids,
                     result: result,
                     notes_to_self: notes_to_self,
-                    match_datetime: match_datetime
+                    match_datetime: match_datetime,
+                    team: team,
+                    season: season,
+                    year: year
                 },
                 success: function (data) {
                     console.log("Success saving match",data);

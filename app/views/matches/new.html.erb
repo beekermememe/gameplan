@@ -1,40 +1,52 @@
 <form autocomplete="off">
-  <div class="grid-x grid-margin-x">
-    <div class="cell small-offset-1 small-10 match-details" id="<%= @match.id %>">
-      <fieldset>
+  <div class="match-details" id="<%= @match.id %>">
+    <div class="grid-x grid-margin-x">
+      <div class="cell small-offset-1 small-5">
         <label class="new-opponent match-label">Opponent
           <input id="new-opponent" type="text"name="new-opponent"/>
         </label>
-      </fieldset>
-      <fieldset>
+      </div>
+      <div class="cell small-offset-1 small-4">
+        <label class="match-label new-date-and-time">Date
+          <input id="new_match_datetime" type="text" name="datetime" placeholder="Please enter a date"/>
+        </label>
+      </div>
+      <div class="cell small-offset-1 small-3 match-details">
+        <label class="new-team match-label">Team
+          <input id="new-team" type="text"name="new-team"/>
+        </label>
+      </div>
+      <div class="cell small-offset-1 small-3 match-details">
+        <label class="new-league match-label">League
+          <input id="new-league" type="text"name="new-league"/>
+        </label>
+      </div>
+      <div class="cell small-offset-1 small-2 match-details">
+        <label class="new-year match-label">Year
+          <input id="new-year" type="text"name="new-year"/>
+        </label>
+      </div>
+      <div class="cell small-offset-1 small-4 match-details" id="<%= @match.id %>">
         <label class="match-label new-results">Result
           <input id="new-results" type="text" name="new-results"/>
         </label>
-      </fieldset>
-      <fieldset>
+      </div>
+      <div class="cell small-offset-1 small-5 match-details" id="<%= @match.id %>">
         <label class="match-label new-location">Location
           <input id="new-location" type="text" name="new-location" value=""/>
         </label>
-      </fieldset>
-      <fieldset>
+      </div>
+      <div class="cell small-offset-1 small-10 match-details" id="<%= @match.id %>">
         <label class="match-label new-strengths">Strengths
           <input id="new-strengths" type="text" name="new-strengths"/>
         </label>
-      </fieldset>
-      <fieldset>
         <label class="match-label new-weaknesses">Weaknesses
           <input id="new-weaknesses" type="text" name="new-weaknesses"/>
         </label>
-      </fieldset>
-      <fieldset>
         <label class="match-label new-note-to-self">Notes to Self
           <textarea autocomplete="off" id="new-note-to-self" type="textarea" rows="4" name="new-note-to-self"></textarea>
         </label>
-      </fieldset>
-      <fieldset>
-        <label class="match-label new-date-and-time">Date</label>
-        <input id="new_match_datetime" type="text" name="datetime" placeholder="Please enter a date"/>
-      </fieldset>
+      </div>
     </div>
   </div>
   <div class="grid-x grid-margin-x">

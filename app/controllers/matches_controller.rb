@@ -136,6 +136,15 @@ class MatchesController < ApplicationController
     if params[:location]
       @match.update_location(params[:location])
     end
+    if params[:team]
+      @match.update_team(params[:team])
+    end
+    if params[:season]
+      @match.update_season(params[:season])
+    end
+    if params[:year]
+      @match.update_year(params[:year])
+    end
     if params[:match_datetime]
       @match.update_datetime(params[:match_datetime])
     end
@@ -150,7 +159,7 @@ class MatchesController < ApplicationController
 
   def update_params
     params.permit(:id)
-    params.require([:result,:strengths,:note_to_self,:opponent, :location, :notes_to_self, :match_datetime])
+    params.require([:result,:strengths,:note_to_self,:opponent, :location, :notes_to_self, :match_datetime, :team, :season, :year])
   end
 
   def index_params
@@ -162,7 +171,7 @@ class MatchesController < ApplicationController
   end
 
   def create_params
-    params.permit(:result,:weakness_ids,:strength_ids,:note_to_self,:opponent_id, :location_id, :notes_to_self, :match_datetime)
+    params.permit(:result,:weakness_ids,:strength_ids,:note_to_self,:opponent_id, :location_id, :notes_to_self, :match_datetime, :team, :season, :year)
   end
 
   private
