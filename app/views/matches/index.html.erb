@@ -1,19 +1,25 @@
 <div class="grid-x grid-margin-x matches-list">
-  <div class="large-offset-1 large-10 medium-offset-1 medium-10 small-12 cell">
+  <div class="cell medium-offset-1 medium-10 small-offset-1 small-10 cell">
+    <a class="button expanded success" href="/matches/new" >Add a new match</a>
+  </div>
+</div>
+<div class="grid-x grid-margin-x matches-list">
+  <div class="medium-offset-1 medium-10 small-offset-1 small-10 cell">
     <table id="data-datatables">
       <thead>
       <tr>
+        <th></th>
         <th>
           Opponent
+        </th>
+        <th>
+          Win/Loss
         </th>
         <th>
           Date
         </th>
         <th>
           Location
-        </th>
-        <th>
-          Win/Loss
         </th>
         <th>
           Set1
@@ -24,18 +30,23 @@
         <th>
           Set3
         </th>
-        <th></th>
       </tr>
       </thead>
       <tbody>
       <% @matches.each do |match| %>
         <tr>
           <td>
+            <button class="view-match button" id="match-id-<%=match.id%>">View Match</button>
+          </td>
+          <td>
             <% if match.opponent %>
               <a class='match-data' data-href='/opponents/<%= match.opponent.id %>'><%= match.opponent.name %></a>
             <% else %>
               Not Entered
             <% end %>
+          </td>
+          <td>
+            <%= (match.details && match.details.result) ? match.details.result.summary : "No results" %>
           </td>
           <td>
             <%= match.match_datetime ? match.match_datetime.strftime("%b/%-d/%Y at %l:%M %p") : 'Not Entered' %>
@@ -48,9 +59,6 @@
             <% end %>
           </td>
           <td>
-            <%= (match.details && match.details.result) ? match.details.result.summary : "No results" %>
-          </td>
-          <td>
             <%= (match.details && match.details.result) ? match.details.result.sets[0] : "No result" %>
           </td>
           <td>
@@ -58,9 +66,6 @@
           </td>
           <td>
             <%= (match.details && match.details.result &&match.details.result.sets.length > 2) ? match.details.result.sets[2] : ""  %>
-          </td>
-          <td>
-            <button class="view-match button" id="match-id-<%=match.id%>">View Match</button>
           </td>
         </tr>
       <% end %>
