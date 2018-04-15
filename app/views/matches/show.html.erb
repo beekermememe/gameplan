@@ -2,59 +2,61 @@
   <div class="match-details" id="<%= @match.id %>">
 
     <div class="grid-x grid-margin-x">
-      <div class="cell small-offset-1 small-5">
+      <div class="cell medium-offset-1 medium-5 small-offset-2 small-8">
         <label class="match-label opponent">Opponent
           <input class="opponent" type="text" name="opponent" value="<%= @match.opponent.name %>"/>
         </label>
       </div>
-      <div class="cell small-offset-1 small-4">
+      <div class="cell medium-offset-1 medium-4 small-offset-2 small-8">
         <label class="match-label datetime">Date
         <input id="match_datetime" type="text" name="datetime" value="<%= @match.match_datetime ? @match.match_datetime.strftime('%Y-%m-%d %H:%M') : '' %>" placeholder="Please enter a date"/>
         </label>
       </div>
-      <div class="cell small-offset-1 small-3 match-details">
+      <div class="cell medium-offset-1 medium-3 small-offset-2 small-8 match-details">
         <label class="team match-label">Team
           <input id="team" type="text"name="team" value="<%= (@match.team) %>"/>
         </label>
       </div>
-      <div class="cell small-offset-1 small-3 match-details">
+      <div class="cell medium-offset-1 medium-3 small-offset-2 small-8 match-details">
         <label class="league match-label">League
           <input id="league" type="text"name="league" value="<%= (@match.league) %>"/>
         </label>
       </div>
-      <div class="cell small-offset-1 small-2 match-details">
+      <div class="cell medium-offset-1 medium-2 small-offset-2 small-8 match-details">
         <label class="season match-label">Season/Year
           <input id="season" type="text"name="season" value="<%= (@match.season) %>"/>
         </label>
       </div>
-      <div class="cell small-offset-1 small-4 match-details" id="<%= @match.id %>">
+      <div class="cell medium-offset-1 medium-4 small-offset-2 small-8 match-details" id="<%= @match.id %>">
         <label class="match-label results">Result <%= (@match.match_detail && @match.match_detail.result) ? @match.match_detail.result.summary : "" %>
           <input type="text" name="result" value="<%= (@match.match_detail && @match.match_detail.result) ? @match.match_detail.result.show_sets : ""%>"/>
         </label>
       </div>
-      <div class="cell small-offset-1 small-5 match-details">
+      <div class="cell medium-offset-1 medium-5 small-offset-2 small-8 match-details">
         <label class="match-label location">Location
           <input type="text" name="location" value="<%= @match.court ? @match.court.name + ',' + @match.court.address : ""%>"/>
         </label>
       </div>
-      <div class="cell small-offset-1 small-10 match-details">
+      <div class="cell medium-offset-1 medium-10 small-offset-2 small-8 match-details">
         <label class="match-label strengths">Strengths
           <input type="text" name="strengths" value="<%= @match.match_detail ? @match.match_detail.show_strengths : ""%>"/>
         </label>
       </div>
-      <div class="cell small-offset-1 small-10 match-details">
+      <div class="cell medium-offset-1 medium-10 small-offset-2 small-8 match-details">
       <label class="match-label weaknesses">Weaknesses
         <input type="text" name="weaknesses" value="<%= @match.match_detail ? @match.match_detail.show_weaknesses : ""%>"/>
       </label>
       </div>
-      <div class="cell small-offset-1 small-10 match-details">
+      <div class="cell medium-offset-1 medium-10 small-offset-2 small-8 match-details">
       <label class="match-label note_to_self">Pre Match Notes
         <textarea type="" rows="4" name="note_to_self" rows="4"><%= @match.match_detail ? @match.match_detail.note_to_self : ""%> </textarea>
       </label>
       </div>
     </div>
-    <div class="cell medium-offset-2 medium-5">
-      <button class="button cell medium-offset-1 medium-4 cancel cancel-update" id="<%= @match.id%>" value="submit">Back</button>
+    <div class="grid-x grid-margin-x">
+      <div class="cell medium-offset-1 medium-5 small-offset-2 small-10">
+        <button class="button expanded cancel cancel-update" id="<%= @match.id%>" value="submit">Back</button>
+      </div>
     </div>
     </div>
   </div>

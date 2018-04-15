@@ -1,48 +1,52 @@
 <form autocomplete="off">
   <div class="match-details" id="<%= @match.id %>">
     <div class="grid-x grid-margin-x">
-      <div class="cell small-offset-1 small-5">
+      <div class="cell medium-offset-1 medium-5 small-offset-2 small-8 ">
         <label class="new-opponent match-label">Opponent
           <input id="new-opponent" type="text"name="new-opponent"/>
         </label>
       </div>
-      <div class="cell small-offset-1 small-4">
+      <div class="cell medium-offset-1 medium-4 small-offset-2 small-8">
         <label class="match-label new-date-and-time">Date
           <input id="new_match_datetime" type="text" name="datetime" placeholder="Please enter a date"/>
         </label>
       </div>
-      <div class="cell small-offset-1 small-3 match-details">
+      <div class="cell medium-offset-1 medium-3 match-details small-offset-2 small-8">
         <label class="new-team match-label">Team
           <input id="new-team" type="text"name="new-team"/>
         </label>
       </div>
-      <div class="cell small-offset-1 small-3 match-details">
+      <div class="cell medium-offset-1 medium-3 match-details small-offset-2 small-8">
         <label class="new-league match-label">League
           <input id="new-league" type="text"name="new-league"/>
         </label>
       </div>
-      <div class="cell small-offset-1 small-2 match-details">
+      <div class="cell medium-offset-1 medium-2 match-details small-offset-2 small-8">
         <label class="new-season match-label">Season/Year
-          <input id="new-season" type="text"name="new-season"/>
+          <input id="new-season" type="text"name="new-season small-offset-2 small-8"/>
         </label>
       </div>
-      <div class="cell small-offset-1 small-4 match-details">
+      <div class="cell medium-offset-1 medium-4 match-details small-offset-2 small-8">
         <label class="match-label new-results">Result
           <input id="new-results" type="text" name="new-results"/>
         </label>
       </div>
-      <div class="cell small-offset-1 small-5 match-details">
+      <div class="cell medium-offset-1 medium-5 match-details small-offset-2 small-8">
         <label class="match-label new-location">Location
           <input id="new-location" type="text" name="new-location" value=""/>
         </label>
       </div>
-      <div class="cell small-offset-1 small-10 match-details">
+      <div class="cell medium-offset-1 medium-10 match-details small-offset-2 small-8">
         <label class="match-label new-strengths">Strengths
           <input id="new-strengths" type="text" name="new-strengths"/>
         </label>
+      </div>
+      <div class="cell medium-offset-1 medium-10 match-details small-offset-2 small-8">
         <label class="match-label new-weaknesses">Weaknesses
           <input id="new-weaknesses" type="text" name="new-weaknesses"/>
         </label>
+      </div>
+      <div class="cell medium-offset-1 medium-10 match-details small-offset-2 small-8">
         <label class="match-label new-note-to-self">Pre Match Notes
           <textarea autocomplete="off" id="new-note-to-self" type="textarea" rows="4" name="new-note-to-self"></textarea>
         </label>
@@ -50,9 +54,9 @@
     </div>
   </div>
   <div class="grid-x grid-margin-x">
-  <div class="cell medium-offset-4 medium-4 small-offset-1 small-10">
-    <button class="button cell medium-4 success create-match" value="submit">Save</button>
-    <button class="button cell medium-2 cancel cancel-create" value="submit">Cancel</button>
+  <div class="cell medium-offset-1 medium-5 small-offset-1 small-10">
+    <button class="button expanded success create-match" value="submit">Save</button>
+    <button class="button expanded cancel cancel-create" value="submit">Cancel</button>
   </div>
   </div>
   <input type="hidden" name="new_opponent_id" id="new_opponent_id"/>
