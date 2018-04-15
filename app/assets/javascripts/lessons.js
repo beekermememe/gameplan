@@ -14,6 +14,7 @@ $(function(){
         $('#form-modal').bind('open.zf.reveal', function() {
             console.log('reattachOpponentHandlers');
             reattachCoachHandlers();
+            $('#coach').focus();
         });
         var modal = $("#form-modal");
         $.ajax('/lessons/' + lesson_id + '/coaches.html').done(function(resp){

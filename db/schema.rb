@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180325160215) do
+ActiveRecord::Schema.define(version: 20180415025308) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -25,6 +25,14 @@ ActiveRecord::Schema.define(version: 20180325160215) do
     t.string "phone"
     t.integer "indoor_courts"
     t.integer "outdoor_courts"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "leagues", force: :cascade do |t|
+    t.string "name"
+    t.string "ext_id"
+    t.string "year"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -71,6 +79,10 @@ ActiveRecord::Schema.define(version: 20180325160215) do
     t.integer "partner_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "season"
+    t.string "league"
+    t.string "team"
+    t.integer "team_id"
   end
 
   create_table "results", force: :cascade do |t|
@@ -82,6 +94,13 @@ ActiveRecord::Schema.define(version: 20180325160215) do
 
   create_table "strengths", force: :cascade do |t|
     t.string "title"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "teams", force: :cascade do |t|
+    t.string "name"
+    t.string "ext_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

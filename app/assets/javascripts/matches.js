@@ -68,6 +68,7 @@ $(function(){
         $('#form-modal').bind('open.zf.reveal', function() {
             console.log('reattachOpponentHandlers');
             reattachOpponentHandlers();
+            $('#opponent').focus();
         });
         var modal = $("#form-modal");
         $.ajax('/matches/' + match_id + '/opponents.html').done(function(resp){
@@ -80,6 +81,7 @@ $(function(){
         $('#form-modal').bind('open.zf.reveal', function() {
             console.log('reattachLocationHandlers');
             reattachLocationHandlers();
+            $('#location').focus();
         });
         var modal = $("#form-modal");
         $.ajax('/matches/' + match_id + '/location.html').done(function(resp){

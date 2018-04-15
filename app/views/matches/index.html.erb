@@ -31,7 +31,11 @@
       <% @matches.each do |match| %>
         <tr>
           <td>
-            <a class='match-data' data-href='/opponents/<%= match.opponent.id %>'><%= match.opponent.name %></a>
+            <% if match.opponent %>
+              <a class='match-data' data-href='/opponents/<%= match.opponent.id %>'><%= match.opponent.name %></a>
+            <% else %>
+              Not Entered
+            <% end %>
           </td>
           <td>
             <%= match.match_datetime ? match.match_datetime.strftime("%b/%-d/%Y at %l:%M %p") : 'Not Entered' %>
