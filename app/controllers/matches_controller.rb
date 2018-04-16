@@ -87,6 +87,12 @@ class MatchesController < ApplicationController
     render layout: false
   end
 
+  def post_match_notes
+    @match = Match.find(show_params[:match_id])
+    @post_match_notes = @match.match_detail ? @match.match_detail.post_match_notes : ""
+    render layout: false
+  end
+
   def league
     @match = Match.find(show_params[:match_id])
     @league = @match.league
@@ -162,6 +168,9 @@ class MatchesController < ApplicationController
     if params[:league]
       @match.update_league(params[:league])
     end
+    if params[:post_match_notes]
+      @match.update_post_match_notes(params[:post_match_notes])
+    end
     if params[:match_datetime]
       @match.update_datetime(params[:match_datetime])
     end
@@ -176,7 +185,7 @@ class MatchesController < ApplicationController
 
   def update_params
     params.permit(:id)
-    params.require([:result,:strengths,:note_to_self,:opponent, :location, :notes_to_self, :match_datetime, :team, :season, :year])
+    params.require([:result,:strengths,:note_to_self,:opponent, :location, :notes_to_self, :match_datetime, :team, :season, :year, :post_match_notes])
   end
 
   def index_params
@@ -188,7 +197,7 @@ class MatchesController < ApplicationController
   end
 
   def create_params
-    params.permit(:result,:weakness_ids,:strength_ids,:note_to_self,:opponent_id, :location_id, :notes_to_self, :match_datetime, :team, :season, :league)
+    params.permit(:result,:weakness_ids,:strength_ids,:note_to_self,:opponent_id, :location_id, :post_match_notes, :notes_to_self, :match_datetime, :team, :season, :league)
   end
 
   private

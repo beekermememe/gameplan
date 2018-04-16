@@ -1,0 +1,12 @@
+<form class="grid-x grid-margin-x" autocomplete="off">
+  <div class="cell medium-12">
+    <div>
+      <label name="post-match-notes">Post Match Notes</label>
+      <textarea autocomplete="off" id="post-match-notes" rows="4"><%= @post_match_notes %></textarea>
+    </div>
+    <div>
+      <button class="button cell success update-post-match-notes" id="<%= @match.id%>" value="submit">Save</button>
+      <button class="button cell cancel cancel-update" id="<%= @match.id%>" value="submit">Cancel</button>
+    </div>
+  </div>
+</form>

@@ -52,6 +52,11 @@
         <textarea type="" rows="4" name="note_to_self" rows="4"><%= @match.match_detail ? @match.match_detail.note_to_self : ""%> </textarea>
       </label>
       </div>
+      <div class="cell medium-offset-1 medium-10 small-offset-2 small-8 match-details">
+        <label class="match-label post_match_notes">Post Match Notes
+          <textarea type="" rows="4" name="post_match_notes" rows="4"><%= @match.match_detail ? @match.match_detail.post_match_notes : ""%> </textarea>
+        </label>
+      </div>
     </div>
     <div class="grid-x grid-margin-x">
       <div class="cell medium-offset-1 medium-5 small-offset-2 small-10">

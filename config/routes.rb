@@ -44,6 +44,7 @@ Rails.application.routes.draw do
     get :league
     get :team
     get :season
+    get :post_match_notes
   end
 
   resources :coaches do

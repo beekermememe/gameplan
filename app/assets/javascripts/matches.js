@@ -68,6 +68,19 @@ $(function(){
         })
     })
 
+    $('.post_match_notes').click(function(element){
+        var match_id = $(".match-details")[0].id;
+        $('#form-modal').off();
+        $('#form-modal').bind('open.zf.reveal', function() {
+            reattachPostMatchNotesHandlers();
+            $("#note-to-self").focus();
+        });
+        var modal = $("#form-modal");
+        $.ajax('/matches/' + match_id + '/post_match_notes.html').done(function(resp){
+            modal.html(resp).foundation('open');
+        })
+    })
+
     $('.team').click(function(element){
         var match_id = $(".match-details")[0].id;
         $('#form-modal').off();
@@ -243,6 +256,30 @@ $(function(){
                     },
                     error: function(err){
                         console.log("Failure changing note_to_self",err);
+                        $("#form-modal").foundation('close');
+                    }
+                }
+            );
+
+        })
+    }
+
+    var reattachPostMatchNotesHandlers = function(){
+        $('.update-post-match-notes').click(function(event) {
+            event.preventDefault();
+            var match_id = $(".match-details")[0].id;
+            var post_match_notes = $("#post-match-notes")[0].value;
+            $.ajax({
+                    url: '/matches/' + match_id,
+                    type: 'PUT',
+                    dataType: 'json',
+                    data: {post_match_notes: post_match_notes},
+                    success: function (data) {
+                        console.log("Success changing post_match_notes",data);
+                        location.reload();
+                    },
+                    error: function(err){
+                        console.log("Failure changing post_match_notes",err);
                         $("#form-modal").foundation('close');
                     }
                 }

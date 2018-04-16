@@ -34,7 +34,8 @@ class Match < ApplicationRecord
       match_datetime: params[:match_datetime],
       league: params[:league],
       season: params[:season],
-      team: params[:team]
+      team: params[:team],
+      post_match_notes: params[:post_match_notes]
     )
     result = Result.create(
       sets: params[:result].to_s == '' ? [] : params[:result].split(','),
@@ -146,6 +147,11 @@ class Match < ApplicationRecord
 
   def update_league(league)
     self.league = league
+    self.save!
+  end
+
+  def update_post_match_notes(post_match_notes)
+    self.post_match_notes = post_match_notes
     self.save!
   end
 

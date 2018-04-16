@@ -4,7 +4,7 @@ $(function(){
 
     $('.create-match').click(function(event){
         event.preventDefault();
-        var location_id,strength_ids,opponent_id, weakness_ids, result, notes_to_self, match_datetime, team ,season, league;
+        var location_id,strength_ids,opponent_id, weakness_ids, result, notes_to_self, match_datetime, team ,season, post_match_notes, league;
         location_id = $('#new_location_id').val();
         strength_ids = $('#new_strengths_ids').val();
         weakness_ids = $('#new_weaknesses_ids').val();
@@ -15,6 +15,7 @@ $(function(){
         team = $('#new-team').val();
         season = $('#new-season').val();
         league = $('#new-league').val();
+        post_match_notes = $('#post_match_notes').text();
         $.ajax({
                 url: '/matches',
                 dataType: 'json',
@@ -26,6 +27,7 @@ $(function(){
                     weakness_ids: weakness_ids,
                     result: result,
                     notes_to_self: notes_to_self,
+                    post_match_notes: post_match_notes,
                     match_datetime: match_datetime,
                     team: team,
                     season: season,
@@ -88,6 +90,18 @@ $(function(){
         $.ajax('/matches/-1/note_to_self.html').done(function(resp){
             modal.html(resp).foundation('open');
             $("#note-to-self").focus();
+        })
+    })
+
+    $('.new-post-match-notes').click(function(element){
+        $('#form-modal').off();
+        $('#form-modal').bind('open.zf.reveal', function() {
+            reattachPostMatchNotesHandlers();
+        });
+        var modal = $("#form-modal");
+        $.ajax('/matches/-1/post_match_notes.html').done(function(resp){
+            modal.html(resp).foundation('open');
+            $("#post-match-notes").focus();
         })
     })
 
@@ -213,6 +227,20 @@ $(function(){
         })
 
     }
+
+    var reattachPostMatchNotesHandlers = function(){
+        $('.update-post-match-notes').click(function(event) {
+            event.preventDefault();
+            var post_match_notes = $("#post-match-notes")[0].value;
+            $("#form-modal").foundation('close');
+        })
+        $('.cancel-update').click(function(event) {
+            event.preventDefault();
+            $("#form-modal").foundation('close');
+        })
+
+    }
+
 
     var reattachNewResultHandlers = function(){
         $('.update-match').click(function(event) {
