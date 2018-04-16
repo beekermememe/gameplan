@@ -15,8 +15,8 @@ class MatchesController < ApplicationController
   end
 
   def create
-    Match.create_new_match(current_user,create_params)
-    render :json => {result: 'ok'}
+    new_match = Match.create_new_match(current_user,create_params)
+    render :json => {match_id: new_match ? new_match.id : nil}
   end
 
   def show

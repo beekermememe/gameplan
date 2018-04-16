@@ -34,8 +34,10 @@ $(function(){
                     league: league
                 },
                 success: function (data) {
-                    console.log("Success saving match",data);
-                    location.reload();
+                    if(data['match_id']){
+                        console.log("Success saving match",data);
+                        location.pathname ='/matches/' + data['match_id'] + '?new_match=true';
+                    }
                 },
                 error: function(err){
                     console.log("Failure saving match",err);

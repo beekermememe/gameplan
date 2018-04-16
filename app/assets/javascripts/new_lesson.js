@@ -18,8 +18,10 @@ $(function(){
                 lesson_datetime: lesson_datetime
             },
             success: function (data) {
-                console.log("Success saving lesson",data);
-                location.reload();
+                if(data['lesson_id']){
+                    console.log("Success saving lesson",data);
+                    location.pathname ='/lessons/' + data['lesson_id'] + '?new_lesson=true';
+                }
             },
             error: function(err){
                 console.log("Failure saving lesson",err);

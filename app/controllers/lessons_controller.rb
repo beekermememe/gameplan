@@ -21,8 +21,8 @@ class LessonsController < ApplicationController
   end
 
   def create
-    Lesson.create_new_lesson(current_user,create_params)
-    render :json => {result: 'ok'}
+    new_lesson = Lesson.create_new_lesson(current_user,create_params)
+    render :json => {lesson_id: new_lesson ? new_lesson.id : nil}
   end
 
   def show
