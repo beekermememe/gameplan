@@ -4,17 +4,22 @@ $(function(){
 
     $('.create-match').click(function(event){
         event.preventDefault();
-        var location_id,strength_ids,opponent_id, weakness_ids, result, notes_to_self, match_datetime, team ,season, post_match_notes, league;
+        var location_id,singles, opponent2_id, doubles, strength_ids,opponent_id,
+            weakness_ids, result, notes_to_self, match_datetime, team ,
+            season, post_match_notes, league;
         location_id = $('#new_location_id').val();
         strength_ids = $('#new_strengths_ids').val();
         weakness_ids = $('#new_weaknesses_ids').val();
         result = $('#new_results_array').val();;
         notes_to_self = $('#new_note_to_self').text();
         opponent_id = $('#new_opponent_id').val();
+        opponent2_id = $('#new_opponent2_id').val();
         match_datetime = $('#new_match_datetime').val();
         team = $('#new-team').val();
         season = $('#new-season').val();
         league = $('#new-league').val();
+        singles = $('#singles')[0].checked;
+        doubles = $('#doubles')[0].checked;
         post_match_notes = $('#post_match_notes').text();
         $.ajax({
                 url: '/matches',
@@ -31,7 +36,10 @@ $(function(){
                     match_datetime: match_datetime,
                     team: team,
                     season: season,
-                    league: league
+                    league: league,
+                    doubles: doubles,
+                    singles: singles,
+                    opponent2_id: opponent2_id
                 },
                 success: function (data) {
                     if(data['match_id']){
@@ -54,6 +62,18 @@ $(function(){
         $.ajax('/matches/-1/result.html').done(function(resp){
             modal.html(resp).foundation('open');
         });
+    })
+
+    $('#doubles').click(function(element){
+        $('.singles-view').addClass('is-hidden');
+        $('.doubles-view').removeClass('is-hidden');
+        $('.doubles-view').removeClass('is-hidden');
+    })
+
+    $('#singles').click(function(element){
+        $('.singles-view').removeClass('is-hidden');
+        $('.doubles-view').addClass('is-hidden');
+        $('.doubles-view').addClass('is-hidden');
     })
 
     $('.new-strengths').click(function(element){
@@ -112,6 +132,19 @@ $(function(){
         $('#form-modal').bind('open.zf.reveal', function() {
             console.log('reattachNewOpponentHandlers');
             reattachNewOpponentHandlers();
+            $("#opponent").focus();
+            $('.update-opponent')[0].disabled = true;
+            $("#search")[0].disabled = true;
+        });
+        var modal = $("#form-modal");
+        $.ajax('/matches/-1/opponents.html').done(function(resp){
+            modal.html(resp).foundation('open');
+        })
+    })
+    $('.new-opponent2').click(function(element){
+        $('#form-modal').off();
+        $('#form-modal').bind('open.zf.reveal', function() {
+            reattachNewOpponent2Handlers();
             $("#opponent").focus();
             $('.update-opponent')[0].disabled = true;
             $("#search")[0].disabled = true;
@@ -198,7 +231,44 @@ $(function(){
             var opponent_id = $("#opponent-id").val();
             var opponent_name = $("#opponent").val();
             $("#new-opponent").val(opponent_name);
+            $("#new-opponent1").val(opponent_name);
             $("#new_opponent_id").val(opponent_id);
+            $("#form-modal").foundation('close');
+        })
+        $('.cancel-update').click(function(event) {
+            event.preventDefault();
+            $("#form-modal").foundation('close');
+        })
+    }
+
+    var reattachNewOpponent2Handlers = function() {
+        $("#search").click(function(event){
+            event.preventDefault();
+            var query = $('#opponent').val();
+            $("#searchingModal").foundation('open');
+            $.ajax(
+                '/matches/-1/search_opponents.html?query=' + query
+            ).done(function(resp){
+                $(".search-results").html(resp);
+                $(".search-results").height('110px');
+                reattachNewSearchHandlers();
+                $("#searchingModal").foundation('close');
+                $("#form-modal").foundation('open');
+            })
+        })
+        $('#opponent').keyup(function(ev){
+            if($("#opponent").val() && $("#opponent").val().split(' ').length > 1 && $("#opponent").val().split(' ')[1].length > 2){
+                $("#search")[0].disabled = false;
+            } else {
+                $("#search")[0].disabled = true;
+            }
+        });
+        $('.update-opponent').click(function(event) {
+            event.preventDefault();
+            var opponent_id = $("#opponent-id").val();
+            var opponent_name = $("#opponent").val();
+            $("#new-opponent2").val(opponent_name);
+            $("#new_opponent2_id").val(opponent_id);
             $("#form-modal").foundation('close');
         })
         $('.cancel-update').click(function(event) {

@@ -31,11 +31,13 @@ class Match < ApplicationRecord
       user_id: user.id,
       court_id: params[:location_id].to_i,
       opponent_id: params[:opponent_id].to_i,
+      opponent2_id: params[:doubles] == 'true' ? params[:opponent2_id].to_i : nil,
+      singles: params[:singles] == 'true',
+      doubles: params[:doubles] == 'true',
       match_datetime: params[:match_datetime],
       league: params[:league],
       season: params[:season],
-      team: params[:team],
-      post_match_notes: params[:post_match_notes]
+      team: params[:team]
     )
     result = Result.create(
       sets: params[:result].to_s == '' ? [] : params[:result].split(','),
@@ -47,15 +49,25 @@ class Match < ApplicationRecord
       weakness_ids: params[:weakness_ids].to_s == '' ? [] : params[:weakness_ids].split(',').map {|i| i.to_i},
       note_to_self: params[:note_to_self],
       result_id: result.id,
-      match_id: match.id
+      match_id: match.id,
+      post_match_notes: params[:post_match_notes]
     )
     match.match_detail_id = details.id
     match.save!
+    match
   end
 
   def opponent
     if self.opponent_id
       User.where(id: self.opponent_id).first
+    else
+      nil
+    end
+  end
+
+  def opponent2
+    if self.opponent2_id
+      User.where(id: self.opponent2_id).first
     else
       nil
     end
@@ -109,6 +121,11 @@ class Match < ApplicationRecord
     self.save!
   end
 
+  def update_opponent2(opponent2_id)
+    self.opponent2_id = opponent2_id.to_i
+    self.save!
+  end
+
   def update_location(location_id)
     self.court_id = location_id.to_i
     self.save!
@@ -151,8 +168,11 @@ class Match < ApplicationRecord
   end
 
   def update_post_match_notes(post_match_notes)
-    self.post_match_notes = post_match_notes
-    self.save!
+    check_object
+    _match_details = match_detail
+    _match_details.match_id = id
+    _match_details.post_match_notes = post_match_notes
+    _match_details.save!
   end
 
   private

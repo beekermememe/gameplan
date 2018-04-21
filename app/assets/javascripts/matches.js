@@ -137,6 +137,19 @@ $(function(){
         })
     })
 
+    $('.opponent2').click(function(element){
+        var match_id = $(".match-details")[0].id;
+        $('#form-modal').off();
+        $('#form-modal').bind('open.zf.reveal', function() {
+            reattachOpponent2Handlers();
+            $('#opponent').focus();
+        });
+        var modal = $("#form-modal");
+        $.ajax('/matches/' + match_id + '/opponents.html?opponents2=true').done(function(resp){
+            modal.html(resp).foundation('open');
+        })
+    })
+
     $('.location').click(function(element){
         var match_id = $(".match-details")[0].id;
         $('#form-modal').off();
@@ -191,6 +204,44 @@ $(function(){
             $("#location").val(e.target.text);
             $(".search-results").html("");
             $(".search-results").height('10px');
+        })
+    }
+
+    var reattachOpponent2Handlers = function() {
+        $(".search-opponent").click(function(event){
+            event.preventDefault();
+            var match_id = $(".match-details")[0].id;
+            var query = $('#opponent2').val();
+            $("#searchingModal").foundation('open')
+            $.ajax(
+                '/matches/' + match_id + '/search_opponents.html?query=' + query
+            ).done(function(resp){
+                $(".search-results").html(resp);
+                $(".search-results").height('110px');
+                reattachSearchHandlers();
+                $("#searchingModal").foundation('close');
+                $("#form-modal").foundation('open');
+            })
+        })
+        $('.update-opponent').click(function(event) {
+            var match_id = $(".match-details")[0].id;
+            var opponent_id = $("#opponent-id").val();
+            $.ajax({
+                    url: '/matches/' + match_id,
+                    type: 'PUT',
+                    dataType: 'json',
+                    data: {opponent2: opponent_id},
+                    success: function (data) {
+                        console.log("Success changing opponent",data);
+                        location.reload();
+                    },
+                    error: function(err){
+                        console.log("Failure changing opponent",err);
+                        $("#form-modal").foundation('close');
+                    }
+                }
+            );
+
         })
     }
 

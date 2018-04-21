@@ -57,7 +57,11 @@ class MatchesController < ApplicationController
       @opponent = nil
     else
       @match = Match.find(show_params[:match_id])
-      @opponent = @match.opponent
+      if show_params[:opponents2]
+        @opponent = @match.opponent2
+      else
+        @opponent = @match.opponent
+      end
     end
 
     render layout: false
@@ -156,6 +160,9 @@ class MatchesController < ApplicationController
     if params[:opponent]
       @match.update_opponent(params[:opponent])
     end
+    if params[:opponent2]
+      @match.update_opponent2(params[:opponent2])
+    end
     if params[:location]
       @match.update_location(params[:location])
     end
@@ -180,7 +187,7 @@ class MatchesController < ApplicationController
   private
 
   def show_params
-    params.permit(:id, :match_id)
+    params.permit(:id, :match_id, :opponents2)
   end
 
   def update_params
@@ -197,7 +204,7 @@ class MatchesController < ApplicationController
   end
 
   def create_params
-    params.permit(:result,:weakness_ids,:strength_ids,:note_to_self,:opponent_id, :location_id, :post_match_notes, :notes_to_self, :match_datetime, :team, :season, :league)
+    params.permit(:result,:weakness_ids,:singles, :doubles, :strength_ids,:note_to_self,:opponent_id, :opponent2_id, :location_id, :post_match_notes, :notes_to_self, :match_datetime, :team, :season, :league)
   end
 
   private
