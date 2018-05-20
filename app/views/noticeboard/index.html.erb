@@ -1,5 +1,8 @@
 <div class="grid-x grid-margin-x">
   <div class="large-offset-1 large-10 medium-offset-1 medium-10 small-12 cell">
+    <button class="button expanded gm_enable" value="submit">Enable Game Mode</button>
+  </div>
+  <div class="large-offset-1 large-10 medium-offset-1 medium-10 small-12 cell">
     <div style="background-color: white">
       <% if @upcoming_lesson %>
           <div class="callout">
@@ -32,7 +35,7 @@
                   <% else %>
                     <span><img style="height: 20px" src='/images/icons8-cloud_lighting.png'/></span>
                   <% end %>
-                You had a Match against <%= item.opponent.name %> on <%= item.match_datetime.strftime("%b/%-d/%Y at %l:%M %p") %> - <%= item.result.show_sets == "" ? "No Result" : item.result.win ? "WIN " : "LOSS " %> <%= item.result.show_sets == "" ? "" : "(#{item.result.show_sets})" %>
+                You had a Match against <%= item.opponent ? item.opponent.name : "unknown"%> on <%= item.match_datetime.strftime("%b/%-d/%Y at %l:%M %p") %> - <%= item.result.show_sets == "" ? "No Result" : item.result.win ? "WIN " : "LOSS " %> <%= item.result.show_sets == "" ? "" : "(#{item.result.show_sets})" %>
                 </td>
               <% elsif  item.try(:lesson_date) %>
                 <td>
@@ -40,7 +43,7 @@
                 </td>
                 <td>
                   <span><img style="height: 20px" src='/images/icons8-curriculum.png'/></span>
-                You had a Lesson<%= item.coach ? " with " + item.coach.name : ""%> on <%= item.lesson_date.strftime("%b/%-d/%Y at %l:%M %p") %>
+                You had a Lesson<%= item.coach ? " with " + item.coach .name : ""%> on <%= item.lesson_date.strftime("%b/%-d/%Y at %l:%M %p") %>
                 </td>
               <% end %>
             </tr>

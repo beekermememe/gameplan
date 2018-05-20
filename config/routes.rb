@@ -69,5 +69,10 @@ Rails.application.routes.draw do
 
   end
 
+  resource :game_mode, only: [:show, :update] do
+    post :enable
+    post :disable
+  end
+
   resources :courts, only: [:show]
 end

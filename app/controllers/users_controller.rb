@@ -13,6 +13,10 @@ class UsersController < ApplicationController
     @user.password = params[:password]
     @user.name = params[:name]
     @user.save!
+
+    if !GameMode.find_by_user_id(@user.id)
+      GameMode.create!(user_id: @user.id)
+    end
     sign_in(@user)
     flash[:notice] = "Welcome #{@user.name}, Time to Add Matches. Select the 'Add New Match' to Start"
     redirect '/matches'
@@ -32,6 +36,9 @@ class UsersController < ApplicationController
       @user.zipcode = update_params[:zipcode] if update_params[:zipcode]
       @user.save!
       UstaWebService.update_user(@user.usta_number,@user.name,@user)
+      if !GameMode.find_by_user_id(@user.id)
+        GameMode.create!(user_id: @user.id)
+      end
       sign_in(@user)
     end
     render json: {status: 'update'}

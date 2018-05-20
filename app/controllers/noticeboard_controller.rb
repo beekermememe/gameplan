@@ -1,5 +1,10 @@
 class NoticeboardController < ApplicationController
   def index
+    game_mode = GameMode.find_by_user_id(current_user.id)
+    if game_mode && game_mode.enabled == true
+      redirect_to :game_mode and return
+    end
+
     @user = current_user
     @upcoming_match = current_user.matches.where('match_datetime > ?',DateTime.now()).first
     @items_to_display = current_user.matches.where('match_datetime < ?',DateTime.now()).order('match_datetime desc').map { |match| match}

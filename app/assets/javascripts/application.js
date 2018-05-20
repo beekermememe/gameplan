@@ -26,5 +26,7 @@
 //= require edit_user
 //= require new_lesson
 //= require lessons
+//= require noticeboard
+//= require game_mode
 
 $(function(){ $(document).foundation(); });
