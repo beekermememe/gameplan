@@ -3,17 +3,17 @@
     <div class="grid-x grid-margin-x">
       <div class="cell medium-offset-1 medium-10 small-offset-2 small-8 match-details">
         <label class="match-label gm_note_to_self">Notes
-          <textarea type="" rows="4" name="note_to_self" rows="4"><%= @gamemode.notes %> </textarea>
+          <textarea type="" rows="4" name="note_to_self" rows="4"><%= @gamemode.note_to_self %> </textarea>
         </label>
       </div>
       <div class="cell medium-offset-1 medium-10 small-offset-2 small-8 match-details">
         <label class="match-label gm_strengths">Strengths
-          <input type="text" name="strengths" value="<%= @gamemode.strengths %>"/>
+          <input type="text" name="strengths" value="<%= @gamemode.show_strengths %>"/>
         </label>
       </div>
       <div class="cell medium-offset-1 medium-10 small-offset-2 small-8 match-details">
         <label class="match-label gm_weaknesses">Weaknesses
-          <input type="text" name="weaknesses" value="<%= @gamemode.weaknesses  %>"/>
+          <input type="text" name="weaknesses" value="<%= @gamemode.show_weaknesses  %>"/>
         </label>
       </div>
       <div class="cell medium-offset-1 medium-10 small-offset-2 small-8 match-details">
@@ -23,9 +23,6 @@
       </div>
     </div>
     <div class="grid-x grid-margin-x">
-      <div class="large-offset-1 large-10 medium-offset-1 medium-10 small-12 cell">
-        <button class="button expanded gm_save" value="submit">Save Changes</button>
-      </div>
       <div class="large-offset-1 large-10 medium-offset-1 medium-10 small-12 cell">
         <button class="button expanded gm_disable warning" value="submit">Disable Game Mode</button>
       </div>

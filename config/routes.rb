@@ -72,6 +72,10 @@ Rails.application.routes.draw do
   resource :game_mode, only: [:show, :update] do
     post :enable
     post :disable
+    get :strengths
+    get :weaknesses
+    get :note_to_self
+    get :post_match_notes
   end
 
   resources :courts, only: [:show]

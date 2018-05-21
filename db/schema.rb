@@ -30,10 +30,12 @@ ActiveRecord::Schema.define(version: 20180520134405) do
   end
 
   create_table "game_modes", force: :cascade do |t|
-    t.string "notes"
+    t.string "note_to_self"
     t.integer "user_id"
-    t.string "strengths"
-    t.string "weaknesses"
+    t.string "strengths", default: [], array: true
+    t.string "strength_ids", default: [], array: true
+    t.string "weaknesses", default: [], array: true
+    t.string "weakness_ids", default: [], array: true
     t.string "post_match_notes"
     t.boolean "enabled", default: false
     t.datetime "created_at", null: false
